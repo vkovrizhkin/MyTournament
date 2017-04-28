@@ -12,22 +12,33 @@ import com.diplom.mytournament.models.Competition;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Kovrizhkin V.A. on 27.04.2017.
  */
 
 public class CompetitionsReсViewAdapter extends RecyclerView.Adapter<CompetitionsReсViewAdapter.ViewHolder>{
 
+
+
 private List<Competition> competitionList;
 
 public static class ViewHolder extends RecyclerView.ViewHolder {
-    public TextView title;
-    public ImageView logo;
+
+    @BindView (R.id.title)
+    TextView title;
+
+    @BindView(R.id.logo_image)
+    ImageView logo;
+
+  //  public TextView title;
+   // public ImageView logo;
 
     public ViewHolder(View view) {
         super(view);
-        title = (TextView) view.findViewById(R.id.title);
-        logo = (ImageView) view.findViewById(R.id.logo_image);
+        ButterKnife.bind(this, itemView);
 
     }
 

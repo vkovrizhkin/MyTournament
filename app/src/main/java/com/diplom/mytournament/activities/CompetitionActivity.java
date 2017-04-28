@@ -13,8 +13,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.diplom.mytournament.R;
+
 public class CompetitionActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private int competitionId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
