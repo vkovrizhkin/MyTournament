@@ -9,10 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.diplom.mytournament.MyTournamentDatabaseHelper;
 import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
-import com.diplom.mytournament.adapters.CompetitionsResViewAdapter;
+import com.diplom.mytournament.adapters.CompetitionsReсViewAdapter;
 import com.diplom.mytournament.models.Competition;
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class CompetitionsFragment extends Fragment {
 
     private List<Competition> competitionList = new ArrayList<>();
     private RecyclerView recyclerView;
-    private CompetitionsResViewAdapter rAdapter;
+    private CompetitionsReсViewAdapter rAdapter;
     public CompetitionsFragment() {
         // Required empty public constructor
     }
@@ -38,7 +37,7 @@ public class CompetitionsFragment extends Fragment {
         recyclerView = (RecyclerView)rootView.findViewById(R.id.competitions_recycler_view);
         MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
         competitionList = qh.getAllCompetition();
-        rAdapter = new CompetitionsResViewAdapter(competitionList);
+        rAdapter = new CompetitionsReсViewAdapter(competitionList);
 
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());

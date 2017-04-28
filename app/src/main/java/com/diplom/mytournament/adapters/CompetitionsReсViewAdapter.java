@@ -16,7 +16,7 @@ import java.util.List;
  * Created by Kovrizhkin V.A. on 27.04.2017.
  */
 
-public class CompetitionsResViewAdapter extends RecyclerView.Adapter<CompetitionsResViewAdapter.ViewHolder>{
+public class CompetitionsReсViewAdapter extends RecyclerView.Adapter<CompetitionsReсViewAdapter.ViewHolder>{
 
 private List<Competition> competitionList;
 
@@ -33,7 +33,7 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
 
 }
 
-    public CompetitionsResViewAdapter(List<Competition> competitionList) {
+    public CompetitionsReсViewAdapter(List<Competition> competitionList) {
         this.competitionList = competitionList;
     }
 
