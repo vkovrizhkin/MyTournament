@@ -53,7 +53,7 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
         //создание таблицы матчей
         db.execSQL("CREATE TABLE MATCHES("+"_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "COMPETITION_id INTEGER,"+"DATE_TIME TEXT,"+"TEAM_H_id INTEGER,"+
-                "TEAM_A_id INTEGER,"+"PLACE TEXT,"+"STAGE TEXT,"+"PLAYED BLOB);");
+                "TEAM_A_id INTEGER,"+"PLACE TEXT,"+"STAGE TEXT,"+"PLAYED INTEGER);");
 
         //создание таблицы с событиями
         db.execSQL("CREATE TABLE EVENTS("+"_id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -97,7 +97,7 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
         ContentValues matchValues = new ContentValues();
 
         matchValues.put("COMPETITION_id", competitionId);
-        matchValues.put("DATE_TIME TEXT", dateTime);
+        matchValues.put("DATE_TIME", dateTime);
         matchValues.put("PLACE", place);
         matchValues.put("STAGE", stage);
         matchValues.put("TEAM_H_id", teamHId);
@@ -168,6 +168,17 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
             insertStanding(db, i , 1);
 
         }
+        insertStanding(db, 2 , 2);
+        insertStanding(db, 8 , 2);
+        insertStanding(db, 9 , 2);
+
+        insertMatch(db, 1, "12.12.12 12:00", "энергия", "1 тур", 1, 4);
+        insertMatch(db, 1, "12.12.12 12:00", "стадион центральный", "1 тур", 2, 5);
+        insertMatch(db, 1, "12.12.12 12:00", "энергия", "1 тур", 1, 4);
+        insertMatch(db, 2, "12.12.12 12:00", "энергия", "1 тур", 1, 4);
+        insertMatch(db, 3, "12.12.12 12:00", "энергия", "1 тур", 1, 4);
+        insertMatch(db, 2, "12.12.12 12:00", "энергия", "1 тур", 1, 4);
+        insertMatch(db, 3, "12.12.12 12:00", "энергия", "1 тур", 1, 4);
 
     }
 

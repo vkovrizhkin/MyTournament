@@ -13,9 +13,9 @@ public class Match {
     public int team1Id;// принимающая команда
     public int team2Id; //команда гостей
     public String place; //место проведения
-    public boolean played; //сыгран / несыгран
+    public int played; //сыгран / несыгран
 
-    public Match(int id, int competitionId, String date, String stage, int team1Id, int team2Id, String place, boolean played) {
+    public Match(int id, int competitionId, String date, String stage, int team1Id, int team2Id, String place, int played) {
         this.id = id;
         this.competitionId = competitionId;
         this.date = date;

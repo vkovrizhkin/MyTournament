@@ -7,8 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
 import com.diplom.mytournament.models.Match;
+import com.diplom.mytournament.models.Team;
 
 import java.util.List;
 
@@ -22,6 +24,8 @@ import butterknife.ButterKnife;
 public class MatchesRecViewAdapter extends RecyclerView.Adapter<MatchesRecViewAdapter.ViewHolder> {
 
     private List<Match> matchList;
+
+    private static MyTournamentQueryHelper qh ;
 
     public MatchesRecViewAdapter(List<Match> matchList) {
         this.matchList = matchList;
@@ -48,9 +52,18 @@ public class MatchesRecViewAdapter extends RecyclerView.Adapter<MatchesRecViewAd
         ImageView team2Logo;
 
 
-        public ViewHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
+        public ViewHolder(View view) {
+            super(view);
+            qh = new MyTournamentQueryHelper(view.getContext());
+            stage = (TextView) view.findViewById(R.id.match_stage);
+            date = (TextView)view.findViewById(R.id.match_date);
+            team1Name = (TextView)view.findViewById(R.id.team1_name);
+            team2Name = (TextView)view.findViewById(R.id.team2_name);
+            team1Logo = (ImageView)view.findViewById(R.id.team1_logo);
+            team2Logo = (ImageView)view.findViewById(R.id.team2_logo);
+
+
+            //ButterKnife.bind(this, itemView);
         }
     }
 
@@ -63,10 +76,26 @@ public class MatchesRecViewAdapter extends RecyclerView.Adapter<MatchesRecViewAd
     @Override
     public void onBindViewHolder(MatchesRecViewAdapter.ViewHolder holder, int position) {
 
+        Match match = matchList.get(position);
+
+        holder.stage.setText(match.getStage());
+        holder.date.setText(match.getDate());
+
+        Team team1 = qh.getTeamById(match.getTeam1Id());
+        Team team2 = qh.getTeamById(match.getTeam2Id());
+
+        holder.team1Name.setText(team1.getName());
+        holder.team2Name.setText(team2.getName());
+
+        //TODO доделать хранение и извлечение логотипов!
+        holder.team1Logo.setImageResource(R.drawable.ic_menu_camera);
+        holder.team2Logo.setImageResource(R.drawable.ic_menu_gallery);
+
+
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return matchList.size();
     }
 }

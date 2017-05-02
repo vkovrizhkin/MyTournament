@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.diplom.mytournament.R;
+import com.diplom.mytournament.fragments.MatchesFragment;
 import com.diplom.mytournament.fragments.TeamsFragment;
 
 public class CompetitionActivity extends AppCompatActivity
@@ -52,7 +54,7 @@ public class CompetitionActivity extends AppCompatActivity
         TeamsFragment teamsFragment = new TeamsFragment(competitionId);
 
         getSupportFragmentManager().beginTransaction().add(R.id.competition_frame_layout, teamsFragment)
-        .commit();
+                .commit();
 
     }
 
@@ -94,7 +96,9 @@ public class CompetitionActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        displayView(id);
+
+/*        if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
@@ -106,10 +110,27 @@ public class CompetitionActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
-        }
+        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void displayView(int viewId) {
+        Fragment fragment = null;
+
+        switch (viewId) {
+            case R.id.nav_matches:
+                fragment = new MatchesFragment(competitionId);
+                break;
+
+            default:
+                fragment = new TeamsFragment(competitionId);
+        }
+
+        if(fragment!=null){
+            getSupportFragmentManager().beginTransaction().replace(R.id.competition_frame_layout, fragment).addToBackStack(null).commit();
+        }
     }
 }

@@ -143,7 +143,44 @@ public class MyTournamentQueryHelper {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<Match> matchList = new ArrayList<Match>();
 
-        Cursor cursor = db.query("MATCHES", null, "COMPETITION_id", new String[]{Integer.toString(competitionId)}, null, null, null);
+      //  Cursor cursor = db.query("MATCHES", null, "COMPETITION_id", new String[]{Integer.toString(competitionId)}, null, null, null);
+        Cursor cursor = db.query("MATCHES", null, null, null, null, null, null);
+        try {
+            if (cursor.moveToFirst()) {
+                //получение данных соревнования из курсора
+                int id = cursor.getInt(0);
+                //int competitionId = cursor.getInt(1);
+                String dateTime = cursor.getString(2);
+                int team1Id = cursor.getInt(3);
+                int team2Id = cursor.getInt(4);
+                String place = cursor.getString(5);
+                String stage = cursor.getString(6);
+                int played = cursor.getInt(7);
+
+                matchList.add(new Match(id, competitionId, dateTime, stage, team1Id, team2Id, place, played));
+
+
+                //return competition;
+            }
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(0);
+                //int competitionId = cursor.getInt(1);
+                String dateTime = cursor.getString(2);
+                int team1Id = cursor.getInt(3);
+                int team2Id = cursor.getInt(4);
+                String place = cursor.getString(5);
+                String stage = cursor.getString(6);
+                int played = cursor.getInt(7);
+
+                matchList.add(new Match(id, competitionId, dateTime, stage, team1Id, team2Id, place, played));
+
+
+            }
+
+
+        } catch (SQLiteException e) {
+            return null;
+        }
 
         return matchList;
 
@@ -215,7 +252,29 @@ public class MyTournamentQueryHelper {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Team team;
 
-        return null;
+        String SqlQuery = "SELECT * FROM TEAMS WHERE _id = ?";
+
+        Cursor cursor = db.rawQuery(SqlQuery, new String[]{Integer.toString(teamId)});
+
+        try {
+            if (cursor.moveToFirst()) {
+                //получение данных соревнования из курсора
+                String name = cursor.getString(1);
+                String sport = cursor.getString(2);
+                long logo = (long)cursor.getInt(3);
+                String info = cursor.getString(4);
+                team = new Team(teamId, name, logo, sport,  info);
+
+                return team;
+            } else return null;
+
+        } catch (SQLiteException e) {
+            return null;
+        } finally {
+            cursor.close();
+            db.close();
+        }
+
 
     }
 
@@ -231,9 +290,8 @@ public class MyTournamentQueryHelper {
                 "WHERE STANDINGS.COMPETITION_id = ?";
 
 
-
-          Cursor cursor = db.rawQuery(SqlQuery, new String[]{Integer.toString(competitionId)});
-          Cursor cursor2 = db.query("STANDINGS", null, null, null, null, null, null);
+        Cursor cursor = db.rawQuery(SqlQuery, new String[]{Integer.toString(competitionId)});
+        Cursor cursor2 = db.query("STANDINGS", null, null, null, null, null, null);
 
         try {
             if (cursor.moveToFirst()) {
