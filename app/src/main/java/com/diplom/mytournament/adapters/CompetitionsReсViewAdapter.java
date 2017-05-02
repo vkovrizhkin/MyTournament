@@ -1,5 +1,7 @@
 package com.diplom.mytournament.adapters;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.diplom.mytournament.R;
+import com.diplom.mytournament.activities.CompetitionActivity;
+import com.diplom.mytournament.fragments.CompetitionsFragment;
 import com.diplom.mytournament.models.Competition;
 
 import java.util.List;
@@ -21,32 +25,31 @@ import butterknife.ButterKnife;
 
 public class CompetitionsReсViewAdapter extends RecyclerView.Adapter<CompetitionsReсViewAdapter.ViewHolder>{
 
-
+private CompetitionsFragment competitionsFragment;
 
 private List<Competition> competitionList;
 
 public static class ViewHolder extends RecyclerView.ViewHolder {
 
-   // @BindView (R.id.title)
     TextView title ;
 
-   // @BindView(R.id.logo_image)
     ImageView logo;
 
-  //  public TextView title;
-   // public ImageView logo;
+    View container;
 
     public ViewHolder(View view) {
         super(view);
         title = (TextView)view.findViewById(R.id.competition_title);
         logo = (ImageView)view.findViewById(R.id.logo_image);
-       // ButterKnife.bind(this, itemView);
+        container = (View)view.findViewById(R.id.competition_content_layout);
+        ButterKnife.bind(this, view);
 
     }
 
 }
 
-    public CompetitionsReсViewAdapter(List<Competition> competitionList) {
+    public CompetitionsReсViewAdapter(CompetitionsFragment competitionsFragment, List<Competition> competitionList) {
+        this.competitionsFragment = competitionsFragment;
         this.competitionList = competitionList;
     }
 
@@ -59,11 +62,22 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Competition competition = competitionList.get(position);
+    public void onBindViewHolder(final ViewHolder holder, int position) {
+        final Competition competition = competitionList.get(position);
 
         holder.title.setText(competition.getName());
         holder.logo.setImageResource((int) competition.getLogoIdResource());
+
+
+        holder.container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(holder.container.getContext(), CompetitionActivity.class);
+                int id = competition.getId();
+                intent.putExtra("competitionId",id );
+                competitionsFragment.startActivity(intent);
+            }
+        });
 
     }
 

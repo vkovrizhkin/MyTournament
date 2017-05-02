@@ -1,5 +1,6 @@
 package com.diplom.mytournament.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.diplom.mytournament.R;
+import com.diplom.mytournament.fragments.TeamsFragment;
 
 public class CompetitionActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,6 +25,8 @@ public class CompetitionActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        competitionId = intent.getIntExtra("competitionId", 0);
         setContentView(R.layout.activity_competition);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -44,6 +48,10 @@ public class CompetitionActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        TeamsFragment teamsFragment = new TeamsFragment(competitionId);
+
+        getSupportFragmentManager().beginTransaction().add(R.id.competition_frame_layout, teamsFragment);
     }
 
     @Override
