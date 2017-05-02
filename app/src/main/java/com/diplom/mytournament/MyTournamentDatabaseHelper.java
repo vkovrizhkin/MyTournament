@@ -136,7 +136,7 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
 
 
         standingValues.put("TEAM_id", team_id);
-        standingValues.put("COMP_id", compId);
+        standingValues.put("COMPETITION_id", compId);
 
         db.insert("STANDINGS", null, standingValues);
 

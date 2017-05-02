@@ -224,16 +224,24 @@ public class MyTournamentQueryHelper {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<Team> teamList = new ArrayList<>();
+       /* String SqlQuery = "SELECT * FROM TEAMS INNER JOIN STANDINGS ON TEAMS._id = STANDINGS.TEAM_id" +
+                " WHERE STANDINGS.COMPETITION_id = ?";*/
 
-        Cursor cursor = db.query("TEAMS", null, null, null, null, null, null);
+        String SqlQuery = "SELECT * FROM TEAMS INNER JOIN STANDINGS ON TEAMS._id = STANDINGS.TEAM_id " +
+                "WHERE STANDINGS.COMPETITION_id = ?";
+
+
+
+          Cursor cursor = db.rawQuery(SqlQuery, new String[]{Integer.toString(competitionId)});
+          Cursor cursor2 = db.query("STANDINGS", null, null, null, null, null, null);
 
         try {
             if (cursor.moveToFirst()) {
                 //получение данных соревнования из курсора
                 int id = cursor.getInt(0);
                 String name = cursor.getString(1);
-                int resourceId = cursor.getInt(2);
-                String kindOfSport = cursor.getString(3);
+                int resourceId = cursor.getInt(3);
+                String kindOfSport = cursor.getString(2);
                 String info = cursor.getString(4);
 
                 Team team = new Team(id, name, resourceId, kindOfSport, info);
