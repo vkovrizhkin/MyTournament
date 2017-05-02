@@ -51,7 +51,9 @@ public class CompetitionActivity extends AppCompatActivity
 
         TeamsFragment teamsFragment = new TeamsFragment(competitionId);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.competition_frame_layout, teamsFragment);
+        getSupportFragmentManager().beginTransaction().add(R.id.competition_frame_layout, teamsFragment)
+        .commit();
+
     }
 
     @Override

@@ -131,6 +131,18 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
         db.insert("EVENTS", null, eventValues);
     }
 
+    public static void insertStanding(SQLiteDatabase db, int team_id, int compId){
+        ContentValues standingValues = new ContentValues();
+
+
+        standingValues.put("TEAM_id", team_id);
+        standingValues.put("COMP_id", compId);
+
+        db.insert("STANDINGS", null, standingValues);
+
+
+    }
+
     private static void testInit(SQLiteDatabase db) {
         // создаём два соревнования
         insertCompetition(db, "Лига Воронежа", "league", "football", "сегодня", "Все скидываем по косарю",
@@ -150,6 +162,13 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
                 R.drawable.ic_menu_camera);
         insertCompetition(db, "Кубок Африки", "cup", "football", "завтра", "предварительная регистрация",
                 R.drawable.ic_menu_camera);
+
+        for (int i = 0; i<15; i++){
+            insertTeam(db, "Team"+ Integer.toString(i), "football", 0, "тестовая команда" );
+            insertStanding(db, i , 1);
+
+        }
+
     }
 
 }
