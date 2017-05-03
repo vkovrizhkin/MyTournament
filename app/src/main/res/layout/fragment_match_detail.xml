@@ -1,7 +1,8 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.diplom.mytournament.fragments.details_redact.MatchDetailFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -9,8 +10,98 @@
         android:id="@+id/timer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="45dp"
-        android:text="" />
+        android:text=""
+        android:textSize="45dp" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-</FrameLayout>
+        <ImageButton
+            android:id="@+id/start_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClickStart"
+            android:layout_weight="1"
+            android:src="@drawable/ic_play_arrow_green_600_36dp"/>
+        <ImageButton
+            android:id="@+id/stop_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onClickStop"
+            android:src="@drawable/ic_pause_blue_grey_800_36dp"/>
+        <ImageButton
+            android:id="@+id/reset_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClickReset"
+            android:layout_weight="1"
+            android:src="@drawable/ic_stop_red_300_36dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/team1_logo"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="left" />
+
+        <TextView
+            android:id="@+id/md_team1_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/md_scores1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text=" - "
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/md_scores2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/md_team2_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:textSize="24sp" />
+
+        <ImageView
+            android:id="@+id/md_team2_logo"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="right"
+            android:gravity="right" />
+    </LinearLayout>
+
+</LinearLayout>
