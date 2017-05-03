@@ -64,7 +64,7 @@ public class MatchDetailFragment extends Fragment {
 
     private int periods;
 
-    private int miliseconds;
+    private int miliseconds ;
 
     private boolean running;
 
@@ -86,6 +86,7 @@ public class MatchDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_match_detail, container, false);
+        runTimer(rootView);
         unbinder = ButterKnife.bind(this, rootView);
 
        // runTimer();
@@ -105,33 +106,31 @@ public class MatchDetailFragment extends Fragment {
         //TODO доделать хранение и извлечение логотипов!
         team1Logo.setImageResource(R.drawable.ic_menu_camera);
         team2Logo.setImageResource(R.drawable.ic_menu_gallery);
-       // runTimer();
+
         return rootView;
     }
 
     @OnClick(R.id.start_button)
     public void onStartImageButtonClick() {
-        //timer.setText("pizda");
-        runTimer();
+
+       // runTimer();
         running = true;
 
     }
 
     @OnClick(R.id.stop_button)
     public void onStopImageButtonClick() {
-        timer.setText("huy");
         running = false;
     }
 
     @OnClick(R.id.reset_button)
     public void onResetImageButtonClick() {
-        timer.setText("ZALUPA");
         running = false;
         miliseconds = timeMinutes * 60 * 100;
     }
 
-    private void runTimer() {
-        // final TextView textView = (TextView)findViewById(R.id.time_view);
+    private void runTimer(View view) {
+        final TextView textView = (TextView)view.findViewById(R.id.timer);
         final Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
@@ -142,12 +141,11 @@ public class MatchDetailFragment extends Fragment {
                 int mili = miliseconds % 100;
 
                 String time = String.format("%d:%02d:%02d:%02d", hours, minutes, secs, mili);
-                timer.setText(time);
-                while (miliseconds >= 1) {
+                textView.setText(time);
                     if (running) {
                         miliseconds--;
                     }
-                }
+
 
                 handler.postDelayed(this, 10);
             }
