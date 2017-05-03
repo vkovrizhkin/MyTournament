@@ -31,17 +31,20 @@ private List<Competition> competitionList;
 
 public static class ViewHolder extends RecyclerView.ViewHolder {
 
+    @BindView(R.id.competition_title)
     TextView title ;
 
+    @BindView(R.id.logo_image)
     ImageView logo;
 
+    @BindView(R.id.competition_content_layout)
     View container;
 
     public ViewHolder(View view) {
         super(view);
-        title = (TextView)view.findViewById(R.id.competition_title);
+/*        title = (TextView)view.findViewById(R.id.competition_title);
         logo = (ImageView)view.findViewById(R.id.logo_image);
-        container = (View)view.findViewById(R.id.competition_content_layout);
+        container = (View)view.findViewById(R.id.competition_content_layout);*/
         ButterKnife.bind(this, view);
 
     }

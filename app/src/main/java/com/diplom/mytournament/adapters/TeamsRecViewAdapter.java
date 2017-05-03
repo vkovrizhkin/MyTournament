@@ -12,6 +12,9 @@ import com.diplom.mytournament.models.Team;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Kovrizhkin V.A. on 28.04.2017.
  */
@@ -27,17 +30,22 @@ public class TeamsRecViewAdapter extends RecyclerView.Adapter<TeamsRecViewAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.team_content_layout)
         View container;
 
+        @BindView(R.id.team_name)
         TextView teamName;
 
+        @BindView(R.id.team_logo)
         ImageView teamLogo;
 
         public ViewHolder(View view) {
             super(view);
-            container = (View) view.findViewById(R.id.team_content_layout);
+/*            container = (View) view.findViewById(R.id.team_content_layout);
             teamName = (TextView) view.findViewById(R.id.team_name);
-            teamLogo = (ImageView) view.findViewById(R.id.team_logo);
+            teamLogo = (ImageView) view.findViewById(R.id.team_logo);*/
+
+            ButterKnife.bind(this, view);
 
         }
     }

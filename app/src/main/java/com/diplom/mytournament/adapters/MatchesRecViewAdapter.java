@@ -33,37 +33,30 @@ public class MatchesRecViewAdapter extends RecyclerView.Adapter<MatchesRecViewAd
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        //@BindView(R.id.match_stage)
+
+        @BindView(R.id.match_stage)
         TextView stage;
 
-       // @BindView(R.id.match_date)
+        @BindView(R.id.match_date)
         TextView date;
 
-       // @BindView(R.id.team1_name)
+        @BindView(R.id.team1_name)
         TextView team1Name;
 
-       // @BindView(R.id.team2_name)
+        @BindView(R.id.team2_name)
         TextView team2Name;
 
-       // @BindView(R.id.team1_logo)
+        @BindView(R.id.team1_logo)
         ImageView team1Logo;
 
-        //@BindView(R.id.team2_logo)
+        @BindView(R.id.team2_logo)
         ImageView team2Logo;
 
 
         public ViewHolder(View view) {
             super(view);
             qh = new MyTournamentQueryHelper(view.getContext());
-            stage = (TextView) view.findViewById(R.id.match_stage);
-            date = (TextView)view.findViewById(R.id.match_date);
-            team1Name = (TextView)view.findViewById(R.id.team1_name);
-            team2Name = (TextView)view.findViewById(R.id.team2_name);
-            team1Logo = (ImageView)view.findViewById(R.id.team1_logo);
-            team2Logo = (ImageView)view.findViewById(R.id.team2_logo);
-
-
-            //ButterKnife.bind(this, itemView);
+            ButterKnife.bind(this, view);
         }
     }
 
