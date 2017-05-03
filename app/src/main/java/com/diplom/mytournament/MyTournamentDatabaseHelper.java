@@ -53,7 +53,8 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
         //создание таблицы матчей
         db.execSQL("CREATE TABLE MATCHES("+"_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "COMPETITION_id INTEGER,"+"DATE_TIME TEXT,"+"TEAM_H_id INTEGER,"+
-                "TEAM_A_id INTEGER,"+"PLACE TEXT,"+"STAGE TEXT,"+"PLAYED INTEGER);");
+                "TEAM_A_id INTEGER,"+"SCORES1 INTEGER, " +
+                "SCORES2 INTEGER,"+"PLACE TEXT,"+"STAGE TEXT,"+"PLAYED INTEGER);");
 
         //создание таблицы с событиями
         db.execSQL("CREATE TABLE EVENTS("+"_id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -93,7 +94,7 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
 
     //добавление матча
     public static void insertMatch(SQLiteDatabase db, int competitionId, String dateTime,
-                                   String place, String stage, int teamHId, int teamAId){
+                                   String place, String stage, int teamHId, int teamAId, int played){
         ContentValues matchValues = new ContentValues();
 
         matchValues.put("COMPETITION_id", competitionId);
@@ -102,6 +103,9 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
         matchValues.put("STAGE", stage);
         matchValues.put("TEAM_H_id", teamHId);
         matchValues.put("TEAM_A_id", teamAId);
+        matchValues.put("PLAYED", played);
+        matchValues.put("SCORES1", 0);
+        matchValues.put("SCORES2", 0);
 
         db.insert("MATCHES", null, matchValues);
     }
@@ -172,13 +176,13 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
         insertStanding(db, 8 , 2);
         insertStanding(db, 9 , 2);
 
-        insertMatch(db, 1, "12.12.12 12:00", "энергия", "1 тур", 1, 4);
-        insertMatch(db, 1, "12.12.12 12:00", "стадион центральный", "1 тур", 2, 5);
-        insertMatch(db, 1, "12.12.12 12:00", "энергия", "1 тур", 1, 4);
-        insertMatch(db, 2, "12.12.12 12:00", "энергия", "1 тур", 1, 4);
-        insertMatch(db, 3, "12.12.12 12:00", "энергия", "1 тур", 1, 4);
-        insertMatch(db, 2, "12.12.12 12:00", "энергия", "1 тур", 1, 4);
-        insertMatch(db, 3, "12.12.12 12:00", "энергия", "1 тур", 1, 4);
+        insertMatch(db, 1, "12.12.12 12:00", "энергия", "1 тур", 1, 4, 0);
+        insertMatch(db, 1, "12.12.12 12:00", "стадион центральный", "1 тур", 2, 5, 1);
+        insertMatch(db, 1, "12.12.12 12:00", "энергия", "1 тур", 1, 4,0);
+        insertMatch(db, 2, "12.12.12 12:00", "энергия", "1 тур", 1, 4, 0);
+        insertMatch(db, 3, "12.12.12 12:00", "энергия", "1 тур", 1, 4, 1);
+        insertMatch(db, 2, "12.12.12 12:00", "энергия", "1 тур", 1, 4, 0);
+        insertMatch(db, 3, "12.12.12 12:00", "энергия", "1 тур", 1, 4, 1);
 
     }
 

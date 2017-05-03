@@ -1,6 +1,5 @@
 package com.diplom.mytournament.adapters;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 
 import com.diplom.mytournament.R;
 import com.diplom.mytournament.activities.CompetitionActivity;
-import com.diplom.mytournament.fragments.CompetitionsFragment;
+import com.diplom.mytournament.fragments.drawer.CompetitionsFragment;
 import com.diplom.mytournament.models.Competition;
 
 import java.util.List;

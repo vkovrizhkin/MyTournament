@@ -52,6 +52,13 @@ public class MatchesRecViewAdapter extends RecyclerView.Adapter<MatchesRecViewAd
         @BindView(R.id.team2_logo)
         ImageView team2Logo;
 
+        @BindView(R.id.scores1)
+        TextView scores1;
+
+        @BindView(R.id.scores2)
+        TextView scores2;
+
+
 
         public ViewHolder(View view) {
             super(view);
@@ -73,6 +80,12 @@ public class MatchesRecViewAdapter extends RecyclerView.Adapter<MatchesRecViewAd
 
         holder.stage.setText(match.getStage());
         holder.date.setText(match.getDate());
+        if(match.getPlayed()==0){
+            holder.scores1.setAlpha((float)0.3);
+            holder.scores2.setAlpha((float)0.3);
+        }
+        holder.scores1.setText(Integer.toString(match.getScores1()));
+        holder.scores2.setText(Integer.toString(match.getScores2()));
 
         Team team1 = qh.getTeamById(match.getTeam1Id());
         Team team2 = qh.getTeamById(match.getTeam2Id());

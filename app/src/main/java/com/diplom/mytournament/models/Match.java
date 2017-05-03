@@ -6,16 +6,28 @@ package com.diplom.mytournament.models;
 
 public class Match {
 
-    public int id;
-    public int competitionId; //идентификатор соревнования
-    public String date; // дата матча
-    public String stage; // этап соревнования (10 тур , полуфинал, групповой этап)
-    public int team1Id;// принимающая команда
-    public int team2Id; //команда гостей
-    public String place; //место проведения
-    public int played; //сыгран / несыгран
+    private int id;
 
-    public Match(int id, int competitionId, String date, String stage, int team1Id, int team2Id, String place, int played) {
+    private int competitionId; //идентификатор соревнования
+
+    private String date; // дата матча
+
+    private String stage; // этап соревнования (10 тур , полуфинал, групповой этап)
+
+    private int team1Id;// принимающая команда
+
+    private int team2Id; //команда гостей
+
+    private int scores1 = 0;
+
+    private int scores2 = 0;
+
+    private String place; //место проведения
+
+    private int played; //сыгран / несыгран
+
+    public Match(int id, int competitionId, String date, String stage, int team1Id, int team2Id,
+                 String place, int played, int scores1, int scores2) {
         this.id = id;
         this.competitionId = competitionId;
         this.date = date;
@@ -23,6 +35,32 @@ public class Match {
         this.team1Id = team1Id;
         this.team2Id = team2Id;
         this.place = place;
+        this.played = played;
+        this.scores1 = scores1;
+        this.scores2 = scores2;
+    }
+
+    public int getScores1() {
+        return scores1;
+    }
+
+    public void setScores1(int scores1) {
+        this.scores1 = scores1;
+    }
+
+    public int getScores2() {
+        return scores2;
+    }
+
+    public void setScores2(int scores2) {
+        this.scores2 = scores2;
+    }
+
+    public int getPlayed() {
+        return played;
+    }
+
+    public void setPlayed(int played) {
         this.played = played;
     }
 

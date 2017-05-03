@@ -157,11 +157,36 @@ public class MyTournamentQueryHelper {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<Event> eventList = new ArrayList<Event>();
 
-        String sqlQuery = "SELECT E._id AS _id , E.MATCH_id AS MATCH_id," +
-                " E.PLAYER_id AS PLAYER_id, E.TYPE AS TYPE, E.MINUTE AS MINUTE" +
-                "FROM EVENTS AS E INNER JOIN MATCHES AS M ON E.MATCH_id = M._id" +
-                "WHERE M.COMPETITION_id = ?";
+        String sqlQuery = "SELECT * FROM EVENTS INNER JOIN MATCHES ON EVENTS.MATCH_id = MATCHES._id" +
+                "WHERE MATCHES.COMPETITION_id = ?";
         Cursor cursor = db.rawQuery(sqlQuery, new String[]{Integer.toString(competitionId)});
+
+        try {
+            if (cursor.moveToFirst()) {
+                int id = cursor.getInt(0);
+                int matchId = cursor.getInt(1);
+                int playerId = cursor.getInt(2);
+                int minute = cursor.getInt(3);
+                String type = cursor.getString(4);
+
+                eventList.add(new Event(id, matchId, playerId, type, minute));
+
+            }
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(0);
+                int matchId = cursor.getInt(1);
+                int playerId = cursor.getInt(2);
+                int minute = cursor.getInt(3);
+                String type = cursor.getString(4);
+
+                eventList.add(new Event(id, matchId, playerId, type, minute));
+            }
+        } catch (SQLiteException e) {
+            return null;
+        } finally {
+            cursor.close();
+            db.close();
+        }
 
         return eventList;
 
@@ -183,11 +208,14 @@ public class MyTournamentQueryHelper {
                 String dateTime = cursor.getString(2);
                 int team1Id = cursor.getInt(3);
                 int team2Id = cursor.getInt(4);
-                String place = cursor.getString(5);
-                String stage = cursor.getString(6);
-                int played = cursor.getInt(7);
+                int scores1 = cursor.getInt(5);
+                int scores2 = cursor.getInt(6);
+                String place = cursor.getString(7);
+                String stage = cursor.getString(8);
+                int played = cursor.getInt(9);
 
-                matchList.add(new Match(id, competitionId, dateTime, stage, team1Id, team2Id, place, played));
+                matchList.add(new Match(id, competitionId, dateTime, stage, team1Id, team2Id, place,
+                        played, scores1, scores2));
 
 
                 //return competition;
@@ -198,11 +226,14 @@ public class MyTournamentQueryHelper {
                 String dateTime = cursor.getString(2);
                 int team1Id = cursor.getInt(3);
                 int team2Id = cursor.getInt(4);
-                String place = cursor.getString(5);
-                String stage = cursor.getString(6);
-                int played = cursor.getInt(7);
+                int scores1 = cursor.getInt(5);
+                int scores2 = cursor.getInt(6);
+                String place = cursor.getString(7);
+                String stage = cursor.getString(8);
+                int played = cursor.getInt(9);
 
-                matchList.add(new Match(id, competitionId, dateTime, stage, team1Id, team2Id, place, played));
+                matchList.add(new Match(id, competitionId, dateTime, stage, team1Id, team2Id, place,
+                        played, scores1, scores2));
 
 
             }

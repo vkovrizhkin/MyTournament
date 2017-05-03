@@ -16,8 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.diplom.mytournament.R;
-import com.diplom.mytournament.fragments.MatchesFragment;
-import com.diplom.mytournament.fragments.TeamsFragment;
+import com.diplom.mytournament.fragments.drawer.MatchesFragment;
+import com.diplom.mytournament.fragments.drawer.TeamsFragment;
 
 public class CompetitionActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

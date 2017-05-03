@@ -1,4 +1,4 @@
-package com.diplom.mytournament.fragments;
+package com.diplom.mytournament.fragments.drawer;
 
 
 import android.os.Bundle;
@@ -12,7 +12,8 @@ import android.view.ViewGroup;
 import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
 import com.diplom.mytournament.adapters.CompetitionsReсViewAdapter;
-import com.diplom.mytournament.models.Competition;
+import com.diplom.mytournament.adapters.TeamsRecViewAdapter;
+import com.diplom.mytournament.models.Team;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,28 +21,37 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CompetitionsFragment extends Fragment {
+public class TeamsFragment extends Fragment {
 
-
-    private List<Competition> competitionList = new ArrayList<>();
+    private int competitionId;
 
     private RecyclerView recyclerView;
 
-    private CompetitionsReсViewAdapter rAdapter;
+    private TeamsRecViewAdapter rAdapter;
 
-    public CompetitionsFragment() {
-        // Required empty public constructor
+    private List<Team> teamList = new ArrayList<>();
+
+    public TeamsFragment(int competitionId) {
+        this.competitionId = competitionId;
+    }
+
+
+    public TeamsFragment() {
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_competitions, container, false);
-        recyclerView = (RecyclerView)rootView.findViewById(R.id.competitions_recycler_view);
+        View rootView = inflater.inflate(R.layout.fragment_teams, container, false);
+
+        recyclerView = (RecyclerView)rootView.findViewById(R.id.teams_recycler_view);
+
         MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
-        competitionList = qh.getAllCompetition();
-        rAdapter = new CompetitionsReсViewAdapter(this, competitionList);
+
+        teamList = qh.getTeamsByCompetitionId(competitionId);
+
+        rAdapter = new TeamsRecViewAdapter(teamList);
 
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
@@ -51,7 +61,7 @@ public class CompetitionsFragment extends Fragment {
         return rootView;
 
 
-    }
 
+    }
 
 }
