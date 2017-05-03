@@ -48,7 +48,7 @@ public class MatchesFragment extends Fragment {
         MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
 
         matchList = qh.getMatchesByCompetitionId(competitionId);
-        rAdapter = new MatchesRecViewAdapter(matchList);
+        rAdapter = new MatchesRecViewAdapter(matchList, getFragmentManager());
 
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());

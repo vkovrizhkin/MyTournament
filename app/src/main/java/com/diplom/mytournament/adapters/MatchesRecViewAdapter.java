@@ -1,5 +1,6 @@
 package com.diplom.mytournament.adapters;
 
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 
 import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
+import com.diplom.mytournament.fragments.details_redact.MatchDetailFragment;
+import com.diplom.mytournament.fragments.drawer.MatchesFragment;
 import com.diplom.mytournament.models.Match;
 import com.diplom.mytournament.models.Team;
 
@@ -27,12 +30,18 @@ public class MatchesRecViewAdapter extends RecyclerView.Adapter<MatchesRecViewAd
 
     private static MyTournamentQueryHelper qh ;
 
-    public MatchesRecViewAdapter(List<Match> matchList) {
+
+    private FragmentManager fragmentManager;
+
+    public MatchesRecViewAdapter(List<Match> matchList, FragmentManager fragmentManager) {
         this.matchList = matchList;
+        this.fragmentManager = fragmentManager;
     }
 
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.match_content_layout)
+        View container;
 
         @BindView(R.id.match_stage)
         TextView stage;
@@ -74,9 +83,9 @@ public class MatchesRecViewAdapter extends RecyclerView.Adapter<MatchesRecViewAd
     }
 
     @Override
-    public void onBindViewHolder(MatchesRecViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final MatchesRecViewAdapter.ViewHolder holder, int position) {
 
-        Match match = matchList.get(position);
+        final Match match = matchList.get(position);
 
         holder.stage.setText(match.getStage());
         holder.date.setText(match.getDate());
@@ -96,6 +105,16 @@ public class MatchesRecViewAdapter extends RecyclerView.Adapter<MatchesRecViewAd
         //TODO доделать хранение и извлечение логотипов!
         holder.team1Logo.setImageResource(R.drawable.ic_menu_camera);
         holder.team2Logo.setImageResource(R.drawable.ic_menu_gallery);
+
+        holder.container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MatchDetailFragment matchDetailFragment = new MatchDetailFragment(10, 2, match.getId());
+              fragmentManager.beginTransaction().replace(R.id.competition_frame_layout,
+                        matchDetailFragment).addToBackStack(null).commit();
+
+            }
+        });
 
 
     }

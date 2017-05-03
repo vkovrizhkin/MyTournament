@@ -241,6 +241,9 @@ public class MyTournamentQueryHelper {
 
         } catch (SQLiteException e) {
             return null;
+        }finally {
+            cursor.close();
+            db.close();
         }
 
         return matchList;
@@ -261,9 +264,33 @@ public class MyTournamentQueryHelper {
     public Match getMatchById(int matchId) {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Match match;
 
-        return null;
+        String SqlQuery = "SELECT * FROM MATCHES WHERE _id = ?";
+        Cursor cursor = db.rawQuery(SqlQuery, new String[]{Integer.toString(matchId)});
+
+        try {
+            if (cursor.moveToFirst()) {
+                //получение данных соревнования из курсора
+               // int id = cursor.getInt(0);
+                int competitionId = cursor.getInt(1);
+                String dateTime = cursor.getString(2);
+                int team1Id = cursor.getInt(3);
+                int team2Id = cursor.getInt(4);
+                int scores1 = cursor.getInt(5);
+                int scores2 = cursor.getInt(6);
+                String place = cursor.getString(7);
+                String stage = cursor.getString(8);
+                int played = cursor.getInt(9);
+                return new Match(matchId, competitionId, dateTime, stage, team1Id, team2Id, place,
+                        played, scores1, scores2);
+            } else return null;
+
+        } catch (SQLiteException e) {
+            return null;
+        } finally {
+            cursor.close();
+            db.close();
+        }
     }
 
     //получение игрока по идентификатору
@@ -381,6 +408,9 @@ public class MyTournamentQueryHelper {
 
         } catch (SQLiteException e) {
             return null;
+        }finally {
+            cursor.close();
+            db.close();
         }
         return teamList;
 

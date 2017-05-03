@@ -10,8 +10,7 @@
         android:id="@+id/timer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="45dp" />
+        android:textSize="45sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +21,6 @@
             android:id="@+id/start_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="onClickStart"
             android:layout_weight="1"
             android:src="@drawable/ic_play_arrow_green_600_36dp"/>
         <ImageButton
@@ -30,13 +28,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="onClickStop"
             android:src="@drawable/ic_pause_blue_grey_800_36dp"/>
         <ImageButton
             android:id="@+id/reset_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="onClickReset"
             android:layout_weight="1"
             android:src="@drawable/ic_stop_red_300_36dp"/>
 
@@ -48,7 +44,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/team1_logo"
+            android:id="@+id/md_team1_logo"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="left" />

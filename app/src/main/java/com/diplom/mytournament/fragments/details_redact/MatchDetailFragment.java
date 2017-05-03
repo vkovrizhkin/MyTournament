@@ -3,15 +3,25 @@ package com.diplom.mytournament.fragments.details_redact;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
+import com.diplom.mytournament.models.Match;
+import com.diplom.mytournament.models.Team;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,18 +31,50 @@ public class MatchDetailFragment extends Fragment {
     @BindView(R.id.timer)
     TextView timer;
 
+    @BindView(R.id.md_team1_name)
+    TextView team1Name;
+
+    @BindView(R.id.md_team2_name)
+    TextView team2Name;
+
+    @BindView(R.id.md_team1_logo)
+    ImageView team1Logo;
+
+    @BindView(R.id.md_team2_logo)
+    ImageView team2Logo;
+
+    @BindView(R.id.md_scores1)
+    TextView scores1;
+
+    @BindView(R.id.md_scores2)
+    TextView scores2;
+
+    @BindView(R.id.start_button)
+    ImageButton startButton;
+
+    @BindView(R.id.stop_button)
+    ImageButton stopButton;
+
+    @BindView(R.id.reset_button)
+    ImageButton resetButton;
+
+    private int matchId;
+
     private int timeMinutes;
 
     private int periods;
 
-    private int miliseconds = 0;
+    private int miliseconds;
 
     private boolean running;
 
-    public MatchDetailFragment(int timeMinutes, int periods) {
+    private Unbinder unbinder;
+
+    public MatchDetailFragment(int timeMinutes, int periods, int matchId) {
+        this.matchId = matchId;
         this.timeMinutes = timeMinutes;
         this.periods = periods;
-        this.miliseconds = timeMinutes * 60 * 1000;
+        this.miliseconds = timeMinutes * 60 * 100;
     }
 
 
@@ -40,12 +82,52 @@ public class MatchDetailFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_match_detail, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_match_detail, container, false);
+        unbinder = ButterKnife.bind(this, rootView);
+
+       // runTimer();
+
+        MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
+        Match match = qh.getMatchById(matchId);
+
+        scores1.setText(Integer.toString(match.getScores1()));
+        scores2.setText(Integer.toString(match.getScores2()));
+
+        Team team1 = qh.getTeamById(match.getTeam1Id());
+        Team team2 = qh.getTeamById(match.getTeam2Id());
+
+        team1Name.setText(team1.getName());
+        team2Name.setText(team2.getName());
+
+        //TODO доделать хранение и извлечение логотипов!
+        team1Logo.setImageResource(R.drawable.ic_menu_camera);
+        team2Logo.setImageResource(R.drawable.ic_menu_gallery);
+       // runTimer();
+        return rootView;
+    }
+
+    @OnClick(R.id.start_button)
+    public void onStartImageButtonClick() {
+        //timer.setText("pizda");
+        runTimer();
+        running = true;
+
+    }
+
+    @OnClick(R.id.stop_button)
+    public void onStopImageButtonClick() {
+        timer.setText("huy");
+        running = false;
+    }
+
+    @OnClick(R.id.reset_button)
+    public void onResetImageButtonClick() {
+        timer.setText("ZALUPA");
+        running = false;
+        miliseconds = timeMinutes * 60 * 100;
     }
 
     private void runTimer() {
@@ -54,14 +136,14 @@ public class MatchDetailFragment extends Fragment {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                int hours = miliseconds / 360000;
-                int minutes = (miliseconds % 360000) / 6000;
-                int secs = (miliseconds % 6000) / 100;
+                int hours = miliseconds / (60 * 60 * 100);
+                int minutes = (miliseconds % (60 * 60 * 100)) / (60 * 100);
+                int secs = (miliseconds % (60 * 100)) / 100;
                 int mili = miliseconds % 100;
 
                 String time = String.format("%d:%02d:%02d:%02d", hours, minutes, secs, mili);
                 timer.setText(time);
-                while (miliseconds >= 0) {
+                while (miliseconds >= 1) {
                     if (running) {
                         miliseconds--;
                     }
@@ -74,4 +156,10 @@ public class MatchDetailFragment extends Fragment {
 
     }
 
+    @Override
+    public void onDestroyView() {
+        unbinder.unbind();
+        super.onDestroyView();
+
+    }
 }
