@@ -100,7 +100,6 @@ public class MatchDetailFragment extends Fragment {
 
         MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
         format = qh.getFormatById(formatId);
-      //  format = new Format(1, "футбольчег", 11,45,2,0,"football");
 
         miliseconds = format.getPeriodMinutes() * 60 * 100;
         if (format.getKindOfSport().equals("football") || format.getKindOfSport().equals("basketball")) {

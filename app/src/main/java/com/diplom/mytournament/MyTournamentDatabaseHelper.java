@@ -211,6 +211,8 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
         insertMatch(db, 3, "12.12.12 12:00", "энергия", "1 тур", 1, 4, 1);
         insertMatch(db, 2, "12.12.12 12:00", "энергия", "1 тур", 1, 4, 0);
         insertMatch(db, 3, "12.12.12 12:00", "энергия", "1 тур", 1, 4, 1);
+        insertMatch(db, 7, "12.12.12 12:00", "энергия", "1 тур", 1, 4, 0);
+        insertMatch(db, 7, "12.12.12 12:00", "энергия", "1 тур", 1, 4, 1);
 
     }
 

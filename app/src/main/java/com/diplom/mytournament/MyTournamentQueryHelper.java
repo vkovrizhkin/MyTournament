@@ -198,8 +198,11 @@ public class MyTournamentQueryHelper {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<Match> matchList = new ArrayList<Match>();
 
-        //  Cursor cursor = db.query("MATCHES", null, "COMPETITION_id", new String[]{Integer.toString(competitionId)}, null, null, null);
-        Cursor cursor = db.query("MATCHES", null, null, null, null, null, null);
+       // Cursor cursor = db.query("MATCHES", null, "COMPETITION_id", new String[]{Integer.toString(competitionId)}, null, null, null);
+       // Cursor cursor = db.query("MATCHES", null, null, null, null, null, null);
+
+        String SqlQuery = "SELECT * FROM MATCHES WHERE COMPETITION_id = ?";
+        Cursor cursor = db.rawQuery(SqlQuery, new String[]{Integer.toString(competitionId)});
         try {
             if (cursor.moveToFirst()) {
                 //получение данных соревнования из курсора
