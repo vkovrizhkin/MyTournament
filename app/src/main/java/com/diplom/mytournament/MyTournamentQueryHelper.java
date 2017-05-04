@@ -38,14 +38,14 @@ public class MyTournamentQueryHelper {
         try {
             if (cursor.moveToFirst()) {
                 //получение данных соревнования из курсора
-                String name = cursor.getString(0);
-                String kindOfSport = cursor.getString(1);
-                String info = cursor.getString(2);
-                String date = cursor.getString(3);
-                String type = cursor.getString(4);
-                int resourceId = cursor.getInt(5);
+                String name = cursor.getString(1);
+                int format = cursor.getInt(2);
+                String info = cursor.getString(3);
+                String date = cursor.getString(4);
+                String type = cursor.getString(5);
+                int resourceId = cursor.getInt(6);
 
-                competition = new Competition(name, id, kindOfSport, info, date, type, resourceId);
+                competition = new Competition(name, id, format, info, date, type, resourceId);
 
                 return competition;
             } else return null;
@@ -65,22 +65,20 @@ public class MyTournamentQueryHelper {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<Competition> competitionList = new ArrayList<Competition>();
 
-        Cursor cursor = db.query("COMPETITIONS", new String[]{"_id", "NAME", "KIND_OF_SPORT",
-                        "INFO", "DATE", "TYPE", "LOGO_RESOURCE_ID"},
-                null, null, null, null, null);
+        Cursor cursor = db.query("COMPETITIONS", null, null, null, null, null, null);
 
         try {
             if (cursor.moveToFirst()) {
                 //получение данных соревнования из курсора
                 int id = cursor.getInt(0);
                 String name = cursor.getString(1);
-                String kindOfSport = cursor.getString(2);
+                int format = cursor.getInt(2);
                 String info = cursor.getString(3);
                 String date = cursor.getString(4);
                 String type = cursor.getString(5);
                 int resourceId = cursor.getInt(6);
 
-                Competition competition = new Competition(name, id, kindOfSport, info, date, type, resourceId);
+                Competition competition = new Competition(name, id, format, info, date, type, resourceId);
                 competitionList.add(competition);
 
                 //return competition;
@@ -89,13 +87,13 @@ public class MyTournamentQueryHelper {
                 //получение данных соревнования из курсора
                 int id = cursor.getInt(0);
                 String name = cursor.getString(1);
-                String kindOfSport = cursor.getString(2);
+                int format = cursor.getInt(2);
                 String info = cursor.getString(3);
                 String date = cursor.getString(4);
                 String type = cursor.getString(5);
                 int resourceId = cursor.getInt(6);
 
-                Competition competition = new Competition(name, id, kindOfSport, info, date, type, resourceId);
+                Competition competition = new Competition(name, id, format, info, date, type, resourceId);
                 competitionList.add(competition);
 
             }
@@ -157,7 +155,7 @@ public class MyTournamentQueryHelper {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<Event> eventList = new ArrayList<Event>();
 
-        String sqlQuery = "SELECT * FROM EVENTS INNER JOIN MATCHES ON EVENTS.MATCH_id = MATCHES._id" +
+        String sqlQuery = "SELECT * FROM EVENTS INNER JOIN MATCHES ON EVENTS.MATCH_id = MATCHES._id " +
                 "WHERE MATCHES.COMPETITION_id = ?";
         Cursor cursor = db.rawQuery(sqlQuery, new String[]{Integer.toString(competitionId)});
 
@@ -241,7 +239,7 @@ public class MyTournamentQueryHelper {
 
         } catch (SQLiteException e) {
             return null;
-        }finally {
+        } finally {
             cursor.close();
             db.close();
         }
@@ -271,7 +269,7 @@ public class MyTournamentQueryHelper {
         try {
             if (cursor.moveToFirst()) {
                 //получение данных соревнования из курсора
-               // int id = cursor.getInt(0);
+                // int id = cursor.getInt(0);
                 int competitionId = cursor.getInt(1);
                 String dateTime = cursor.getString(2);
                 int team1Id = cursor.getInt(3);
@@ -408,7 +406,7 @@ public class MyTournamentQueryHelper {
 
         } catch (SQLiteException e) {
             return null;
-        }finally {
+        } finally {
             cursor.close();
             db.close();
         }

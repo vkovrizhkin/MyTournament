@@ -34,7 +34,7 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
 
         //созднаие таблицы "Соревнование". Основные сведения о проводимом соревновании
         db.execSQL("CREATE TABLE COMPETITIONS("+ "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "NAME TEXT,"+"TYPE TEXT,"+"KIND_OF_SPORT TEXT,"+
+                "NAME TEXT,"+"TYPE TEXT,"+"FORMAT INTEGER,"+
                 "DATE TEXT,"+"INFO TEXT,"+"LOGO_RESOURCE_id INTEGER);");
 
         //создание сводной турнирной таблицы
@@ -60,16 +60,20 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE EVENTS("+"_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "MATCH_id INTEGER,"+"PLAYER_id INTEGER,"+"MINUTE INTEGER,"+"TYPE TEXT);");
 
+        db.execSQL("CREATE TABLE FORMATS( _id INTEGER, NAME TEXT, TEAM_PLAYERS INTEGER, " +
+                "PERIOD_MINUTES INTEGER, PERIODS_NUM INTEGER, SCORES_IN_PERIOD INTEGER, " +
+                "KIND_OF_SPORT TEXT" );
+
     }
 
     //добавление соревнования
-    public static void insertCompetition(SQLiteDatabase db,String name, String type, String sport,
+    public static void insertCompetition(SQLiteDatabase db,String name, String type, int format,
                                          String date, String info, int resourceId){
         ContentValues competitionValues = new ContentValues();
 
         competitionValues.put("NAME", name);
         competitionValues.put("TYPE", type);
-        competitionValues.put("KIND_OF_SPORT", sport);
+        competitionValues.put("FORMAT", format );
         competitionValues.put("DATE", date);
         competitionValues.put("INFO", info);
         competitionValues.put("LOGO_RESOURCE_id", resourceId);
@@ -149,22 +153,22 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
 
     private static void testInit(SQLiteDatabase db) {
         // создаём два соревнования
-        insertCompetition(db, "Лига Воронежа", "league", "football", "сегодня", "Все скидываем по косарю",
+        insertCompetition(db, "Лига Воронежа", "league", 1, "сегодня", "Все скидываем по косарю",
                 R.drawable.ic_menu_camera);
-        insertCompetition(db, "Кубок Липецка", "cup", "football", "завтра", "предварительная регистрация",
+        insertCompetition(db, "Кубок Липецка", "cup", 1, "завтра", "предварительная регистрация",
                 R.drawable.ic_menu_camera);
-        insertCompetition(db, "Лига Чемпионов", "league", "football", "сегодня", "Все скидываем по косарю",
+        insertCompetition(db, "Лига Чемпионов", "league", 1, "сегодня", "Все скидываем по косарю",
                 R.drawable.ic_menu_camera);
-        insertCompetition(db, "Кубок Мира", "cup", "football", "завтра", "предварительная регистрация",
+        insertCompetition(db, "Кубок Мира", "cup", 2, "завтра", "предварительная регистрация",
                 R.drawable.ic_menu_camera);
 
-        insertCompetition(db, "Лига Москвы", "league", "football", "сегодня", "Все скидываем по косарю",
+        insertCompetition(db, "Лига Москвы", "league", 2, "сегодня", "Все скидываем по косарю",
                 R.drawable.ic_menu_camera);
-        insertCompetition(db, "Кубок Питера", "cup", "football", "завтра", "предварительная регистрация",
+        insertCompetition(db, "Кубок Питера", "cup", 2, "завтра", "предварительная регистрация",
                 R.drawable.ic_menu_camera);
-        insertCompetition(db, "Лига Китая", "league", "football", "сегодня", "Все скидываем по косарю",
+        insertCompetition(db, "Лига Китая", "league", 3, "сегодня", "Все скидываем по косарю",
                 R.drawable.ic_menu_camera);
-        insertCompetition(db, "Кубок Африки", "cup", "football", "завтра", "предварительная регистрация",
+        insertCompetition(db, "Кубок Африки", "cup", 3, "завтра", "предварительная регистрация",
                 R.drawable.ic_menu_camera);
 
         for (int i = 0; i<15; i++){

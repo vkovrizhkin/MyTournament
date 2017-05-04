@@ -8,17 +8,17 @@ public class Competition {
 
     public int id;
     public String name; //название соревнования
-    public String kindOfSport; //вид спорта
+    public int format; //вид спорта
     public String info; //дополнительная информация
     public String date; //дата начала
     public String type; //тип расписания (кубок, по кругу и тд)
     public long logoIdResource;//ссылка на ресурс логотипа
 
-    public Competition(String name, int id, String kindOfSport, String info, String date,
+    public Competition(String name, int id, int format, String info, String date,
                        String type, long logoIdResource) {
         this.name = name;
         this.id = id;
-        this.kindOfSport = kindOfSport;
+        this.format = format;
         this.info = info;
         this.date = date;
         this.type = type;
@@ -41,12 +41,12 @@ public class Competition {
         this.id = id;
     }
 
-    public String getKindOfSport() {
-        return kindOfSport;
+    public int getFormat() {
+        return format;
     }
 
-    public void setKindOfSport(String kindOfSport) {
-        this.kindOfSport = kindOfSport;
+    public void setFormat(int format) {
+        this.format = format;
     }
 
     public String getInfo() {

@@ -1,6 +1,7 @@
 package com.diplom.mytournament.fragments.details_redact;
 
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -58,6 +59,9 @@ public class MatchDetailFragment extends Fragment {
     @BindView(R.id.reset_button)
     ImageButton resetButton;
 
+    @BindView(R.id.add_button)
+    ImageButton addView;
+
     private int matchId;
 
     private int timeMinutes;
@@ -69,6 +73,8 @@ public class MatchDetailFragment extends Fragment {
     private boolean running;
 
     private Unbinder unbinder;
+
+    private MediaPlayer mediaPlayer;
 
     public MatchDetailFragment(int timeMinutes, int periods, int matchId) {
         this.matchId = matchId;
@@ -88,6 +94,7 @@ public class MatchDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_match_detail, container, false);
         runTimer(rootView);
         unbinder = ButterKnife.bind(this, rootView);
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.whistle);
 
        // runTimer();
 
@@ -113,9 +120,21 @@ public class MatchDetailFragment extends Fragment {
     @OnClick(R.id.start_button)
     public void onStartImageButtonClick() {
 
-       // runTimer();
         running = true;
+        mediaPlayer.start();
+        try {
+            Thread.sleep(2000);
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+        mediaPlayer.stop();
 
+
+    }
+
+    @OnClick(R.id.add_button)
+    public void onAddImageButtonClick(){
+        miliseconds+=60*100;
     }
 
     @OnClick(R.id.stop_button)
