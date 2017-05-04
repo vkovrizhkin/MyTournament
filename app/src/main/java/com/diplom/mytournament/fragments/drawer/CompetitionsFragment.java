@@ -2,7 +2,6 @@ package com.diplom.mytournament.fragments.drawer;
 
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +14,7 @@ import com.diplom.mytournament.R;
 import com.diplom.mytournament.adapters.CompetitionsReсViewAdapter;
 import com.diplom.mytournament.fragments.details_redact.AddCompetitionFragment;
 import com.diplom.mytournament.models.Competition;
+import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +42,8 @@ public class CompetitionsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_competitions, container, false);
         recyclerView = (RecyclerView)rootView.findViewById(R.id.competitions_recycler_view);
+        FloatingActionButton fab = (FloatingActionButton)rootView.findViewById(R.id.competitions_fab);
+        fab.attachToRecyclerView(recyclerView);
         MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
         competitionList = qh.getAllCompetition();
         rAdapter = new CompetitionsReсViewAdapter(this, competitionList);
@@ -51,7 +53,7 @@ public class CompetitionsFragment extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(rAdapter);
 
-        FloatingActionButton fab = (FloatingActionButton)rootView.findViewById(R.id.competitions_fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
