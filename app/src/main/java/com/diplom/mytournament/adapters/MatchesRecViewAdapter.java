@@ -28,14 +28,17 @@ public class MatchesRecViewAdapter extends RecyclerView.Adapter<MatchesRecViewAd
 
     private List<Match> matchList;
 
+    private int formatId;
+
     private static MyTournamentQueryHelper qh ;
 
 
     private FragmentManager fragmentManager;
 
-    public MatchesRecViewAdapter(List<Match> matchList, FragmentManager fragmentManager) {
+    public MatchesRecViewAdapter(List<Match> matchList, FragmentManager fragmentManager, int formatId) {
         this.matchList = matchList;
         this.fragmentManager = fragmentManager;
+        this.formatId = formatId;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -109,7 +112,7 @@ public class MatchesRecViewAdapter extends RecyclerView.Adapter<MatchesRecViewAd
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MatchDetailFragment matchDetailFragment = new MatchDetailFragment(10, 2, match.getId());
+                MatchDetailFragment matchDetailFragment = new MatchDetailFragment(formatId, match.getId());
               fragmentManager.beginTransaction().replace(R.id.competition_frame_layout,
                         matchDetailFragment).addToBackStack(null).commit();
 

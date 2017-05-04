@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
+import com.diplom.mytournament.models.Format;
 import com.diplom.mytournament.models.Match;
 import com.diplom.mytournament.models.Team;
 
@@ -64,23 +65,24 @@ public class MatchDetailFragment extends Fragment {
 
     private int matchId;
 
-    private int timeMinutes;
+    private Format format;
 
-    private int periods;
+    private int formatId;
 
-    private int miliseconds ;
+    private int miliseconds;
 
     private boolean running;
+
+    private boolean timerType;//true если отчёт обратный
 
     private Unbinder unbinder;
 
     private MediaPlayer mediaPlayer;
 
-    public MatchDetailFragment(int timeMinutes, int periods, int matchId) {
+    public MatchDetailFragment(int formatId, int matchId) {
+        this.formatId = formatId;
         this.matchId = matchId;
-        this.timeMinutes = timeMinutes;
-        this.periods = periods;
-        this.miliseconds = timeMinutes * 60 * 100;
+
     }
 
 
@@ -96,9 +98,17 @@ public class MatchDetailFragment extends Fragment {
         unbinder = ButterKnife.bind(this, rootView);
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.whistle);
 
-       // runTimer();
-
         MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
+        format = qh.getFormatById(formatId);
+      //  format = new Format(1, "футбольчег", 11,45,2,0,"football");
+
+        miliseconds = format.getPeriodMinutes() * 60 * 100;
+        if (format.getKindOfSport().equals("football") || format.getKindOfSport().equals("basketball")) {
+            timerType = true;
+        } else {
+            timerType = false;
+        }
+
         Match match = qh.getMatchById(matchId);
 
         scores1.setText(Integer.toString(match.getScores1()));
@@ -123,7 +133,7 @@ public class MatchDetailFragment extends Fragment {
         mediaPlayer.start();
         try {
             Thread.sleep(2000);
-        } catch(InterruptedException ex) {
+        } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
         mediaPlayer.stop();
@@ -132,8 +142,8 @@ public class MatchDetailFragment extends Fragment {
     }
 
     @OnClick(R.id.add_button)
-    public void onAddImageButtonClick(){
-        miliseconds+=60*100;
+    public void onAddImageButtonClick() {
+        miliseconds += 60 * 100;
     }
 
     @OnClick(R.id.stop_button)
@@ -144,11 +154,11 @@ public class MatchDetailFragment extends Fragment {
     @OnClick(R.id.reset_button)
     public void onResetImageButtonClick() {
         running = false;
-        miliseconds = timeMinutes * 60 * 100;
+        miliseconds = format.getPeriodMinutes() * 60 * 100;
     }
 
     private void runTimer(View view) {
-        final TextView textView = (TextView)view.findViewById(R.id.timer);
+        final TextView textView = (TextView) view.findViewById(R.id.timer);
         final Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
@@ -160,9 +170,14 @@ public class MatchDetailFragment extends Fragment {
 
                 String time = String.format("%d:%02d:%02d:%02d", hours, minutes, secs, mili);
                 textView.setText(time);
-                    if (running) {
+                if (running) {
+                    if (timerType) {
                         miliseconds--;
+                    } else {
+                        miliseconds++;
                     }
+
+                }
 
 
                 handler.postDelayed(this, 10);

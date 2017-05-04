@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteException;
 
 import com.diplom.mytournament.models.Competition;
 import com.diplom.mytournament.models.Event;
+import com.diplom.mytournament.models.Format;
 import com.diplom.mytournament.models.Match;
 import com.diplom.mytournament.models.Player;
 import com.diplom.mytournament.models.Standing;
@@ -38,11 +39,12 @@ public class MyTournamentQueryHelper {
         try {
             if (cursor.moveToFirst()) {
                 //получение данных соревнования из курсора
+               // int id = cursor.getInt(0);
                 String name = cursor.getString(1);
-                int format = cursor.getInt(2);
-                String info = cursor.getString(3);
+                String type = cursor.getString(2);
+                int format = cursor.getInt(3);
                 String date = cursor.getString(4);
-                String type = cursor.getString(5);
+                String info = cursor.getString(5);
                 int resourceId = cursor.getInt(6);
 
                 competition = new Competition(name, id, format, info, date, type, resourceId);
@@ -72,10 +74,10 @@ public class MyTournamentQueryHelper {
                 //получение данных соревнования из курсора
                 int id = cursor.getInt(0);
                 String name = cursor.getString(1);
-                int format = cursor.getInt(2);
-                String info = cursor.getString(3);
+                String type = cursor.getString(2);
+                int format = cursor.getInt(3);
                 String date = cursor.getString(4);
-                String type = cursor.getString(5);
+                String info = cursor.getString(5);
                 int resourceId = cursor.getInt(6);
 
                 Competition competition = new Competition(name, id, format, info, date, type, resourceId);
@@ -87,10 +89,10 @@ public class MyTournamentQueryHelper {
                 //получение данных соревнования из курсора
                 int id = cursor.getInt(0);
                 String name = cursor.getString(1);
-                int format = cursor.getInt(2);
-                String info = cursor.getString(3);
+                String type = cursor.getString(2);
+                int format = cursor.getInt(3);
                 String date = cursor.getString(4);
-                String type = cursor.getString(5);
+                String info = cursor.getString(5);
                 int resourceId = cursor.getInt(6);
 
                 Competition competition = new Competition(name, id, format, info, date, type, resourceId);
@@ -233,9 +235,7 @@ public class MyTournamentQueryHelper {
                 matchList.add(new Match(id, competitionId, dateTime, stage, team1Id, team2Id, place,
                         played, scores1, scores2));
 
-
             }
-
 
         } catch (SQLiteException e) {
             return null;
@@ -243,7 +243,6 @@ public class MyTournamentQueryHelper {
             cursor.close();
             db.close();
         }
-
         return matchList;
 
     }
@@ -260,7 +259,6 @@ public class MyTournamentQueryHelper {
 
     //получение матча по идентификатору
     public Match getMatchById(int matchId) {
-
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         String SqlQuery = "SELECT * FROM MATCHES WHERE _id = ?";
@@ -289,6 +287,36 @@ public class MyTournamentQueryHelper {
             cursor.close();
             db.close();
         }
+    }
+
+    public Format getFormatById(int formatId) {
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String SqlQuery = "SELECT * FROM FORMATS WHERE _id=?";
+        Cursor cursor = db.rawQuery(SqlQuery, new String[]{Integer.toString(formatId)});
+        int i =0;
+        try {
+            if (cursor.moveToFirst()) {
+                String name = cursor.getString(1);
+                int teamPlayers = cursor.getInt(2);
+                int periodMinutes = cursor.getInt(3);
+                int periodsNum = cursor.getInt(4);
+                int scoresInPeriod = cursor.getInt(5);
+                String kindOfSport = cursor.getString(6);
+
+                return new Format(formatId, name, teamPlayers, periodMinutes, periodsNum, scoresInPeriod,
+                        kindOfSport);
+            } else {
+                return null;
+            }
+
+        } catch (SQLiteException e) {
+            return null;
+        } finally {
+            cursor.close();
+            db.close();
+        }
+
     }
 
     //получение игрока по идентификатору
