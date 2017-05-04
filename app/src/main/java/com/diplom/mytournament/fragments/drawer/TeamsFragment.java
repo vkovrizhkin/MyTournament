@@ -2,6 +2,7 @@ package com.diplom.mytournament.fragments.drawer;
 
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
 import com.diplom.mytournament.adapters.CompetitionsReсViewAdapter;
 import com.diplom.mytournament.adapters.TeamsRecViewAdapter;
+import com.diplom.mytournament.fragments.details_redact.AddTeamFragment;
 import com.diplom.mytournament.models.Team;
 
 import java.util.ArrayList;
@@ -57,6 +59,16 @@ public class TeamsFragment extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(rAdapter);
+
+        FloatingActionButton fab = (FloatingActionButton)rootView.findViewById(R.id.teams_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new AddTeamFragment();
+                getFragmentManager().beginTransaction().replace(R.id.competition_frame_layout, fragment)
+                        .addToBackStack(null).commit();
+            }
+        });
 
         return rootView;
 

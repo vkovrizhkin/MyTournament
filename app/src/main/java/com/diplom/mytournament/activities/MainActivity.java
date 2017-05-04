@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FrameLayout frameLayout = (FrameLayout)findViewById(R.id.profile_frame_layout);
+        //FrameLayout frameLayout = (FrameLayout)findViewById(R.id.profile_frame_layout);
 
         CompetitionsFragment competitionsFragment = new CompetitionsFragment();
 
