@@ -120,7 +120,6 @@ public class MatchDetailFragment extends Fragment {
     @OnClick(R.id.start_button)
     public void onStartImageButtonClick() {
 
-        running = true;
         mediaPlayer.start();
         try {
             Thread.sleep(2000);
@@ -128,7 +127,7 @@ public class MatchDetailFragment extends Fragment {
             Thread.currentThread().interrupt();
         }
         mediaPlayer.stop();
-
+        running = true;
 
     }
 

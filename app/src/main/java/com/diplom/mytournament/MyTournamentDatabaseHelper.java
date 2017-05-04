@@ -62,7 +62,7 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE FORMATS( _id INTEGER, NAME TEXT, TEAM_PLAYERS INTEGER, " +
                 "PERIOD_MINUTES INTEGER, PERIODS_NUM INTEGER, SCORES_IN_PERIOD INTEGER, " +
-                "KIND_OF_SPORT TEXT" );
+                "KIND_OF_SPORT TEXT);" );
 
     }
 
