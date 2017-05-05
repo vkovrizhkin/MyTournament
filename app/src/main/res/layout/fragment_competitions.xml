@@ -25,6 +25,7 @@
         fab:fab_colorNormal="@color/colorPrimary"
         fab:fab_colorPressed="@color/colorPrimaryDark"
         fab:fab_colorRipple="@color/colorAccent"
-        fab:fab_type="normal" />
+        fab:fab_type="normal"
+        android:elevation = "30dp" />
 
 </FrameLayout>
