@@ -1,5 +1,7 @@
 package com.diplom.mytournament.adapters;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.diplom.mytournament.R;
+import com.diplom.mytournament.fragments.TeamFragment;
 import com.diplom.mytournament.models.Team;
 
 import java.util.List;
@@ -24,8 +27,11 @@ public class TeamsRecViewAdapter extends RecyclerView.Adapter<TeamsRecViewAdapte
 
     private List<Team> teamList;
 
-    public TeamsRecViewAdapter(List<Team> teamList) {
+    FragmentManager fragmentManager;
+
+    public TeamsRecViewAdapter(List<Team> teamList, FragmentManager fragmentManager) {
         this.teamList = teamList;
+        this.fragmentManager = fragmentManager;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -61,6 +67,14 @@ public class TeamsRecViewAdapter extends RecyclerView.Adapter<TeamsRecViewAdapte
 
         holder.teamName.setText(team.getName());
         holder.teamLogo.setImageResource(R.drawable.ic_menu_camera);
+
+        holder.container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new TeamFragment();
+                fragmentManager.beginTransaction().replace(R.id.competition_frame_layout, fragment).addToBackStack(null).commit();
+            }
+        });
 
     }
 

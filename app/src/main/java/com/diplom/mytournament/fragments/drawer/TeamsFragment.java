@@ -54,7 +54,7 @@ public class TeamsFragment extends Fragment {
 
         teamList = qh.getTeamsByCompetitionId(competitionId);
 
-        rAdapter = new TeamsRecViewAdapter(teamList);
+        rAdapter = new TeamsRecViewAdapter(teamList, getFragmentManager());
 
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
