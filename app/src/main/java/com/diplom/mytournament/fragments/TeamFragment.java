@@ -9,33 +9,45 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.diplom.mytournament.R;
-import com.diplom.mytournament.adapters.TeamPagerAdapter;
+import com.diplom.mytournament.adapters.MyTournamentPagerAdapter;
+import com.diplom.mytournament.fragments.team_view_pager.TeamInfoFragment;
+import com.diplom.mytournament.fragments.team_view_pager.TeamMatchesFragment;
+import com.diplom.mytournament.fragments.team_view_pager.TeamPlayersFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class TeamFragment extends Fragment {
 
+    private MyTournamentPagerAdapter myTournamentPagerAdapter;
+
+    private ViewPager mViewPager;
+
+    private int teamId = 1;
+
+    private int competitionId = 1;
 
     public TeamFragment() {
         // Required empty public constructor
     }
 
-    // When requested, this adapter returns a DemoObjectFragment,
-    // representing an object in the collection.
-    TeamPagerAdapter mDemoCollectionPagerAdapter;
-    ViewPager mViewPager;
-
+    public TeamFragment(int teamId) {
+        this.teamId = teamId;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_team, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_team, container, false);
 
-        mDemoCollectionPagerAdapter = new TeamPagerAdapter(getFragmentManager());
+        myTournamentPagerAdapter = new MyTournamentPagerAdapter(getFragmentManager(), 3);
+        myTournamentPagerAdapter.addFragment(new TeamMatchesFragment(teamId, competitionId), "МАТЧИ");
+        myTournamentPagerAdapter.addFragment(new TeamPlayersFragment(teamId), "СОСТАВ");
+        myTournamentPagerAdapter.addFragment(new TeamInfoFragment(teamId), "ИНФОРМАЦИЯ");
+
         mViewPager = (ViewPager) rootView.findViewById(R.id.team_pager);
-        mViewPager.setAdapter(mDemoCollectionPagerAdapter);
+        mViewPager.setAdapter(myTournamentPagerAdapter);
         return rootView;
     }
 
