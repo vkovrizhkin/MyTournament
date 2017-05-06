@@ -1,4 +1,4 @@
-package com.diplom.mytournament.fragments;
+package com.diplom.mytournament.fragments.team_view_pager;
 
 
 import android.os.Bundle;
@@ -13,24 +13,26 @@ import com.diplom.mytournament.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TestObjectFragment extends Fragment {
+public class TeamInfoFragment extends Fragment {
 
     public static final String ARG_OBJECT = "object";
 
-    public TestObjectFragment() {
+    private int teamId;
+
+    public TeamInfoFragment() {
         // Required empty public constructor
     }
 
+    public TeamInfoFragment(int teamId) {
+        this.teamId = teamId;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(
-                R.layout.fragment_test_object, container, false);
-        Bundle args = getArguments();
-        ((TextView) rootView.findViewById(R.id.text1)).setText(
-                Integer.toString(args.getInt(ARG_OBJECT)));
+                R.layout.fragment_team_info, container, false);
         return rootView;
         // Inflate the layout for this fragment
 

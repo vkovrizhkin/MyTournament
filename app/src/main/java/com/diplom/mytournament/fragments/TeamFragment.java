@@ -32,9 +32,8 @@ public class TeamFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_team, container, false);
-        mDemoCollectionPagerAdapter =
-                new TeamPagerAdapter(
-                        getFragmentManager());
+
+        mDemoCollectionPagerAdapter = new TeamPagerAdapter(getFragmentManager());
         mViewPager = (ViewPager) rootView.findViewById(R.id.team_pager);
         mViewPager.setAdapter(mDemoCollectionPagerAdapter);
         return rootView;
