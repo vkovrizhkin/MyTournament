@@ -39,7 +39,7 @@ public class MyTournamentQueryHelper {
         try {
             if (cursor.moveToFirst()) {
                 //получение данных соревнования из курсора
-               // int id = cursor.getInt(0);
+                // int id = cursor.getInt(0);
                 String name = cursor.getString(1);
                 String type = cursor.getString(2);
                 int format = cursor.getInt(3);
@@ -198,8 +198,8 @@ public class MyTournamentQueryHelper {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<Match> matchList = new ArrayList<Match>();
 
-       // Cursor cursor = db.query("MATCHES", null, "COMPETITION_id", new String[]{Integer.toString(competitionId)}, null, null, null);
-       // Cursor cursor = db.query("MATCHES", null, null, null, null, null, null);
+        // Cursor cursor = db.query("MATCHES", null, "COMPETITION_id", new String[]{Integer.toString(competitionId)}, null, null, null);
+        // Cursor cursor = db.query("MATCHES", null, null, null, null, null, null);
 
         String SqlQuery = "SELECT * FROM MATCHES WHERE COMPETITION_id = ?";
         Cursor cursor = db.rawQuery(SqlQuery, new String[]{Integer.toString(competitionId)});
@@ -256,6 +256,54 @@ public class MyTournamentQueryHelper {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<Match> matchList = new ArrayList<Match>();
 
+        String SqlQuery = "SELECT * FROM MATCHES WHERE TEAM_H_id = ? AND COMPETITION_id = ? " +
+                "UNION SELECT * FROM MATCHES WHERE TEAM_A_id = ? AND COMPETITION_id = ?";
+        Cursor cursor = db.rawQuery(SqlQuery, new String[]{Integer.toString(teamId), Integer.toString(competitionId),
+                Integer.toString(teamId), Integer.toString(competitionId)});
+
+        try {
+            if (cursor.moveToFirst()) {
+                //получение данных соревнования из курсора
+                int id = cursor.getInt(0);
+                //int competitionId = cursor.getInt(1);
+                String dateTime = cursor.getString(2);
+                int team1Id = cursor.getInt(3);
+                int team2Id = cursor.getInt(4);
+                int scores1 = cursor.getInt(5);
+                int scores2 = cursor.getInt(6);
+                String place = cursor.getString(7);
+                String stage = cursor.getString(8);
+                int played = cursor.getInt(9);
+
+                matchList.add(new Match(id, competitionId, dateTime, stage, team1Id, team2Id, place,
+                        played, scores1, scores2));
+
+
+                //return competition;
+            }
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(0);
+                //int competitionId = cursor.getInt(1);
+                String dateTime = cursor.getString(2);
+                int team1Id = cursor.getInt(3);
+                int team2Id = cursor.getInt(4);
+                int scores1 = cursor.getInt(5);
+                int scores2 = cursor.getInt(6);
+                String place = cursor.getString(7);
+                String stage = cursor.getString(8);
+                int played = cursor.getInt(9);
+
+                matchList.add(new Match(id, competitionId, dateTime, stage, team1Id, team2Id, place,
+                        played, scores1, scores2));
+
+            }
+
+        } catch (SQLiteException e) {
+            return null;
+        } finally {
+            cursor.close();
+            db.close();
+        }
         return matchList;
 
     }
@@ -297,7 +345,7 @@ public class MyTournamentQueryHelper {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String SqlQuery = "SELECT * FROM FORMATS WHERE _id=?";
         Cursor cursor = db.rawQuery(SqlQuery, new String[]{Integer.toString(formatId)});
-        int i =0;
+        int i = 0;
         try {
             if (cursor.moveToFirst()) {
                 String name = cursor.getString(1);
@@ -337,6 +385,35 @@ public class MyTournamentQueryHelper {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<Player> playerList = new ArrayList<>();
+
+        String SqlQuery = "SELECT * FROM PLAYERS WHERE TEAM_id = ?";
+
+        Cursor cursor = db.rawQuery(SqlQuery, new String[]{Integer.toString(teamId)});
+        try {
+            if (cursor.moveToFirst()) {
+                int id = cursor.getInt(0);
+                String fio = cursor.getString(1);
+                // int teamId = cursor.getInt(2);
+                String info = cursor.getString(3);
+
+                playerList.add(new Player(id, fio, teamId, info));
+            } else {
+                return null;
+            }
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(0);
+                String fio = cursor.getString(1);
+                // int teamId = cursor.getInt(2);
+                String info = cursor.getString(3);
+
+                playerList.add(new Player(id, fio, teamId, info));
+            }
+        }catch (SQLiteException e) {
+            return null;
+        } finally {
+            cursor.close();
+            db.close();
+        }
 
         return playerList;
 

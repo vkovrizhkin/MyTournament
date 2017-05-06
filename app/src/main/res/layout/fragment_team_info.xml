@@ -1,15 +1,29 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
     tools:context="com.diplom.mytournament.fragments.team_view_pager.TeamInfoFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:id="@+id/text1"
+        android:id="@+id/team_info_id"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="макет фрагмента с информацией"
-        android:textSize="40sp"/>
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        tools:text="id команды: 23435523"/>
+    <TextView
+        android:id="@+id/team_info_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Название команды"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/team_info_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        tools:text="phone: 8-908-146-2344"/>
 
-</FrameLayout>
+</LinearLayout>

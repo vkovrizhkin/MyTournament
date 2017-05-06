@@ -58,6 +58,10 @@ public class PlayersRecViewAdapter extends RecyclerView.Adapter<PlayersRecViewAd
 
         Player player = playerList.get(position);
 
+        holder.fio.setText(player.getFio());
+
+        holder.matches.setText("лол, кек, чебурек");
+
     }
 
     @Override
