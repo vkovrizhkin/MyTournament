@@ -41,9 +41,6 @@ public class TeamsRecViewAdapter extends RecyclerView.Adapter<TeamsRecViewAdapte
 
         public ViewHolder(View view) {
             super(view);
-/*            container = (View) view.findViewById(R.id.team_content_layout);
-            teamName = (TextView) view.findViewById(R.id.team_name);
-            teamLogo = (ImageView) view.findViewById(R.id.team_logo);*/
 
             ButterKnife.bind(this, view);
 
