@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/team_content_layout"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
+    android:layout_height="@dimen/logo_middle"
     android:orientation="horizontal">
 
     <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
         android:id="@+id/team_logo"
-        android:scaleType="fitCenter"/>
+        android:layout_width="@dimen/logo_middle"
+        android:layout_height="@dimen/logo_middle"
+        android:scaleType="fitCenter" />
+
     <TextView
+        android:id="@+id/team_name"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/team_name"
         android:gravity="center_vertical"
-        android:textSize="24sp" />
+        android:textSize="@dimen/text_title"
+        tools:text="Команда 1" />
 
 </LinearLayout>

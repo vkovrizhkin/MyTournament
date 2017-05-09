@@ -5,4 +5,17 @@
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="margin_small">5dp</dimen>
+    <dimen name="elevation_size">40dp</dimen>
+
+    <dimen name="text_title">24sp</dimen>
+    <dimen name="text_standings">18sp</dimen>
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_timer">45sp</dimen>
+    <dimen name="text_goals">30sp</dimen>
+    <dimen name="text_info">20sp</dimen>
+
+    <dimen name="logo_big">100dp</dimen>
+    <dimen name="logo_middle">60dp</dimen>
+
 </resources>

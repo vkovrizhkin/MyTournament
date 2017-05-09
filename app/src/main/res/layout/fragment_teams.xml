@@ -1,10 +1,9 @@
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.diplom.mytournament.fragments.drawer.TeamsFragment">
 
 
@@ -22,10 +21,10 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_group_add_white_36dp"
-        fab:fab_colorNormal="@color/colorPrimary"
+        fab:fab_colorNormal="@color/colorDarkGray"
         fab:fab_colorPressed="@color/colorPrimaryDark"
         fab:fab_colorRipple="@color/colorAccent"
-        fab:fab_type="normal"/>
+        fab:fab_type="normal" />
 
 
 </android.support.design.widget.CoordinatorLayout>
