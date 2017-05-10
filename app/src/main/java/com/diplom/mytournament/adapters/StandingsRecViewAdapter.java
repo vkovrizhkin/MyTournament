@@ -94,7 +94,6 @@ public class StandingsRecViewAdapter extends RecyclerView.Adapter<StandingsRecVi
         }
 
 
-
     }
 
 

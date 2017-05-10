@@ -17,5 +17,6 @@
 
     <dimen name="logo_big">100dp</dimen>
     <dimen name="logo_middle">60dp</dimen>
+    <dimen name="logo_small">30dp</dimen>
 
 </resources>

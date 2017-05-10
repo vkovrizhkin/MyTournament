@@ -7,10 +7,11 @@
     android:clickable="true"
     android:orientation="horizontal">
 
-    <ImageView
+    <com.github.siyamed.shapeimageview.CircularImageView
         android:id="@+id/logo_image"
         android:layout_width="@dimen/logo_big"
         android:layout_height="@dimen/logo_big"
+        android:elevation="@dimen/elevation_size"
         android:scaleType="fitCenter" />
 
     <TextView
@@ -19,6 +20,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center_vertical"
+        android:layout_marginLeft="@dimen/margin_small"
         android:textSize="@dimen/text_title" />
 
 
