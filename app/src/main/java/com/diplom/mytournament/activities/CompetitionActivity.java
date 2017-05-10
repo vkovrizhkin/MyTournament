@@ -17,6 +17,7 @@ import android.view.MenuItem;
 
 import com.diplom.mytournament.R;
 import com.diplom.mytournament.fragments.drawer.MatchesFragment;
+import com.diplom.mytournament.fragments.drawer.StandingsFragment;
 import com.diplom.mytournament.fragments.drawer.TeamsFragment;
 
 public class CompetitionActivity extends AppCompatActivity
@@ -123,6 +124,9 @@ public class CompetitionActivity extends AppCompatActivity
         switch (viewId) {
             case R.id.nav_matches:
                 fragment = new MatchesFragment(competitionId);
+                break;
+            case R.id.nav_standings:
+                fragment = new StandingsFragment(competitionId);
                 break;
 
             default:

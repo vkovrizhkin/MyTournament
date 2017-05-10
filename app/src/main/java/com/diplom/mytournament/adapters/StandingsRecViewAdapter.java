@@ -22,7 +22,11 @@ import butterknife.Unbinder;
 
 public class StandingsRecViewAdapter extends RecyclerView.Adapter<StandingsRecViewAdapter.ViewHolder> {
 
-    List<Standing> standingList;
+    private List<Standing> standingList;
+
+    public StandingsRecViewAdapter(List<Standing> standingList) {
+        this.standingList = standingList;
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -66,23 +70,38 @@ public class StandingsRecViewAdapter extends RecyclerView.Adapter<StandingsRecVi
 
     @Override
     public void onBindViewHolder(StandingsRecViewAdapter.ViewHolder holder, int position) {
-        Standing standing = standingList.get(position);
-        holder.num.setText(Integer.toString(position + 1));
-        holder.teamName.setText(Integer.toString(standing.getTeamId()));
-        holder.played.setText(Integer.toString(standing.getMatchesPlayed()));
-        holder.won.setText(Integer.toString(standing.getWon()));
-        holder.lost.setText(Integer.toString(standing.getLost()));
-        holder.drawn.setText(Integer.toString(standing.getMatchesPlayed() - standing.getLost() -
-                standing.getWon()));
-        holder.goals.setText(Integer.toString(standing.getGs())+"|"+Integer.toString(standing.getGa()));
-        holder.points.setText(Integer.toString(standing.getPoints()));
+        if(position==0){
+           // Standing standing = standingList.get(position);
+            holder.num.setText(" ");
+            holder.teamName.setText("НАЗВАНИЕ");
+            holder.played.setText("И");
+            holder.won.setText("В");
+            holder.lost.setText("П");
+            holder.drawn.setText("Н");
+            holder.goals.setText("Г");
+            holder.points.setText("О");
+        }else{
+            Standing standing = standingList.get(position-1);
+            holder.num.setText(Integer.toString(position));
+            holder.teamName.setText(Integer.toString(standing.getTeamId()));
+            holder.played.setText(Integer.toString(standing.getMatchesPlayed()));
+            holder.won.setText(Integer.toString(standing.getWon()));
+            holder.lost.setText(Integer.toString(standing.getLost()));
+            holder.drawn.setText(Integer.toString(standing.getMatchesPlayed() - standing.getLost() -
+                    standing.getWon()));
+            holder.goals.setText(Integer.toString(standing.getGs())+"|"+Integer.toString(standing.getGa()));
+            holder.points.setText(Integer.toString(standing.getPoints()));
+        }
+
 
 
     }
 
+
+
     @Override
     public int getItemCount() {
-        return standingList.size();
+        return standingList.size()+1;
     }
 
 

@@ -408,7 +408,7 @@ public class MyTournamentQueryHelper {
 
                 playerList.add(new Player(id, fio, teamId, info));
             }
-        }catch (SQLiteException e) {
+        } catch (SQLiteException e) {
             return null;
         } finally {
             cursor.close();
@@ -425,6 +425,52 @@ public class MyTournamentQueryHelper {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<Standing> standingList = new ArrayList<>();
+
+        String SqlQuery = "SELECT * FROM STANDINGS WHERE COMPETITION_id = ?";
+        Cursor cursor = db.rawQuery(SqlQuery, new String[]{Integer.toString(competitionId)});
+
+        try {
+            if (cursor.moveToFirst()) {
+                int id = cursor.getInt(0);
+                int teamId = cursor.getInt(1);
+                String group = cursor.getString(3);
+                int played = cursor.getInt(4);
+                int points = cursor.getInt(5);
+                int won = cursor.getInt(6);
+                int lost = cursor.getInt(7);
+                int drawn = cursor.getInt(8);
+                int goalsS = cursor.getInt(9);
+                int goalsA = cursor.getInt(10);
+
+                standingList.add(new Standing(id, competitionId, teamId, points, played, goalsS, goalsA,
+                        won, lost, drawn, group));
+
+
+            } else {
+                return null;
+            }
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(0);
+                int teamId = cursor.getInt(1);
+                String group = cursor.getString(3);
+                int played = cursor.getInt(4);
+                int points = cursor.getInt(5);
+                int won = cursor.getInt(6);
+                int lost = cursor.getInt(7);
+                int drawn = cursor.getInt(8);
+                int goalsS = cursor.getInt(9);
+                int goalsA = cursor.getInt(10);
+
+                standingList.add(new Standing(id, competitionId, teamId, points, played, goalsS, goalsA,
+                        won, lost, drawn, group));
+
+            }
+        } catch (SQLiteException e) {
+            return null;
+        } finally {
+            cursor.close();
+            db.close();
+        }
 
         return standingList;
 

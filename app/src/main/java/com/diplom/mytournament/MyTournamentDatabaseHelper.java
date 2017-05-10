@@ -144,9 +144,9 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
     public static void insertStanding(SQLiteDatabase db, int team_id, int compId) {
         ContentValues standingValues = new ContentValues();
 
-
         standingValues.put("TEAM_id", team_id);
         standingValues.put("COMPETITION_id", compId);
+
 
         db.insert("STANDINGS", null, standingValues);
 
@@ -195,6 +195,8 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
         insertCompetition(db, "Кубок Африки", "cup", 3, "завтра", "предварительная регистрация",
                 R.drawable.ic_menu_camera);
         for (int i = 1; i < 6; ++i) {
+
+
             insertPlayer(db, "Бубенцов", i, "умничка, по кайфу, молодец");
             insertPlayer(db, "Петров", i, "умничка, по кайфу, молодец");
             insertPlayer(db, "Иванов", i, "умничка, по кайфу, молодец");
@@ -207,9 +209,6 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
             insertStanding(db, i, 1);
 
         }
-        insertStanding(db, 2, 2);
-        insertStanding(db, 8, 2);
-        insertStanding(db, 9, 2);
 
         insertMatch(db, 1, "12.12.12 12:00", "энергия", "1 тур", 1, 4, 0);
         insertMatch(db, 1, "12.12.12 12:00", "энергия", "1 тур", 2, 1, 1);

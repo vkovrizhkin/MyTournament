@@ -6,17 +6,30 @@ package com.diplom.mytournament.models;
 
 public class Standing {
 
-    public int id;
-    public int competitionId; // идентификатор соревнования
-    public int teamId; //идентификатор команды
-    public int points; // количество очков
-    public int matchesPlayed; //сыграно матчей
-    public int gs; //голов забито
-    public int ga; //голов пропущено
-    public int won; //матчей выиграно
-    public int lost; //матчей проиграно
+    private int id;
 
-    public Standing(int id, int competitionId, int teamId, int points, int matchesPlayed, int gs, int ga, int won, int lost) {
+    private int competitionId; // идентификатор соревнования
+
+    private int teamId; //идентификатор команды
+
+    private int points; // количество очков
+
+    private int matchesPlayed; //сыграно матчей
+
+    private int gs; //голов забито
+
+    private int ga; //голов пропущено
+
+    private int won; //матчей выиграно
+
+    private int lost; //матчей проиграно
+
+    private int drawn;
+
+    private String group;
+
+
+    public Standing(int id, int competitionId, int teamId, int points, int matchesPlayed, int gs, int ga, int won, int lost, int drawn, String group) {
         this.id = id;
         this.competitionId = competitionId;
         this.teamId = teamId;
@@ -26,6 +39,8 @@ public class Standing {
         this.ga = ga;
         this.won = won;
         this.lost = lost;
+        this.drawn = drawn;
+        this.group = group;
     }
 
     public int getId() {
