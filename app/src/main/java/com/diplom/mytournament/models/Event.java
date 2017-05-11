@@ -6,18 +6,26 @@ package com.diplom.mytournament.models;
 
 public class Event {
 
-    public int id;
-    public int matchId; // идентификатор матча
-    public int playerId; //идентификатор игрока
-    public String type; // тип события (гол, жёлтая/красная карточка, фол, пенальти, сейв ...)
-    public int minute; //минута матча
+    private int id;
 
-    public Event(int id, int matchId, int playerId, String type, int minute) {
+    private int matchId; // идентификатор матча
+
+    private int playerId; //идентификатор игрока
+
+    private String type; // тип события (гол, жёлтая/красная карточка, фол, пенальти, сейв ...)
+
+    private int minute; //минута матча
+
+    private char side;
+
+
+    public Event(int id, int matchId, int playerId, String type, int minute, char side) {
         this.id = id;
         this.matchId = matchId;
         this.playerId = playerId;
         this.type = type;
         this.minute = minute;
+        this.side = side;
     }
 
     public int getId() {
@@ -58,5 +66,13 @@ public class Event {
 
     public void setMinute(int minute) {
         this.minute = minute;
+    }
+
+    public char getSide() {
+        return side;
+    }
+
+    public void setSide(char side) {
+        this.side = side;
     }
 }

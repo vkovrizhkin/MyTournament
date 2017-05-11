@@ -49,7 +49,8 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
 
         //создание таблицы с игроками
         db.execSQL("CREATE TABLE PLAYERS(" + "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "FIO TEXT," + "TEAM_id INTEGER," + "INFO TEXT);");
+                "FIO TEXT," + "TEAM_id INTEGER," + "INFO TEXT," +
+                "NUMBER INTEGER, DATE_BORN INTEGER);");
 
         //создание таблицы матчей
         db.execSQL("CREATE TABLE MATCHES(" + "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -59,7 +60,8 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
 
         //создание таблицы с событиями
         db.execSQL("CREATE TABLE EVENTS(" + "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "MATCH_id INTEGER," + "PLAYER_id INTEGER," + "MINUTE INTEGER," + "TYPE TEXT);");
+                "MATCH_id INTEGER," + "PLAYER_id INTEGER," + "MINUTE INTEGER," + "TYPE TEXT," +
+                "TEAM_SIDE TEXT);");
 
         db.execSQL("CREATE TABLE FORMATS(" + "_id INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, TEAM_PLAYERS INTEGER, " +
                 "PERIOD_MINUTES INTEGER, PERIODS_NUM INTEGER, SCORES_IN_PERIOD INTEGER, " +

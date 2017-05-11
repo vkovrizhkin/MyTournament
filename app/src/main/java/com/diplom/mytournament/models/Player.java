@@ -6,16 +6,25 @@ package com.diplom.mytournament.models;
 
 public class Player {
 
-    public int id;
-    public String fio; // ФИО игрока
-    public int teamId; //идентификатор команды игрока
-    public String info; //дополнительная информация
+    private int id;
 
-    public Player(int id, String fio, int teamId, String info) {
+    private String fio; // ФИО игрока
+
+    private int teamId; //идентификатор команды игрока
+
+    private String info; //дополнительная информация
+
+    private int number;
+
+    private long dateBorn;
+
+    public Player(int id, String fio, int teamId, String info, int number, long dateBorn) {
         this.id = id;
         this.fio = fio;
         this.teamId = teamId;
         this.info = info;
+        this.number = number;
+        this.dateBorn = dateBorn;
     }
 
     public int getId() {
@@ -48,5 +57,21 @@ public class Player {
 
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    public long getDateBorn() {
+        return dateBorn;
+    }
+
+    public void setDateBorn(long dateBorn) {
+        this.dateBorn = dateBorn;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 }

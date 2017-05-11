@@ -127,7 +127,7 @@ public class MyTournamentQueryHelper {
                 int minute = cursor.getInt(3);
                 String type = cursor.getString(4);
 
-                eventList.add(new Event(id, matchId, playerId, type, minute));
+                eventList.add(new Event(id, matchId, playerId, type, minute, 'l'));
 
             }
             while (cursor.moveToNext()) {
@@ -137,7 +137,7 @@ public class MyTournamentQueryHelper {
                 int minute = cursor.getInt(3);
                 String type = cursor.getString(4);
 
-                eventList.add(new Event(id, matchId, playerId, type, minute));
+                eventList.add(new Event(id, matchId, playerId, type, minute, 'l'));
             }
         } catch (SQLiteException e) {
             return null;
@@ -169,7 +169,7 @@ public class MyTournamentQueryHelper {
                 int minute = cursor.getInt(3);
                 String type = cursor.getString(4);
 
-                eventList.add(new Event(id, matchId, playerId, type, minute));
+                eventList.add(new Event(id, matchId, playerId, type, minute, 'l'));
 
             }
             while (cursor.moveToNext()) {
@@ -179,7 +179,7 @@ public class MyTournamentQueryHelper {
                 int minute = cursor.getInt(3);
                 String type = cursor.getString(4);
 
-                eventList.add(new Event(id, matchId, playerId, type, minute));
+                eventList.add(new Event(id, matchId, playerId, type, minute, 'l'));
             }
         } catch (SQLiteException e) {
             return null;
@@ -396,7 +396,7 @@ public class MyTournamentQueryHelper {
                 // int teamId = cursor.getInt(2);
                 String info = cursor.getString(3);
 
-                playerList.add(new Player(id, fio, teamId, info));
+                playerList.add(new Player(id, fio, teamId, info, 0, 811596323));
             } else {
                 return null;
             }
@@ -406,7 +406,7 @@ public class MyTournamentQueryHelper {
                 // int teamId = cursor.getInt(2);
                 String info = cursor.getString(3);
 
-                playerList.add(new Player(id, fio, teamId, info));
+                playerList.add(new Player(id, fio, teamId, info, 0, 811596323));
             }
         } catch (SQLiteException e) {
             return null;

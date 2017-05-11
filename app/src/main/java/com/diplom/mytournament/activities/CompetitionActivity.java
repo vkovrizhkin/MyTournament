@@ -99,7 +99,7 @@ public class CompetitionActivity extends AppCompatActivity
 
         displayView(id);
 
-/*        if (id == R.id.nav_camera) {
+     /* if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
