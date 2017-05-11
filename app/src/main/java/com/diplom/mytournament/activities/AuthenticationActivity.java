@@ -1,5 +1,6 @@
 package com.diplom.mytournament.activities;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,13 +44,12 @@ public class AuthenticationActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = emailET.getText().toString();
                 String password = passwordET.getText().toString();
-                signing(email, password);
+                registration(email, password);
 
             }
         });
@@ -59,7 +59,7 @@ public class AuthenticationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = emailET.getText().toString();
                 String password = passwordET.getText().toString();
-                registration(email, password);
+                signing(email, password);
 
             }
         });
@@ -80,28 +80,36 @@ public class AuthenticationActivity extends AppCompatActivity {
         };
     }
 
-    public void signing(String email, String password){
+    public void signing(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(AuthenticationActivity.this, "Успешно вошёл!", Toast.LENGTH_SHORT);
-                } else{
-                    Toast.makeText(AuthenticationActivity.this, "ну ты и долбоёб, братишка!", Toast.LENGTH_SHORT);
+                if (task.isSuccessful()) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Успешно вошёл!!", Toast.LENGTH_LONG);
+                    toast.show();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+
+                } else {
+                    Toast toast = Toast.makeText(getApplicationContext(), "ну ты и долбоёб, братишка!", Toast.LENGTH_LONG);
+                    toast.show();
                 }
 
             }
         });
 
     }
-    public void registration(String email, String password){
+
+    public void registration(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(AuthenticationActivity.this, "Успешно зарегался!!", Toast.LENGTH_SHORT);
-                } else{
-                    Toast.makeText(AuthenticationActivity.this, "ну ты и долбоёб, братишка!", Toast.LENGTH_SHORT);
+                if (task.isSuccessful()) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Успешно зарегался!!", Toast.LENGTH_LONG);
+                    toast.show();
+                } else {
+                    Toast toast = Toast.makeText(getApplicationContext(), "ну ты и долбоёб, братишка!", Toast.LENGTH_LONG);
+                    toast.show();
                 }
             }
         });
