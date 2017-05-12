@@ -51,6 +51,9 @@ public class AddCompetitionFragment extends Fragment {
     @BindView(R.id.submit_button)
     Button submit;
 
+    @BindView(R.id.comp_info_edit)
+    EditText info;
+
 
     public AddCompetitionFragment() {
         // Required empty public constructor
@@ -107,7 +110,7 @@ public class AddCompetitionFragment extends Fragment {
                 String dateString = Integer.toString(date.getDayOfMonth())+":"+Integer.toString(date.getMonth());
 
                 dbHelper.insertCompetition(db, title.getText().toString(), "league", f.getId() , dateString,
-                        "Обычное соревнование", R.drawable.ic_menu_camera );
+                        info.getText().toString(), R.drawable.ic_menu_camera );
             }
         });
 

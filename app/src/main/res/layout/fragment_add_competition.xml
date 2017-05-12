@@ -15,8 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:hint="Название соревнования"
-            />
+            android:hint="Название соревнования" />
 
         <TextView
             android:layout_width="match_parent"
@@ -41,7 +40,7 @@
             android:id="@+id/format_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_info"/>
+            android:textSize="@dimen/text_info" />
 
         <TextView
             android:layout_width="match_parent"
@@ -53,21 +52,28 @@
             android:id="@+id/competition_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:calendarViewShown="false"
             android:layout_marginTop="@dimen/margin_small"
+            android:calendarViewShown="false"
             android:datePickerMode="spinner" />
 
+        <EditText
+            android:id="@+id/comp_info_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:hint="@string/enter_info"/>
 
         <Button
             android:id="@+id/submit_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_title"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@color/colorDarkGray"
             android:text="@string/submit"
             android:textColor="@color/colorWhite"
-            android:background="@color/colorDarkGray"
-            android:layout_marginBottom="@dimen/margin_small"
-            android:layout_marginTop="@dimen/margin_small" />
+            android:textSize="@dimen/text_title" />
     </LinearLayout>
 </ScrollView>
 
