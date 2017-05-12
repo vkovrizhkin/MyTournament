@@ -35,7 +35,7 @@ public class AddTeamFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_add_team, container, false);
         pAdapter = new MyTournamentPagerAdapter(getFragmentManager(), 2);
         Fragment createTeamFragment = new CreateTeamFragment(kindOfSport);
-        Fragment selectTeamFragment = new SelectTeamsFragment();
+        Fragment selectTeamFragment = new SelectTeamsFragment(kindOfSport);
         pAdapter.addFragment(selectTeamFragment, getString(R.string.select_teams));
         pAdapter.addFragment(createTeamFragment, getString(R.string.new_team));
         ViewPager viewPager = (ViewPager)rootView.findViewById(R.id.team_add_pager);

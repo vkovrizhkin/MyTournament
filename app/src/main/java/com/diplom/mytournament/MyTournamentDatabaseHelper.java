@@ -195,9 +195,9 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
                 R.drawable.ic_menu_camera);
         insertCompetition(db, "Кубок Питера", "cup", 2, "завтра", "предварительная регистрация",
                 R.drawable.ic_menu_camera);
-        insertCompetition(db, "Лига Китая", "league", 3, "сегодня", "Все скидываем по косарю",
+        insertCompetition(db, "Лига Китая", "league", 6, "сегодня", "Все скидываем по косарю",
                 R.drawable.ic_menu_camera);
-        insertCompetition(db, "Кубок Африки", "cup", 3, "завтра", "предварительная регистрация",
+        insertCompetition(db, "Кубок Африки", "cup", 4, "завтра", "предварительная регистрация",
                 R.drawable.ic_menu_camera);
         for (int i = 1; i < 6; ++i) {
 
@@ -210,7 +210,9 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
         }
 
         for (int i = 0; i < 15; i++) {
-            insertTeam(db, "Team" + Integer.toString(i), "football", 0, "тестовая команда");
+            insertTeam(db, "Футбольная команда " + Integer.toString(i), "football", 0, "тестовая команда");
+            insertTeam(db, "баскетбольная команда " + Integer.toString(i), "basketball", 0, "тестовая команда");
+            insertTeam(db, "волейбольная команда " + Integer.toString(i), "volleyball", 0, "тестовая команда");
             insertStanding(db, i, 1);
 
         }

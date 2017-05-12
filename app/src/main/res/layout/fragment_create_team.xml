@@ -30,6 +30,6 @@
         android:background="@color/colorDarkGray"
         android:text="@string/submit"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/text_title"/>
+        android:textSize="@dimen/text_standings"/>
 
 </LinearLayout>

@@ -612,4 +612,48 @@ public class MyTournamentQueryHelper {
         }
         return formatList;
     }
+
+    public List<Team> getTeamsBySport(String kindOfSport) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        List<Team> teamList = new ArrayList<>();
+
+        String SqlQuery = "SELECT * FROM TEAMS WHERE KIND_OF_SPORT= ?";
+        Cursor cursor = db.rawQuery(SqlQuery, new String[]{kindOfSport});
+
+        try {
+            if (cursor.moveToFirst()) {
+                //получение данных соревнования из курсора
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                int resourceId = cursor.getInt(3);
+                //String kindOfSport = cursor.getString(2);
+                String info = cursor.getString(4);
+
+                Team team = new Team(id, name, resourceId, kindOfSport, info);
+                teamList.add(team);
+
+                //return competition;
+            }
+            while (cursor.moveToNext()) {
+                //получение данных соревнования из курсора
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                int resourceId = cursor.getInt(2);
+                //String kindOfSport = cursor.getString(3);
+                String info = cursor.getString(4);
+
+                Team team = new Team(id, name, resourceId, kindOfSport, info);
+                teamList.add(team);
+
+            }
+
+
+        } catch (SQLiteException e) {
+            return null;
+        } finally {
+            cursor.close();
+            db.close();
+        }
+        return teamList;
+    }
 }
