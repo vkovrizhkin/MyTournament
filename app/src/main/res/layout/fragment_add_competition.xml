@@ -1,13 +1,74 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.diplom.mytournament.fragments.details_redact.AddCompetitionFragment">
+    android:layout_height="wrap_content">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Добавление соревнования" />
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_small"
+        android:orientation="vertical"
+        tools:context="com.diplom.mytournament.fragments.details_redact.AddCompetitionFragment">
 
-</FrameLayout>
+        <EditText
+            android:id="@+id/competition_title_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:hint="Название соревнования"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:text="@string/select_sport"
+            android:textSize="@dimen/text_info" />
+
+        <Spinner
+            android:id="@+id/kind_of_sport_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:text="@string/select_format"
+            android:textSize="@dimen/text_info" />
+
+        <Spinner
+            android:id="@+id/format_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_info"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/select_date"
+            android:textSize="@dimen/text_info" />
+
+        <DatePicker
+            android:id="@+id/competition_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:calendarViewShown="false"
+            android:layout_marginTop="@dimen/margin_small"
+            android:datePickerMode="spinner" />
+
+
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_title"
+            android:text="@string/submit"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorDarkGray"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small" />
+    </LinearLayout>
+</ScrollView>
+
+

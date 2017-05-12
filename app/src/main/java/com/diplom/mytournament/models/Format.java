@@ -30,6 +30,11 @@ public class Format {
         this.kindOfSport = kindOfSport;
     }
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
+
     public int getId() {
         return id;
     }

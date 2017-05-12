@@ -570,4 +570,46 @@ public class MyTournamentQueryHelper {
     }
 
 
+    public List<Format> getFormatsBySport(String kindOfSport) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String SqlQuery = "SELECT * FROM FORMATS WHERE KIND_OF_SPORT=?";
+
+        List<Format> formatList = new ArrayList<>();
+        Cursor cursor = db.rawQuery(SqlQuery, new String[]{kindOfSport});
+        try {
+            if (cursor.moveToFirst()) {
+                int formatId = cursor.getInt(0);
+                String name = cursor.getString(1);
+                int teamPlayers = cursor.getInt(2);
+                int periodMinutes = cursor.getInt(3);
+                int periodsNum = cursor.getInt(4);
+                int scoresInPeriod = cursor.getInt(5);
+                //String kindOfSport = cursor.getString(6);
+
+                formatList.add(new Format(formatId, name, teamPlayers, periodMinutes, periodsNum, scoresInPeriod,
+                        kindOfSport));
+            } else {
+                return null;
+            }
+            while (cursor.moveToNext()){
+                int formatId = cursor.getInt(0);
+                String name = cursor.getString(1);
+                int teamPlayers = cursor.getInt(2);
+                int periodMinutes = cursor.getInt(3);
+                int periodsNum = cursor.getInt(4);
+                int scoresInPeriod = cursor.getInt(5);
+                //String kindOfSport = cursor.getString(6);
+
+                formatList.add(new Format(formatId, name, teamPlayers, periodMinutes, periodsNum, scoresInPeriod,
+                        kindOfSport));
+            }
+
+        } catch (SQLiteException e) {
+            return null;
+        } finally {
+            cursor.close();
+            db.close();
+        }
+        return formatList;
+    }
 }

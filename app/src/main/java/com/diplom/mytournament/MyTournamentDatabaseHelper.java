@@ -70,7 +70,7 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
     }
 
     //добавление соревнования
-    public static void insertCompetition(SQLiteDatabase db, String name, String type, int format,
+    public  void insertCompetition(SQLiteDatabase db, String name, String type, int format,
                                          String date, String info, int resourceId) {
         ContentValues competitionValues = new ContentValues();
 
@@ -171,12 +171,15 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    private static void testInit(SQLiteDatabase db) {
+    private void testInit(SQLiteDatabase db) {
 
         insertFormat(db, "минифутбол", 5, 25, 2, 0, "football");
+        insertFormat(db, "мидифутбол", 8, 30, 2, 0, "football");
         insertFormat(db, "футбол", 11, 45, 2, 0, "football");
         insertFormat(db, "воллейбол", 6, 0, 3, 25, "volleyball");
+        insertFormat(db, "пляж. воллейбол", 2, 0, 3, 15, "volleyball");
         insertFormat(db, "баскетбол", 5, 15, 4, 0, "basketball");
+        insertFormat(db, "стритбол", 3, 10, 4, 0, "basketball");
 
         // создаём два соревнования
         insertCompetition(db, "Лига Воронежа", "league", 1, "сегодня", "Все скидываем по косарю",

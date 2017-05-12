@@ -9,4 +9,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_competition">CompetitionActivity</string>
+    <string name="select_sport">Выберите вид спорта </string>
+    <string name="select_format">Выберите формат матчей</string>
+    <string name="select_date">Выберите дату начала</string>
+    <string name="select_teams">Добавьте команды</string>
+    <string name="submit">Готово!</string>
 </resources>
