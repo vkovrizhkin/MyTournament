@@ -3,23 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="@dimen/margin_small"
-    tools:context="com.diplom.mytournament.fragments.details_redact.CreateTeamFragment">
+    tools:context="com.diplom.mytournament.fragments.details_redact.SelectTeamsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <EditText
-        android:id="@+id/edit_team_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/enter_team_name"
-        android:textSize="@dimen/text_info" />
 
-    <EditText
+    <TextView
+        android:id="@+id/teams_selected_count"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/enter_info"
-        android:gravity="start"
-        android:layout_weight="1"/>
+        android:gravity="center"
+        android:textSize="@dimen/text_info"
+        tools:text="@string/selected_teams_count" />
+
+    <ListView
+        android:id="@+id/teams_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:choiceMode="multipleChoice" />
+
     <Button
         android:id="@+id/submit_button"
         android:layout_width="match_parent"
@@ -30,6 +32,6 @@
         android:background="@color/colorDarkGray"
         android:text="@string/submit"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/text_standings"/>
+        android:textSize="@dimen/text_standings" />
 
 </LinearLayout>

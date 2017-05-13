@@ -38,7 +38,7 @@ public class SelectTeamsFragment extends Fragment {
 
     private List<Team> teamList;
 
-    private ArrayAdapter<Team> aAdapter;
+    private ArrayAdapter<Team> aAdapter ;
 
     private List<Integer> selectedTeamsId = new ArrayList<>();
 
@@ -54,7 +54,7 @@ public class SelectTeamsFragment extends Fragment {
     Button submitButton;
 
     public SelectTeamsFragment() {
-        // Required empty public constructor
+        // Required empty public
     }
 
     public SelectTeamsFragment(String kindOfSport) {
@@ -67,12 +67,12 @@ public class SelectTeamsFragment extends Fragment {
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_select_teams, container, false);
         ButterKnife.bind(this, rootView);
-        dbHelper = new MyTournamentDatabaseHelper(getContext());
+        dbHelper =  new MyTournamentDatabaseHelper(getContext());
         MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
         teamList = qh.getTeamsBySport(kindOfSport);
         aAdapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_list_item_multiple_choice,
                 teamList);
-        // aAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+       // aAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         listView.setAdapter(aAdapter);
         countSelected.setText(getString(R.string.selected_teams_count, selectedTeamsId.size()));
 
@@ -98,10 +98,10 @@ public class SelectTeamsFragment extends Fragment {
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
                 CompetitionActivity activity = (CompetitionActivity) getActivity();
 
-                for (int i = 0; i < selectedTeamsId.size(); i++) {
-                    dbHelper.insertStanding(db, selectedTeamsId.get(i), activity.getCompetitionId());
-                }
-                Snackbar.make(rootView, getString(R.string.teams_selected_succesful, selectedTeamsId.size()), Snackbar.LENGTH_LONG).show();
+                for(int i = 0; i<selectedTeamsId.size(); i++){
+                    dbHelper.insertStanding(db, selectedTeamsId.get(i), activity.getCompetitionId() );
+                };
+                Snackbar.make(rootView, getString(R.string.teams_selected_succesful, selectedTeamsId.size()) , Snackbar.LENGTH_LONG).show();
 
             }
         });

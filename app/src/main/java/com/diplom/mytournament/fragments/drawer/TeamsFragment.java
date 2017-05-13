@@ -14,6 +14,8 @@ import com.diplom.mytournament.R;
 import com.diplom.mytournament.adapters.CompetitionsReсViewAdapter;
 import com.diplom.mytournament.adapters.TeamsRecViewAdapter;
 import com.diplom.mytournament.fragments.details_redact.AddTeamFragment;
+import com.diplom.mytournament.models.Competition;
+import com.diplom.mytournament.models.Format;
 import com.diplom.mytournament.models.Team;
 import com.melnykov.fab.FloatingActionButton;
 
@@ -51,6 +53,8 @@ public class TeamsFragment extends Fragment {
         FloatingActionButton fab = (FloatingActionButton)rootView.findViewById(R.id.teams_fab);
         fab.attachToRecyclerView(recyclerView);
         MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
+        Competition competition = qh.getCompetitionById(competitionId);
+        final Format format = qh.getFormatById(competition.getFormat());
 
         teamList = qh.getTeamsByCompetitionId(competitionId);
 
@@ -64,7 +68,7 @@ public class TeamsFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new AddTeamFragment();
+                Fragment fragment = new AddTeamFragment(format.getKindOfSport());
                 getFragmentManager().beginTransaction().replace(R.id.competition_frame_layout, fragment)
                         .addToBackStack(null).commit();
             }

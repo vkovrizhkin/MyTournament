@@ -20,6 +20,11 @@ public class Team {
         this.info = info;
     }
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
+
     public int getId() {
         return id;
     }

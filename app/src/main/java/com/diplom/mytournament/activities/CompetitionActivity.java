@@ -25,6 +25,10 @@ public class CompetitionActivity extends AppCompatActivity
 
     private int competitionId;
 
+    public int getCompetitionId() {
+        return competitionId;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

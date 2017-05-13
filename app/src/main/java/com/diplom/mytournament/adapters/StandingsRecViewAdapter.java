@@ -1,14 +1,17 @@
 package com.diplom.mytournament.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
 import com.diplom.mytournament.models.Event;
 import com.diplom.mytournament.models.Standing;
+import com.diplom.mytournament.models.Team;
 
 import java.util.List;
 
@@ -24,8 +27,12 @@ public class StandingsRecViewAdapter extends RecyclerView.Adapter<StandingsRecVi
 
     private List<Standing> standingList;
 
-    public StandingsRecViewAdapter(List<Standing> standingList) {
+    MyTournamentQueryHelper qh;
+
+    public StandingsRecViewAdapter(List<Standing> standingList, Context context) {
         this.standingList = standingList;
+        qh = new MyTournamentQueryHelper(context);
+
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -70,8 +77,8 @@ public class StandingsRecViewAdapter extends RecyclerView.Adapter<StandingsRecVi
 
     @Override
     public void onBindViewHolder(StandingsRecViewAdapter.ViewHolder holder, int position) {
-        if(position==0){
-           // Standing standing = standingList.get(position);
+        if (position == 0) {
+            // Standing standing = standingList.get(position);
             holder.num.setText(" ");
             holder.teamName.setText("НАЗВАНИЕ");
             holder.played.setText("И");
@@ -80,16 +87,23 @@ public class StandingsRecViewAdapter extends RecyclerView.Adapter<StandingsRecVi
             holder.drawn.setText("Н");
             holder.goals.setText("Г");
             holder.points.setText("О");
-        }else{
-            Standing standing = standingList.get(position-1);
+        } else {
+            Standing standing = standingList.get(position - 1);
+            int id = standing.getTeamId();
+            //String teamName = qh.getTeamById(standing.getTeamId()).getName();
+            Team team = qh.getTeamById(id);
+            String teamName = team.getName();
+
+            holder.teamName.setSelected(true);
+
             holder.num.setText(Integer.toString(position));
-            holder.teamName.setText(Integer.toString(standing.getTeamId()));
+            holder.teamName.setText(teamName);
             holder.played.setText(Integer.toString(standing.getMatchesPlayed()));
             holder.won.setText(Integer.toString(standing.getWon()));
             holder.lost.setText(Integer.toString(standing.getLost()));
             holder.drawn.setText(Integer.toString(standing.getMatchesPlayed() - standing.getLost() -
                     standing.getWon()));
-            holder.goals.setText(Integer.toString(standing.getGs())+"|"+Integer.toString(standing.getGa()));
+            holder.goals.setText(Integer.toString(standing.getGs()) + "|" + Integer.toString(standing.getGa()));
             holder.points.setText(Integer.toString(standing.getPoints()));
         }
 
@@ -97,10 +111,9 @@ public class StandingsRecViewAdapter extends RecyclerView.Adapter<StandingsRecVi
     }
 
 
-
     @Override
     public int getItemCount() {
-        return standingList.size()+1;
+        return standingList.size() + 1;
     }
 
 
