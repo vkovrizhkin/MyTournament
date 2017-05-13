@@ -11,25 +11,27 @@
         android:id="@+id/teams_selected_count"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="@string/selected_teams_count"
+        android:gravity="center"
         android:textSize="@dimen/text_info"
-        android:gravity="center"/>
-        <ListView
-            android:layout_weight="1"
-            android:id="@+id/teams_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:choiceMode="multipleChoice"/>
+        tools:text="@string/selected_teams_count" />
+
+    <ListView
+        android:id="@+id/teams_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:choiceMode="multipleChoice" />
+
     <Button
+        android:id="@+id/submit_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/submit_button"
         android:layout_gravity="center"
         android:layout_marginBottom="@dimen/margin_small"
         android:layout_marginTop="@dimen/margin_small"
         android:background="@color/colorDarkGray"
         android:text="@string/submit"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/text_standings"/>
+        android:textSize="@dimen/text_standings" />
 
 </LinearLayout>

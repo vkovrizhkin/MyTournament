@@ -19,4 +19,5 @@
     <string name="enter_team_name">Название команды</string>
     <string name="enter_competition_name">Название соревнования</string>
     <string name="selected_teams_count">Выбрано %d команд</string>
+    <string name="teams_selected_succesful">Успешно добавлены %d команд!</string>
 </resources>
