@@ -20,4 +20,11 @@
     <string name="enter_competition_name">Название соревнования</string>
     <string name="selected_teams_count">Выбрано %d команд</string>
     <string name="teams_selected_succesful">Успешно добавлены %d команд!</string>
+    <string name="name">Название</string>
+    <string name="points">О</string>
+    <string name="goals">Г</string>
+    <string name="played">И</string>
+    <string name="won">В</string>
+    <string name="drawn">Н</string>
+    <string name="lost">П</string>
 </resources>
