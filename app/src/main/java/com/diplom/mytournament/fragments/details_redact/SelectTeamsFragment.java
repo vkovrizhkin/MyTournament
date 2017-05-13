@@ -54,7 +54,7 @@ public class SelectTeamsFragment extends Fragment {
     Button submitButton;
 
     public SelectTeamsFragment() {
-        // Required empty public constructor
+        // Required empty public
     }
 
     public SelectTeamsFragment(String kindOfSport) {
