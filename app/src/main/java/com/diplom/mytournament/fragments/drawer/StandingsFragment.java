@@ -47,7 +47,7 @@ public class StandingsFragment extends Fragment {
         MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
         standingList = qh.getStandingsByCompetitionId(competitionId);
 
-        rAdapter = new StandingsRecViewAdapter(standingList);
+        rAdapter = new StandingsRecViewAdapter(standingList, getContext());
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);

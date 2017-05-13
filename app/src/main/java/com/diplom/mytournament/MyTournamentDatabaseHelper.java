@@ -213,7 +213,10 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
             insertTeam(db, "Футбольная команда " + Integer.toString(i), "football", 0, "тестовая команда");
             insertTeam(db, "баскетбольная команда " + Integer.toString(i), "basketball", 0, "тестовая команда");
             insertTeam(db, "волейбольная команда " + Integer.toString(i), "volleyball", 0, "тестовая команда");
-            insertStanding(db, i, 1);
+            if(i>0 && i<14){
+                insertStanding(db, i, 1);
+            }
+
 
         }
 
