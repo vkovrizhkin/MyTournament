@@ -1,6 +1,7 @@
 package com.diplom.mytournament.adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -31,7 +32,7 @@ public class EventsRecViewAdapter extends RecyclerView.Adapter<EventsRecViewAdap
         this.eventList = eventList;
     }
 
-    private static void mapInit(){
+    private static void mapInit() {
         eventsImagesMap.put("yellow_card", R.drawable.yellow_card);
         eventsImagesMap.put("red_card", R.drawable.red_card);
     }
@@ -63,12 +64,20 @@ public class EventsRecViewAdapter extends RecyclerView.Adapter<EventsRecViewAdap
     }
 
     @Override
-    public EventsRecViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_content, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(EventsRecViewAdapter.ViewHolder holder, int position) {
+        Event event = eventList.get(position);
+        if(event.getSide()=='l'){
+            holder.leftFio.setText("Бубенцов");
+            holder.leftLogo.setImageResource(eventsImagesMap.get(event.getType()));
+            holder.min.setText(Integer.toString(event.getMinute()));
+        }
+
 
     }
 

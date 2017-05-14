@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:background="@color/colorDarkGray"
+        android:textColor="@color/colorWhite"
         android:textSize="@dimen/text_timer" />
 
     <LinearLayout
@@ -23,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/colorWhite"
             android:src="@drawable/ic_play_arrow_green_600_36dp" />
 
         <ImageButton
@@ -30,6 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/colorWhite"
             android:src="@drawable/ic_pause_blue_grey_800_36dp" />
 
         <ImageButton
@@ -37,6 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/colorWhite"
             android:src="@drawable/ic_stop_red_300_36dp" />
 
         <ImageButton
@@ -44,6 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/colorWhite"
             android:src="@drawable/ic_exposure_plus_1_blue_grey_800_36dp" />
 
     </LinearLayout>
@@ -109,5 +115,37 @@
             android:layout_gravity="right"
             android:gravity="right" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ЖК"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="КК"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="КК"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ЖК"/>
+
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </ScrollView>
+
 
 </LinearLayout>

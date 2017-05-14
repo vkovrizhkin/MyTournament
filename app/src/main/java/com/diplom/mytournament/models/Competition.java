@@ -6,13 +6,19 @@ package com.diplom.mytournament.models;
 
 public class Competition {
 
-    public int id;
-    public String name; //название соревнования
-    public int format; //вид спорта
-    public String info; //дополнительная информация
-    public String date; //дата начала
-    public String type; //тип расписания (кубок, по кругу и тд)
-    public long logoIdResource;//ссылка на ресурс логотипа
+    private int id;
+
+    private String name; //название соревнования
+
+    private int format; //вид спорта
+
+    private String info; //дополнительная информация
+
+    private String date; //дата начала
+
+    private String type; //тип расписания (кубок, по кругу и тд)
+
+    private long logoIdResource;//ссылка на ресурс логотипа
 
     public Competition(String name, int id, int format, String info, String date,
                        String type, long logoIdResource) {

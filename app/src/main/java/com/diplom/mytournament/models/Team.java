@@ -6,11 +6,15 @@ package com.diplom.mytournament.models;
 
 public class Team {
 
-    public int id;
-    public String name; //название команды
-    public long logoResourceId; // ссылка на ресурс логотипа команды
-    public String kindOfSport; // вид спорта (футбол/ минифутбол)
-    public String info; // дополнительная информация
+    private int id;
+
+    private String name; //название команды
+
+    private long logoResourceId; // ссылка на ресурс логотипа команды
+
+    private String kindOfSport; // вид спорта (футбол/ минифутбол)
+
+    private String info; // дополнительная информация
 
     public Team(int id, String name, long logoResourceId, String kindOfSport, String info) {
         this.id = id;

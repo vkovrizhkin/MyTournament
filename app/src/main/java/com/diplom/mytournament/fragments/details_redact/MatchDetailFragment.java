@@ -5,6 +5,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,6 +79,8 @@ public class MatchDetailFragment extends Fragment {
     private Unbinder unbinder;
 
     private MediaPlayer mediaPlayer;
+
+    private DialogFragment dialogFragment;
 
     public MatchDetailFragment(int formatId, int matchId) {
         this.formatId = formatId;

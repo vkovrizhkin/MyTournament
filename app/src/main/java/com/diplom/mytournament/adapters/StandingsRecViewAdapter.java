@@ -27,10 +27,13 @@ public class StandingsRecViewAdapter extends RecyclerView.Adapter<StandingsRecVi
 
     private List<Standing> standingList;
 
-    MyTournamentQueryHelper qh;
+    private MyTournamentQueryHelper qh;
+
+    private Context context;
 
     public StandingsRecViewAdapter(List<Standing> standingList, Context context) {
         this.standingList = standingList;
+        this.context = context;
         qh = new MyTournamentQueryHelper(context);
 
     }
@@ -80,13 +83,13 @@ public class StandingsRecViewAdapter extends RecyclerView.Adapter<StandingsRecVi
         if (position == 0) {
             // Standing standing = standingList.get(position);
             holder.num.setText(" ");
-            holder.teamName.setText("НАЗВАНИЕ");
-            holder.played.setText("И");
-            holder.won.setText("В");
-            holder.lost.setText("П");
-            holder.drawn.setText("Н");
-            holder.goals.setText("Г");
-            holder.points.setText("О");
+            holder.teamName.setText(context.getString(R.string.name));
+            holder.played.setText(context.getString(R.string.played));
+            holder.won.setText(context.getString(R.string.won));
+            holder.lost.setText(context.getString(R.string.lost));
+            holder.drawn.setText(context.getString(R.string.drawn));
+            holder.goals.setText(context.getString(R.string.goals));
+            holder.points.setText(context.getString(R.string.points));
         } else {
             Standing standing = standingList.get(position - 1);
             int id = standing.getTeamId();
