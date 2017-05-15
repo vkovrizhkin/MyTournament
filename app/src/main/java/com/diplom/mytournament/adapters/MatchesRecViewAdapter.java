@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
 import com.diplom.mytournament.fragments.details_redact.MatchDetailFragment;
-import com.diplom.mytournament.fragments.drawer.MatchesFragment;
 import com.diplom.mytournament.models.Match;
 import com.diplom.mytournament.models.Team;
 
@@ -112,9 +111,9 @@ public class MatchesRecViewAdapter extends RecyclerView.Adapter<MatchesRecViewAd
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MatchDetailFragment matchDetailFragment = new MatchDetailFragment(formatId, match.getId());
+                MatchDetailFragment matchDetailFragment = new MatchDetailFragment(formatId, match.getId(), fragmentManager);
               fragmentManager.beginTransaction().replace(R.id.competition_frame_layout,
-                        matchDetailFragment).addToBackStack(null).commit();
+                        matchDetailFragment, "matchFragment").addToBackStack("matchFragment").commit();
 
             }
         });

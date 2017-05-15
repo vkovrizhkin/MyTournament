@@ -15,15 +15,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.diplom.mytournament.PlayersDialogFragment;
+import com.diplom.mytournament.PlayersDialogFragment.PlayersInterface;
 import com.diplom.mytournament.R;
+import com.diplom.mytournament.fragments.details_redact.MatchDetailFragment;
 import com.diplom.mytournament.fragments.drawer.MatchesFragment;
 import com.diplom.mytournament.fragments.drawer.StandingsFragment;
 import com.diplom.mytournament.fragments.drawer.TeamsFragment;
+import com.diplom.mytournament.models.Player;
 
 public class CompetitionActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements PlayersInterface, NavigationView.OnNavigationItemSelectedListener {
 
     private int competitionId;
+
+    private Player currentPlayer;
 
     public int getCompetitionId() {
         return competitionId;
@@ -140,5 +146,15 @@ public class CompetitionActivity extends AppCompatActivity
         if(fragment!=null){
             getSupportFragmentManager().beginTransaction().replace(R.id.competition_frame_layout, fragment).addToBackStack(null).commit();
         }
+    }
+
+    @Override
+    public void dialogOK(Player player, MatchDetailFragment matchDetailFragment) {
+        matchDetailFragment.setCurrentPlayer(player);
+        currentPlayer = player;
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
     }
 }

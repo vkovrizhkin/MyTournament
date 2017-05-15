@@ -4,9 +4,11 @@ package com.diplom.mytournament.fragments.details_redact;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +18,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.diplom.mytournament.MyTournamentQueryHelper;
+import com.diplom.mytournament.PlayersDialogFragment;
 import com.diplom.mytournament.R;
+import com.diplom.mytournament.adapters.EventsRecViewAdapter;
+import com.diplom.mytournament.models.Event;
 import com.diplom.mytournament.models.Format;
 import com.diplom.mytournament.models.Match;
+import com.diplom.mytournament.models.Player;
 import com.diplom.mytournament.models.Team;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,7 +38,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MatchDetailFragment extends Fragment {
+public class MatchDetailFragment extends Fragment implements PlayersDialogFragment.PlayersInterface {
 
     @BindView(R.id.timer)
     TextView timer;
@@ -64,6 +73,12 @@ public class MatchDetailFragment extends Fragment {
     @BindView(R.id.add_button)
     ImageButton addView;
 
+    @BindView(R.id.left_yc)
+    Button leftYC;
+
+    @BindView(R.id.events_rec_view)
+    RecyclerView recyclerView;
+
     private int matchId;
 
     private Format format;
@@ -80,12 +95,20 @@ public class MatchDetailFragment extends Fragment {
 
     private MediaPlayer mediaPlayer;
 
-    private DialogFragment dialogFragment;
+    private PlayersDialogFragment myDialogFragment;
 
-    public MatchDetailFragment(int formatId, int matchId) {
+    private Player currentPlayer;
+
+    private List<Event> eventList = new ArrayList<>();
+
+    private EventsRecViewAdapter rAdapter;
+
+    private FragmentManager fragmentManager;
+
+    public MatchDetailFragment(int formatId, int matchId, FragmentManager fragmentManager) {
         this.formatId = formatId;
         this.matchId = matchId;
-
+        this.fragmentManager = fragmentManager;
     }
 
 
@@ -99,9 +122,37 @@ public class MatchDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_match_detail, container, false);
         runTimer(rootView);
         unbinder = ButterKnife.bind(this, rootView);
+        rAdapter = new EventsRecViewAdapter(eventList);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(rAdapter);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                mLayoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.whistle);
+        final MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
+        final Match match = qh.getMatchById(matchId);
+        leftYC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<Player> playerList = qh.getPlayersByTeamId(match.getTeam1Id());
+               // FragmentManager manager = getFragmentManager();
+                int index = fragmentManager.getBackStackEntryCount() - 1;
+                FragmentManager.BackStackEntry backEntry = fragmentManager.getBackStackEntryAt(index);
+                String tag = backEntry.getName();
+                Fragment fragment1= fragmentManager.findFragmentByTag(tag);
+                //Fragment fragment2= fragmentManager.popBackStack(tag);
+                MatchDetailFragment fragment = (MatchDetailFragment)fragmentManager.findFragmentByTag(tag);
+                myDialogFragment = new PlayersDialogFragment(playerList, fragment );
+                myDialogFragment.show(fragmentManager, "dialog");
+                currentPlayer = myDialogFragment.getCurrentPlayer();
+            }
+        });
 
-        MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
+
+
+
         format = qh.getFormatById(formatId);
 
         miliseconds = format.getPeriodMinutes() * 60 * 100;
@@ -111,7 +162,7 @@ public class MatchDetailFragment extends Fragment {
             timerType = false;
         }
 
-        Match match = qh.getMatchById(matchId);
+
 
         scores1.setText(Integer.toString(match.getScores1()));
         scores2.setText(Integer.toString(match.getScores2()));
@@ -194,5 +245,30 @@ public class MatchDetailFragment extends Fragment {
         unbinder.unbind();
         super.onDestroyView();
 
+    }
+
+    @Override
+    public void dialogOK(Player player, MatchDetailFragment matchDetailFragment) {
+        Event event = new Event(1, matchId, player.getId(), "yellow_card", (miliseconds % (60 * 60 * 100)) / (60 * 100), 'l' );
+        eventList.add(event);
+        rAdapter.notifyItemInserted(eventList.size()-1);
+        rAdapter.notifyDataSetChanged();
+
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+       // this.currentPlayer = currentPlayer;
+        Event event = new Event(1, matchId, currentPlayer.getId(), "yellow_card", (miliseconds % (60 * 60 * 100)) / (60 * 100), 'l' );
+        eventList.add(event);
+        rAdapter = new EventsRecViewAdapter(eventList);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(rAdapter);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                mLayoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        rAdapter.notifyItemInserted(eventList.size()-1);
+        rAdapter.notifyDataSetChanged();
     }
 }
