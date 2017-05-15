@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by Kovrizhkin V.A. on 10.05.2017.
@@ -28,8 +29,9 @@ public class EventsRecViewAdapter extends RecyclerView.Adapter<EventsRecViewAdap
 
 
     public EventsRecViewAdapter(List<Event> eventList) {
-        mapInit();
         this.eventList = eventList;
+        mapInit();
+
     }
 
     private static void mapInit() {
@@ -60,6 +62,7 @@ public class EventsRecViewAdapter extends RecyclerView.Adapter<EventsRecViewAdap
 
         public ViewHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 
@@ -73,9 +76,9 @@ public class EventsRecViewAdapter extends RecyclerView.Adapter<EventsRecViewAdap
     public void onBindViewHolder(EventsRecViewAdapter.ViewHolder holder, int position) {
         Event event = eventList.get(position);
         if(event.getSide()=='l'){
-            holder.leftFio.setText("Бубенцов");
+            holder.leftFio.setText("Туркин");
             holder.leftLogo.setImageResource(eventsImagesMap.get(event.getType()));
-            holder.min.setText(Integer.toString(event.getMinute()));
+            holder.min.setText(Integer.toString(event.getMinute())+"'");
         }
 
 
@@ -83,7 +86,7 @@ public class EventsRecViewAdapter extends RecyclerView.Adapter<EventsRecViewAdap
 
     @Override
     public int getItemCount() {
-        return 0;
+        return eventList.size();
     }
 
 

@@ -82,7 +82,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:scaleType="centerInside"
-        android:src="@drawable/red_card"
+        tools:src="@drawable/red_card"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/guideline11" />
 
@@ -92,7 +92,7 @@
         android:layout_height="@dimen/logo_small"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:src="@drawable/yellow_card"
+        tools:src="@drawable/yellow_card"
         app:layout_constraintLeft_toLeftOf="@+id/guideline10"
         app:layout_constraintRight_toRightOf="parent" />
 </android.support.constraint.ConstraintLayout>

@@ -268,7 +268,7 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
                 mLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
-        rAdapter.notifyItemInserted(eventList.size()-1);
-        rAdapter.notifyDataSetChanged();
+      //  rAdapter.notifyItemInserted(eventList.size()-1);
+       // rAdapter.notifyDataSetChanged();
     }
 }
