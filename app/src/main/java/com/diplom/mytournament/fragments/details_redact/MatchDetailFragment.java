@@ -122,6 +122,8 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
         View rootView = inflater.inflate(R.layout.fragment_match_detail, container, false);
         runTimer(rootView);
         unbinder = ButterKnife.bind(this, rootView);
+        team1Name.setSelected(true);
+        team2Name.setSelected(true);
         rAdapter = new EventsRecViewAdapter(eventList, getContext());
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
