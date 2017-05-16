@@ -45,6 +45,8 @@ public class EventsRecViewAdapter extends RecyclerView.Adapter<EventsRecViewAdap
     private static void mapInit() {
         eventsImagesMap.put("yellow_card", R.drawable.yellow_card);
         eventsImagesMap.put("red_card", R.drawable.red_card);
+        eventsImagesMap.put("goal", R.drawable.ic_goal);
+
     }
 
 

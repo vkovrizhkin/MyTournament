@@ -74,12 +74,21 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
     ImageButton addView;
 
     @BindView(R.id.left_yc)
-    Button leftYC;
+    ImageButton leftYC;
+
+    @BindView(R.id.left_goal)
+    ImageButton leftGoal;
+
+    @BindView(R.id.left_rc)
+    ImageButton leftRC;
+
 
     @BindView(R.id.events_rec_view)
     RecyclerView recyclerView;
 
     private int matchId;
+
+    private Match match;
 
     private Format format;
 
@@ -101,9 +110,13 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
 
     private List<Event> eventList = new ArrayList<>();
 
+    private Event currentEvent;
+
     private EventsRecViewAdapter rAdapter;
 
     private FragmentManager fragmentManager;
+
+    private MyTournamentQueryHelper qh;
 
     public MatchDetailFragment(int formatId, int matchId, FragmentManager fragmentManager) {
         this.formatId = formatId;
@@ -133,26 +146,27 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
                 mLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.whistle);
-        final MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
-        final Match match = qh.getMatchById(matchId);
-        leftYC.setOnClickListener(new View.OnClickListener() {
+        qh = new MyTournamentQueryHelper(getContext());
+        match = qh.getMatchById(matchId);
+
+        leftYC.setOnClickListener(eventClickListener);
+        leftRC.setOnClickListener(eventClickListener);
+        leftGoal.setOnClickListener(eventClickListener);
+
+/*        leftYC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 List<Player> playerList = qh.getPlayersByTeamId(match.getTeam1Id());
-               // FragmentManager manager = getFragmentManager();
+                // FragmentManager manager = getFragmentManager();
                 int index = fragmentManager.getBackStackEntryCount() - 1;
                 FragmentManager.BackStackEntry backEntry = fragmentManager.getBackStackEntryAt(index);
                 String tag = backEntry.getName();
-                Fragment fragment1= fragmentManager.findFragmentByTag(tag);
-                //Fragment fragment2= fragmentManager.popBackStack(tag);
-                MatchDetailFragment fragment = (MatchDetailFragment)fragmentManager.findFragmentByTag(tag);
-                myDialogFragment = new PlayersDialogFragment(playerList, fragment );
+                MatchDetailFragment fragment = (MatchDetailFragment) fragmentManager.findFragmentByTag(tag);
+                myDialogFragment = new PlayersDialogFragment(playerList, fragment);
                 myDialogFragment.show(fragmentManager, "dialog");
-                currentPlayer = myDialogFragment.getCurrentPlayer();
+                // currentPlayer = myDialogFragment.getCurrentPlayer();
             }
-        });
-
-
+        });*/
 
 
         format = qh.getFormatById(formatId);
@@ -163,7 +177,6 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
         } else {
             timerType = false;
         }
-
 
 
         scores1.setText(Integer.toString(match.getScores1()));
@@ -251,17 +264,17 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
 
     @Override
     public void dialogOK(Player player, MatchDetailFragment matchDetailFragment) {
-        Event event = new Event(1, matchId, player.getId(), "yellow_card", (miliseconds % (60 * 60 * 100)) / (60 * 100), 'l' );
+        Event event = new Event(1, matchId, player.getId(), "yellow_card", (miliseconds % (60 * 60 * 100)) / (60 * 100), 'l');
         eventList.add(event);
-        rAdapter.notifyItemInserted(eventList.size()-1);
+        rAdapter.notifyItemInserted(eventList.size() - 1);
         rAdapter.notifyDataSetChanged();
 
     }
 
-    public void setCurrentPlayer(Player currentPlayer) {
-       // this.currentPlayer = currentPlayer;
-        Event event = new Event(1, matchId, currentPlayer.getId(), "yellow_card", (miliseconds % (60 * 60 * 100)) / (60 * 100), 'l' );
-        eventList.add(event);
+    public void executeEventAdding(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+        currentEvent.setPlayerId(currentPlayer.getId());
+        eventList.add(currentEvent);
         rAdapter = new EventsRecViewAdapter(eventList, getContext());
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
@@ -270,18 +283,67 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
                 mLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
-      //  rAdapter.notifyItemInserted(eventList.size()-1);
-       // rAdapter.notifyDataSetChanged();
+
+        //  rAdapter.notifyItemInserted(eventList.size()-1);
+        // rAdapter.notifyDataSetChanged();
     }
-/*    private View.OnClickListener eventClickListener= new View.OnClickListener() {
 
-
+    private View.OnClickListener eventClickListener = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
-            if(v.getId()==R.id.left_yc || v.getId()==R.id.left_rc){
-                List<Player> playerList = qh.getPlayersByTeamId(match.getTeam1Id());
+            // MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
+            List<Player> playerList = new ArrayList<>();
+
+            char side = ' ';
+
+            String type = "";
+
+            switch (v.getId()) {
+                case R.id.left_yc:
+                    playerList = qh.getPlayersByTeamId(match.getTeam1Id());
+                    side = 'l';
+                    type = "yellow_card";
+                    break;
+                case R.id.left_rc:
+                    playerList = qh.getPlayersByTeamId(match.getTeam1Id());
+                    side = 'l';
+                    type = "red_card";
+                    break;
+                case R.id.left_goal:
+                    playerList = qh.getPlayersByTeamId(match.getTeam1Id());
+                    side = 'l';
+                    type = "goal";
+                    break;
+
             }
+
+/*            if (v.getId() == R.id.left_yc || v.getId() == R.id.left_rc) {
+
+
+            } else {
+                playerList = qh.getPlayersByTeamId(match.getTeam2Id());
+                side = 'r';
+            }*/
+            int index = fragmentManager.getBackStackEntryCount() - 1;
+            FragmentManager.BackStackEntry backEntry = fragmentManager.getBackStackEntryAt(index);
+            String tag = backEntry.getName();
+            MatchDetailFragment fragment = (MatchDetailFragment) fragmentManager.findFragmentByTag(tag);
+            myDialogFragment = new PlayersDialogFragment(playerList, fragment);
+            myDialogFragment.show(fragmentManager, "dialog");
+            //currentPlayer = myDialogFragment.getCurrentPlayer();
+           currentEvent = new Event(1, matchId, 0, type, (miliseconds % (60 * 60 * 100)) / (60 * 100), side);
+           /*  eventList.add(event);
+            rAdapter = new EventsRecViewAdapter(eventList, getContext());
+            recyclerView.setHasFixedSize(true);
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+            recyclerView.setLayoutManager(mLayoutManager);
+            recyclerView.setAdapter(rAdapter);
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                    mLayoutManager.getOrientation());
+            recyclerView.addItemDecoration(dividerItemDecoration);*/
+            // currentPlayer = myDialogFragment.getCurrentPlayer();
+
         }
-    }*/
+    };
 }

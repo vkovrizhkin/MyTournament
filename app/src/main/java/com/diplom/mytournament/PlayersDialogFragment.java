@@ -84,6 +84,7 @@ public class PlayersDialogFragment extends DialogFragment {
                         // User clicked OK, so save the mSelectedItems results somewhere
                         // or return them to the component that opened the dialog
                         dialogInterface.dialogOK(currentPlayer, matchDetailFragment);
+                        //matchDetailFragment.setCurrentPlayer(currentPlayer);
 
 
 

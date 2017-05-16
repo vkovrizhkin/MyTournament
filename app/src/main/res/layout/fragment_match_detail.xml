@@ -217,29 +217,67 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/logo_middle">
 
-        <Button
+        <ImageButton
             android:id="@+id/left_yc"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ЖК" />
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/margin_small"
+            android:background="@color/colorWhite"
+            android:src="@drawable/yellow_card"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/left_rc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="КК" />
-
-        <Button
+            android:scaleType="fitCenter"
+            android:layout_margin="@dimen/margin_small"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+            android:src="@drawable/red_card"/>
+        <ImageButton
+            android:id="@+id/left_goal"
+            android:background="@color/colorWhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="КК" />
+            android:layout_margin="@dimen/margin_small"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:src="@drawable/ic_goal"/>
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorDarkGray"/>
 
-        <Button
+        <ImageButton
+            android:id="@+id/right_goal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ЖК" />
+            android:layout_margin="@dimen/margin_small"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+            android:src="@drawable/ic_goal"/>
+        <ImageButton
+            android:background="@color/colorWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:layout_margin="@dimen/margin_small"
+            android:layout_weight="1"
+            android:src="@drawable/red_card"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small"
+            android:scaleType="fitCenter"
+            android:background="@color/colorWhite"
+            android:layout_weight="1"
+            android:src="@drawable/yellow_card"/>
 
     </LinearLayout>
 

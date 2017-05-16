@@ -150,7 +150,7 @@ public class CompetitionActivity extends AppCompatActivity
 
     @Override
     public void dialogOK(Player player, MatchDetailFragment matchDetailFragment) {
-        matchDetailFragment.setCurrentPlayer(player);
+        matchDetailFragment.executeEventAdding(player);
         currentPlayer = player;
     }
 
