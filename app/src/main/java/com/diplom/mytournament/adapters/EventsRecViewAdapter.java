@@ -90,6 +90,10 @@ public class EventsRecViewAdapter extends RecyclerView.Adapter<EventsRecViewAdap
             holder.leftFio.setText(player.getFio());
             holder.leftLogo.setImageResource(eventsImagesMap.get(event.getType()));
             holder.min.setText(Integer.toString(event.getMinute())+"'");
+        } else {
+            holder.rightFio.setText(player.getFio());
+            holder.rightLogo.setImageResource(eventsImagesMap.get(event.getType()));
+            holder.min.setText(Integer.toString(event.getMinute())+"'");
         }
 
 

@@ -262,6 +262,7 @@
             android:background="@color/colorWhite"
             android:src="@drawable/ic_goal"/>
         <ImageButton
+            android:id="@+id/right_rc"
             android:background="@color/colorWhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -271,6 +272,7 @@
             android:src="@drawable/red_card"/>
 
         <ImageButton
+            android:id="@+id/right_yc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_small"
