@@ -1,5 +1,6 @@
 package com.diplom.mytournament.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,8 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
 import com.diplom.mytournament.models.Event;
+import com.diplom.mytournament.models.Player;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,9 +30,14 @@ public class EventsRecViewAdapter extends RecyclerView.Adapter<EventsRecViewAdap
 
     static private Map<String, Integer> eventsImagesMap = new HashMap<String, Integer>();
 
+    private Context context;
+    MyTournamentQueryHelper qh;
 
-    public EventsRecViewAdapter(List<Event> eventList) {
+
+    public EventsRecViewAdapter(List<Event> eventList, Context context) {
         this.eventList = eventList;
+        this.context = context;
+        qh = new MyTournamentQueryHelper(context);
         mapInit();
 
     }
@@ -75,8 +83,9 @@ public class EventsRecViewAdapter extends RecyclerView.Adapter<EventsRecViewAdap
     @Override
     public void onBindViewHolder(EventsRecViewAdapter.ViewHolder holder, int position) {
         Event event = eventList.get(position);
+        Player player = qh.getPlayersById(event.getPlayerId());
         if(event.getSide()=='l'){
-            holder.leftFio.setText("Туркин");
+            holder.leftFio.setText(player.getFio());
             holder.leftLogo.setImageResource(eventsImagesMap.get(event.getType()));
             holder.min.setText(Integer.toString(event.getMinute())+"'");
         }

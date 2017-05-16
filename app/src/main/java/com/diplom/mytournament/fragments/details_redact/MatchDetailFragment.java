@@ -122,7 +122,7 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
         View rootView = inflater.inflate(R.layout.fragment_match_detail, container, false);
         runTimer(rootView);
         unbinder = ButterKnife.bind(this, rootView);
-        rAdapter = new EventsRecViewAdapter(eventList);
+        rAdapter = new EventsRecViewAdapter(eventList, getContext());
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -260,7 +260,7 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
        // this.currentPlayer = currentPlayer;
         Event event = new Event(1, matchId, currentPlayer.getId(), "yellow_card", (miliseconds % (60 * 60 * 100)) / (60 * 100), 'l' );
         eventList.add(event);
-        rAdapter = new EventsRecViewAdapter(eventList);
+        rAdapter = new EventsRecViewAdapter(eventList, getContext());
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -271,4 +271,15 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
       //  rAdapter.notifyItemInserted(eventList.size()-1);
        // rAdapter.notifyDataSetChanged();
     }
+/*    private View.OnClickListener eventClickListener= new View.OnClickListener() {
+
+
+
+        @Override
+        public void onClick(View v) {
+            if(v.getId()==R.id.left_yc || v.getId()==R.id.left_rc){
+                List<Player> playerList = qh.getPlayersByTeamId(match.getTeam1Id());
+            }
+        }
+    }*/
 }

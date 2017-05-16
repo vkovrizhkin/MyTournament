@@ -375,9 +375,27 @@ public class MyTournamentQueryHelper {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Player player;
+        String SqlQuery = "SELECT * FROM PLAYERS WHERE _id = ?";
 
-        return null;
+        Cursor cursor = db.rawQuery(SqlQuery, new String[]{Integer.toString(playerId)});
+        try {
+            if (cursor.moveToFirst()) {
+                // int id = cursor.getInt(0);
+                String fio = cursor.getString(1);
+                int teamId = cursor.getInt(2);
+                String info = cursor.getString(3);
 
+                return new Player(playerId, fio, teamId, info, 0, 811596323);
+            } else {
+                return null;
+            }
+
+        } catch (SQLiteException e) {
+            return null;
+        } finally {
+            cursor.close();
+            db.close();
+        }
     }
 
     //получение игроков команды
@@ -591,7 +609,7 @@ public class MyTournamentQueryHelper {
             } else {
                 return null;
             }
-            while (cursor.moveToNext()){
+            while (cursor.moveToNext()) {
                 int formatId = cursor.getInt(0);
                 String name = cursor.getString(1);
                 int teamPlayers = cursor.getInt(2);

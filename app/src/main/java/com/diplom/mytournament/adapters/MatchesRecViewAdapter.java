@@ -88,6 +88,8 @@ public class MatchesRecViewAdapter extends RecyclerView.Adapter<MatchesRecViewAd
     public void onBindViewHolder(final MatchesRecViewAdapter.ViewHolder holder, int position) {
 
         final Match match = matchList.get(position);
+        holder.team1Name.setSelected(true);
+        holder.team2Name.setSelected(true);
 
         holder.stage.setText(match.getStage());
         holder.date.setText(match.getDate());
