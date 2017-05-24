@@ -3,6 +3,7 @@ package com.diplom.mytournament.fragments.details_redact;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -111,6 +112,8 @@ public class AddCompetitionFragment extends Fragment {
 
                 dbHelper.insertCompetition(db, title.getText().toString(), "league", f.getId() , dateString,
                         info.getText().toString(), R.drawable.ic_menu_camera );
+
+                Snackbar.make(rootView, "Соревнование создано!", Snackbar.LENGTH_LONG).show();
             }
         });
 

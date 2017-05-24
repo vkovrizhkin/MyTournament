@@ -3,6 +3,7 @@ package com.diplom.mytournament.fragments.details_redact;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +27,7 @@ public class AddPlayerFragment extends Fragment {
 
     private MyTournamentDatabaseHelper dbHelper;
 
-/*    @BindView(R.id.player_fio)
+   @BindView(R.id.player_fio_edit)
     EditText playerFio;
 
     @BindView(R.id.player_date_born)
@@ -39,7 +40,7 @@ public class AddPlayerFragment extends Fragment {
     EditText playerInfo;
 
     @BindView(R.id.player_submit_button)
-    Button submitButton;*/
+    Button submitButton;
 
     public AddPlayerFragment(int teamId) {
         this.teamId = teamId;
@@ -54,15 +55,16 @@ public class AddPlayerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_add_player, container, false);
-      //  ButterKnife.bind(this, rootView);
+        ButterKnife.bind(this, rootView);
         dbHelper = new MyTournamentDatabaseHelper(getContext());
-        Button submitButton = (Button)rootView.findViewById(R.id.player_submit_button);
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
-                dbHelper.insertPlayer(db, "член", teamId, "залупа", 1488);
+                dbHelper.insertPlayer(db, playerFio.getText().toString(), teamId, playerInfo.getText().toString(), Integer.parseInt(number.getText().toString()));
+
+                Snackbar.make(rootView, "Игрок Добавлен!", Snackbar.LENGTH_LONG).show();
             }
         });
         return rootView;
