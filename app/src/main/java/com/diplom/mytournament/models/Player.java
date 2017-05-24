@@ -16,9 +16,9 @@ public class Player {
 
     private int number;
 
-    private long dateBorn;
+    private String dateBorn;
 
-    public Player(int id, String fio, int teamId, String info, int number, long dateBorn) {
+    public Player(int id, String fio, int teamId, String info, int number, String dateBorn) {
         this.id = id;
         this.fio = fio;
         this.teamId = teamId;
@@ -59,11 +59,11 @@ public class Player {
         this.info = info;
     }
 
-    public long getDateBorn() {
+    public String getDateBorn() {
         return dateBorn;
     }
 
-    public void setDateBorn(long dateBorn) {
+    public void setDateBorn(String dateBorn) {
         this.dateBorn = dateBorn;
     }
 

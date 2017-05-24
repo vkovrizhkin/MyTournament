@@ -64,9 +64,9 @@ public class TeamPlayersFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new AddPlayerFragment();
-                Fragment fragment1 = getParentFragment();
-                getFragmentManager().beginTransaction().replace(R.id.competition_frame_layout, fragment).addToBackStack(null).commit();
+                Fragment fragment = new AddPlayerFragment(teamId);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.competition_frame_layout, fragment).addToBackStack(null).commit();
             }
         });
 

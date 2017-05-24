@@ -18,6 +18,11 @@
     <string name="enter_info">Дополнительная информация</string>
     <string name="enter_team_name">Название команды</string>
     <string name="enter_competition_name">Название соревнования</string>
+    <string name="enter_fio">Введите ФИО</string>
+    <string name="players">Игроки</string>
+    <string name="info">Информация</string>
+    <string name="select_date_born">Выберите дату рождения</string>
+    <string name="select_number">Выберите номер</string>
     <string name="selected_teams_count">Выбрано %d команд</string>
     <string name="teams_selected_succesful">Успешно добавлены %d команд!</string>
     <string name="name">Название</string>

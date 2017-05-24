@@ -385,7 +385,7 @@ public class MyTournamentQueryHelper {
                 int teamId = cursor.getInt(2);
                 String info = cursor.getString(3);
 
-                return new Player(playerId, fio, teamId, info, 0, 811596323);
+                return new Player(playerId, fio, teamId, info, 0, "20 января 1995");
             } else {
                 return null;
             }
@@ -414,7 +414,7 @@ public class MyTournamentQueryHelper {
                 // int teamId = cursor.getInt(2);
                 String info = cursor.getString(3);
 
-                playerList.add(new Player(id, fio, teamId, info, 0, 811596323));
+                playerList.add(new Player(id, fio, teamId, info, 0, "20 января"));
             } else {
                 return null;
             }
@@ -424,7 +424,7 @@ public class MyTournamentQueryHelper {
                 // int teamId = cursor.getInt(2);
                 String info = cursor.getString(3);
 
-                playerList.add(new Player(id, fio, teamId, info, 0, 811596323));
+                playerList.add(new Player(id, fio, teamId, info, 0, "20 января"));
             }
         } catch (SQLiteException e) {
             return null;

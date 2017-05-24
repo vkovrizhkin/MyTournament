@@ -119,12 +119,13 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
     }
 
     //добавление игрок
-    public static void insertPlayer(SQLiteDatabase db, String fio, int teamId, String info) {
+    public static void insertPlayer(SQLiteDatabase db, String fio, int teamId, String info, int number) {
         ContentValues playerValues = new ContentValues();
 
         playerValues.put("FIO", fio);
         playerValues.put("TEAM_id", teamId);
         playerValues.put("INFO", info);
+        playerValues.put("NUMBER", number);
 
         db.insert("PLAYERS", null, playerValues);
 
@@ -202,11 +203,11 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
         for (int i = 1; i < 6; ++i) {
 
 
-            insertPlayer(db, "Бубенцов", i, "умничка, по кайфу, молодец");
-            insertPlayer(db, "Петров", i, "умничка, по кайфу, молодец");
-            insertPlayer(db, "Иванов", i, "умничка, по кайфу, молодец");
-            insertPlayer(db, "Кузнецов", i, "умничка, по кайфу, молодец");
-            insertPlayer(db, "Джибриль Сиссе", i, "умничка, по кайфу, молодец");
+            insertPlayer(db, "Бубенцов", i, "умничка, по кайфу, молодец", 2);
+            insertPlayer(db, "Петров", i, "умничка, по кайфу, молодец", 1);
+            insertPlayer(db, "Иванов", i, "умничка, по кайфу, молодец", 3);
+            insertPlayer(db, "Кузнецов", i, "умничка, по кайфу, молодец", 4);
+            insertPlayer(db, "Джибриль Сиссе", i, "умничка, по кайфу, молодец",5);
         }
 
         for (int i = 0; i < 15; i++) {
