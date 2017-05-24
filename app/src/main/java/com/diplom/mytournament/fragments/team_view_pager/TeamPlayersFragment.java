@@ -3,6 +3,7 @@ package com.diplom.mytournament.fragments.team_view_pager;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +14,9 @@ import android.view.ViewGroup;
 import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
 import com.diplom.mytournament.adapters.PlayersRecViewAdapter;
+import com.diplom.mytournament.fragments.details_redact.AddPlayerFragment;
 import com.diplom.mytournament.models.Player;
+import com.melnykov.fab.FloatingActionButton;
 
 import java.util.List;
 
@@ -43,7 +46,7 @@ public class TeamPlayersFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_team_players, container, false);
-
+        FloatingActionButton fab = (FloatingActionButton)rootView.findViewById(R.id.players_fab);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.team_players_rec_view);
         MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
 
@@ -58,7 +61,14 @@ public class TeamPlayersFragment extends Fragment {
                 mLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
 
-
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new AddPlayerFragment();
+                Fragment fragment1 = getParentFragment();
+                getFragmentManager().beginTransaction().replace(R.id.competition_frame_layout, fragment).addToBackStack(null).commit();
+            }
+        });
 
         return rootView;
     }

@@ -13,6 +13,7 @@ import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
 import com.diplom.mytournament.adapters.CompetitionsReсViewAdapter;
 import com.diplom.mytournament.fragments.details_redact.AddCompetitionFragment;
+import com.diplom.mytournament.fragments.details_redact.AddPlayerFragment;
 import com.diplom.mytournament.models.Competition;
 import com.melnykov.fab.FloatingActionButton;
 
@@ -58,6 +59,7 @@ public class CompetitionsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Fragment fragment = new AddCompetitionFragment();
+               // Fragment fragment = new AddPlayerFragment();
                 getFragmentManager().beginTransaction().replace(R.id.profile_frame_layout, fragment).addToBackStack(null).commit();
             }
         });

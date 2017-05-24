@@ -1,5 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.diplom.mytournament.fragments.team_view_pager.TeamPlayersFragment">
@@ -9,5 +10,18 @@
         android:id="@+id/team_players_rec_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/players_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:elevation="@dimen/elevation_size"
+        android:src="@drawable/ic_person_add_white_36dp"
+        fab:fab_colorNormal="@color/colorDarkGray"
+        fab:fab_colorPressed="@color/colorPrimaryDark"
+        fab:fab_colorRipple="@color/colorAccent"
+        fab:fab_type="normal" />
 
 </FrameLayout>
