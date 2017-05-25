@@ -71,7 +71,7 @@ public class TeamsRecViewAdapter extends RecyclerView.Adapter<TeamsRecViewAdapte
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new TeamFragment();
+                Fragment fragment = new TeamFragment(team.getId());
                 fragmentManager.beginTransaction().replace(R.id.competition_frame_layout, fragment).addToBackStack(null).commit();
             }
         });

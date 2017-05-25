@@ -43,6 +43,22 @@ public class Standing {
         this.group = group;
     }
 
+    public int getDrawn() {
+        return drawn;
+    }
+
+    public void setDrawn(int drawn) {
+        this.drawn = drawn;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
     public int getId() {
         return id;
     }

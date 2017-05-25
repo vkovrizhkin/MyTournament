@@ -495,12 +495,38 @@ public class MyTournamentQueryHelper {
     }
 
     //получение турнирных данных для команды во всех соревнованиях
-    public List<Standing> getStandingsByTeamId(int teamId) {
+    public Standing getStandingsByTeamId(int teamId, int competitionId) {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        List<Standing> standingList = new ArrayList<>();
+        String SqlQuery = "SELECT * FROM STANDINGS WHERE TEAM_id = ? AND COMPETITION_id = ?";
+        Cursor cursor = db.rawQuery(SqlQuery, new String[]{Integer.toString(teamId), Integer.toString(competitionId)});
 
-        return standingList;
+
+        try {
+            if (cursor.moveToFirst()) {
+                int id = cursor.getInt(0);
+                // int teamId = cursor.getInt(1);
+                String group = cursor.getString(3);
+                int played = cursor.getInt(4);
+                int points = cursor.getInt(5);
+                int won = cursor.getInt(6);
+                int lost = cursor.getInt(7);
+                int drawn = cursor.getInt(8);
+                int goalsS = cursor.getInt(9);
+                int goalsA = cursor.getInt(10);
+
+                return new Standing(id, competitionId, teamId, points, played, goalsS, goalsA,
+                        won, lost, drawn, group);
+
+            } else{
+                return null;
+            }
+        } catch (SQLiteException e) {
+            return null;
+        } finally {
+            cursor.close();
+            db.close();
+        }
 
     }
 
@@ -534,6 +560,23 @@ public class MyTournamentQueryHelper {
         }
 
 
+    }
+
+    public boolean updateStandings(Standing standing) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        String SqlQuery = "UPDATE STANDINGS SET PLAYED = ?, POINTS = ?, WON = ?, LOST = ?," +
+                "DRAWN = ?, GOALS_SCORED = ?, GOALS_AGAINST = ? WHERE _id = ?";
+
+        try {
+            db.execSQL(SqlQuery, new String[]{Integer.toString(standing.getMatchesPlayed()), Integer.toString(standing.getPoints()),
+                    Integer.toString(standing.getWon()), Integer.toString(standing.getLost()),
+                    Integer.toString(standing.getDrawn()), Integer.toString(standing.getGs()),
+                    Integer.toString(standing.getGa()), Integer.toString(standing.getId())});
+            return true;
+        } catch (SQLiteException e) {
+            return false;
+        }
     }
 
     //получение всех команд соревнования

@@ -25,6 +25,7 @@ import com.diplom.mytournament.models.Event;
 import com.diplom.mytournament.models.Format;
 import com.diplom.mytournament.models.Match;
 import com.diplom.mytournament.models.Player;
+import com.diplom.mytournament.models.Standing;
 import com.diplom.mytournament.models.Team;
 
 import java.util.ArrayList;
@@ -93,6 +94,9 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
 
     @BindView(R.id.events_rec_view)
     RecyclerView recyclerView;
+
+    @BindView(R.id.finish_button)
+    ImageButton finishButton;
 
     private int matchId;
 
@@ -209,6 +213,38 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
 
         running = true;
 
+    }
+    @OnClick(R.id.finish_button)
+    public void onFinishButtonClick(){
+        Standing standing1 = qh.getStandingsByTeamId(match.getTeam1Id(), match.getCompetitionId());
+        Standing standing2 = qh.getStandingsByTeamId(match.getTeam2Id(), match.getCompetitionId());
+
+        standing1.setGs(standing1.getGs()+match.getScores1());
+        standing1.setGa(standing1.getGa()+match.getScores2());
+        standing2.setGs(standing2.getGs()+match.getScores2());
+        standing2.setGa(standing2.getGa()+match.getScores1());
+
+        standing1.setMatchesPlayed(standing1.getMatchesPlayed()+1);
+        standing2.setMatchesPlayed(standing2.getMatchesPlayed()+1);
+
+
+        if(match.getScores1() == match.getScores2()){
+            standing1.setDrawn(standing1.getDrawn()+1);
+            standing1.setPoints(standing1.getPoints()+1);
+            standing2.setDrawn(standing2.getDrawn()+1);
+            standing2.setPoints(standing2.getPoints()+1);
+        } else if(match.getScores1() > match.getScores2()){
+            standing1.setWon(standing1.getWon()+1);
+            standing1.setPoints(standing1.getPoints()+3);
+            standing2.setLost(standing2.getLost()+1);
+        } else{
+            standing2.setWon(standing2.getWon()+1);
+            standing2.setPoints(standing2.getPoints()+3);
+            standing1.setLost(standing1.getLost()+1);
+        }
+
+        qh.updateStandings(standing1);
+        qh.updateStandings(standing2);
     }
 
     @OnClick(R.id.add_button)

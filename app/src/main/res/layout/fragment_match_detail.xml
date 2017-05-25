@@ -52,6 +52,15 @@
             android:layout_weight="1"
             android:background="@color/colorWhite"
             android:src="@drawable/ic_exposure_plus_1_blue_grey_800_36dp" />
+        <ImageButton
+            android:id="@+id/finish_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:background="@color/colorWhite"
+            android:src="@drawable/ic_finish" />
+
 
     </LinearLayout>
 
