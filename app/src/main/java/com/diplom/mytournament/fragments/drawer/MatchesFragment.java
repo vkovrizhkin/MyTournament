@@ -69,7 +69,7 @@ public class MatchesFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new AddMatchFragment();
+                Fragment fragment = new AddMatchFragment(competitionId);
                 getFragmentManager().beginTransaction().replace(R.id.competition_frame_layout, fragment)
                         .addToBackStack(null)
                         .commit();

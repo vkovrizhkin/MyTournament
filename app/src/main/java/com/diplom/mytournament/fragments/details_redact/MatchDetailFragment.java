@@ -247,7 +247,7 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
                     } else {
                         miliseconds++;
                     }
-                   eventMiliseconds++;
+                    eventMiliseconds++;
                 }
                 handler.postDelayed(this, 10);
             }
@@ -344,7 +344,7 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
             myDialogFragment = new PlayersDialogFragment(playerList, fragment);
             myDialogFragment.show(fragmentManager, "dialog");
             //currentPlayer = myDialogFragment.getCurrentPlayer();
-            currentEvent = new Event(1, matchId, 0, type, (eventMiliseconds % (60 * 60 * 100)) / (60 * 100), side);
+            currentEvent = new Event(1, matchId, 0, type, (eventMiliseconds % (60 * 60 * 100)) / (60 * 100) + 1, side);
 
         }
     };

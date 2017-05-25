@@ -19,31 +19,32 @@
             android:textSize="@dimen/text_info" />
 
         <TextView
-            android:id="@+id/select_team1"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/select_first_team"
             android:textSize="@dimen/text_info" />
 
         <Spinner
+            android:id="@+id/select_team1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_info" />
 
         <TextView
-            android:id="@+id/select_team2"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/select_second_team"
             android:textSize="@dimen/text_info" />
 
         <Spinner
+            android:id="@+id/select_team2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_info" />
 
         <TextView
-            android:id="@+id/select_match_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/select_match_date"
@@ -64,7 +65,7 @@
             android:hint="@string/enter_match_place"
             android:textSize="@dimen/text_info" />
         <Button
-            android:id="@+id/submit_button"
+            android:id="@+id/match_submit_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_small"
