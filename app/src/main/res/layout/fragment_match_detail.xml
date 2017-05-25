@@ -205,16 +205,24 @@
 
 
     </android.support.constraint.ConstraintLayout>
-
-
-    <LinearLayout
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDarkGray"/>
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_weight="1">
 
-
-    </LinearLayout>
-
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/events_rec_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </ScrollView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDarkGray"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/logo_middle">
@@ -282,17 +290,6 @@
             android:src="@drawable/yellow_card"/>
 
     </LinearLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/events_rec_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </ScrollView>
 
 
 </LinearLayout>

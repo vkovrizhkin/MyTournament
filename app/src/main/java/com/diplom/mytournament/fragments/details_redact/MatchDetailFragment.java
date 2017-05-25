@@ -104,7 +104,11 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
 
     private int miliseconds;
 
+    private int eventMiliseconds = 0;
+
     private boolean running;
+
+    private boolean wasRunning;
 
     private boolean timerType;//true если отчёт обратный
 
@@ -153,7 +157,6 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
                 mLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
-        mediaPlayer = MediaPlayer.create(getContext(), R.raw.whistle);
         qh = new MyTournamentQueryHelper(getContext());
         match = qh.getMatchById(matchId);
 
@@ -192,14 +195,18 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
 
     @OnClick(R.id.start_button)
     public void onStartImageButtonClick() {
-
-        mediaPlayer.start();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
+        if (!wasRunning) {
+            mediaPlayer = MediaPlayer.create(getContext(), R.raw.whistle);
+            mediaPlayer.start();
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+            mediaPlayer.stop();
+            wasRunning = true;
         }
-        mediaPlayer.stop();
+
         running = true;
 
     }
@@ -217,6 +224,7 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
     @OnClick(R.id.reset_button)
     public void onResetImageButtonClick() {
         running = false;
+        wasRunning = false;
         miliseconds = format.getPeriodMinutes() * 60 * 100;
     }
 
@@ -226,9 +234,9 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
         handler.post(new Runnable() {
             @Override
             public void run() {
-                int hours = miliseconds / (60 * 60 * 100);
-                int minutes = (miliseconds % (60 * 60 * 100)) / (60 * 100);
-                int secs = (miliseconds % (60 * 100)) / 100;
+                int hours = miliseconds / 360000;
+                int minutes = (miliseconds % 360000) / (6000);
+                int secs = (miliseconds % 6000) / 100;
                 int mili = miliseconds % 100;
 
                 String time = String.format("%d:%02d:%02d:%02d", hours, minutes, secs, mili);
@@ -239,10 +247,8 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
                     } else {
                         miliseconds++;
                     }
-
+                   eventMiliseconds++;
                 }
-
-
                 handler.postDelayed(this, 10);
             }
         });
@@ -259,7 +265,7 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
 
     @Override
     public void dialogOK(Player player, MatchDetailFragment matchDetailFragment) {
-        Event event = new Event(1, matchId, player.getId(), "yellow_card", (miliseconds % (60 * 60 * 100)) / (60 * 100), 'l');
+        Event event = new Event(1, matchId, player.getId(), "yellow_card", (eventMiliseconds % (60 * 60 * 100)) / (60 * 100), 'l');
         eventList.add(event);
         rAdapter.notifyItemInserted(eventList.size() - 1);
         rAdapter.notifyDataSetChanged();
@@ -310,7 +316,7 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
                 case R.id.left_goal:
                     playerList = qh.getPlayersByTeamId(match.getTeam1Id());
                     side = 'l';
-                    match.setScores1(match.getScores1()+1);
+                    match.setScores1(match.getScores1() + 1);
                     type = "goal";
                     break;
                 case R.id.right_yc:
@@ -327,7 +333,7 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
                     playerList = qh.getPlayersByTeamId(match.getTeam2Id());
                     side = 'r';
                     type = "goal";
-                    match.setScores2(match.getScores2()+1);
+                    match.setScores2(match.getScores2() + 1);
                     break;
 
             }
@@ -338,7 +344,7 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
             myDialogFragment = new PlayersDialogFragment(playerList, fragment);
             myDialogFragment.show(fragmentManager, "dialog");
             //currentPlayer = myDialogFragment.getCurrentPlayer();
-           currentEvent = new Event(1, matchId, 0, type, (miliseconds % (60 * 60 * 100)) / (60 * 100), side);
+            currentEvent = new Event(1, matchId, 0, type, (eventMiliseconds % (60 * 60 * 100)) / (60 * 100), side);
 
         }
     };

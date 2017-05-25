@@ -27,4 +27,10 @@
     <string name="played">PL</string>
     <string name="points">PO</string>
     <string name="won">W</string>
+    <string name="enter_fio">Enter name, surname</string>
+    <string name="info">INFO</string>
+    <string name="matches">MATCHES</string>
+    <string name="players">PLAYERS</string>
+    <string name="select_date_born">select date born</string>
+    <string name="select_number">Enter Number</string>
 </resources>
