@@ -1,0 +1,79 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:orientation="vertical"
+        tools:context="com.diplom.mytournament.fragments.details_redact.AddMatchFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+        <EditText
+            android:id="@+id/enter_stage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_match_stage"
+            android:textSize="@dimen/text_info" />
+
+        <TextView
+            android:id="@+id/select_team1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/select_first_team"
+            android:textSize="@dimen/text_info" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_info" />
+
+        <TextView
+            android:id="@+id/select_team2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/select_second_team"
+            android:textSize="@dimen/text_info" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_info" />
+
+        <TextView
+            android:id="@+id/select_match_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/select_match_date"
+            android:textSize="@dimen/text_info" />
+
+        <DatePicker
+            android:id="@+id/match_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
+
+        <EditText
+            android:id="@+id/enter_match_place"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_match_place"
+            android:textSize="@dimen/text_info" />
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@color/colorDarkGray"
+            android:text="@string/submit"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_title" />
+
+    </LinearLayout>
+</ScrollView>
+

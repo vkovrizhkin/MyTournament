@@ -1,5 +1,6 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_matches_layout"
     android:layout_width="match_parent"
@@ -12,12 +13,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <!-- <android.support.design.widget.FloatingActionButton
-         android:id="@+id/matches_fab"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_gravity="bottom|end"
-         android:layout_margin="@dimen/fab_margin"
-         android:src="@drawable/ic_add_white_36dp"/>!-->
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/matches_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:elevation="@dimen/elevation_size"
+        android:src="@drawable/ic_add_white_36dp"
+        fab:fab_colorNormal="@color/colorDarkGray"
+        fab:fab_colorPressed="@color/colorPrimaryDark"
+        fab:fab_colorRipple="@color/colorAccent"
+        fab:fab_type="normal" />
 
 </android.support.design.widget.CoordinatorLayout>
