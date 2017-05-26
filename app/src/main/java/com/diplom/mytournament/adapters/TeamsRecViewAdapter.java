@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.diplom.mytournament.R;
-import com.diplom.mytournament.fragments.TeamFragment;
+import com.diplom.mytournament.fragments.details_redact.TeamFragment;
 import com.diplom.mytournament.models.Team;
 
 import java.util.List;

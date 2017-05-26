@@ -1,4 +1,4 @@
-package com.diplom.mytournament;
+package com.diplom.mytournament.fragments;
 
 import android.app.Activity;
 import android.app.Dialog;

@@ -1,4 +1,4 @@
-package com.diplom.mytournament.fragments;
+package com.diplom.mytournament.fragments.details_redact;
 
 
 import android.os.Bundle;
