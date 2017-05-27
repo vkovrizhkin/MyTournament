@@ -27,10 +27,13 @@ public class TeamsRecViewAdapter extends RecyclerView.Adapter<TeamsRecViewAdapte
 
     private List<Team> teamList;
 
+    private int competitionId;
+
     FragmentManager fragmentManager;
 
-    public TeamsRecViewAdapter(List<Team> teamList, FragmentManager fragmentManager) {
+    public TeamsRecViewAdapter(List<Team> teamList, int competitionId, FragmentManager fragmentManager) {
         this.teamList = teamList;
+        this.competitionId = competitionId;
         this.fragmentManager = fragmentManager;
     }
 
@@ -71,7 +74,7 @@ public class TeamsRecViewAdapter extends RecyclerView.Adapter<TeamsRecViewAdapte
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new TeamFragment(team.getId());
+                Fragment fragment = new TeamFragment(team.getId(), competitionId);
                 fragmentManager.beginTransaction().replace(R.id.competition_frame_layout, fragment).addToBackStack(null).commit();
             }
         });

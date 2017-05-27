@@ -14,9 +14,9 @@ public class Player {
 
     private String info; //дополнительная информация
 
-    private int number;
+    private int number; //номер
 
-    private String dateBorn;
+    private String dateBorn; //дата рождения
 
     public Player(int id, String fio, int teamId, String info, int number, String dateBorn) {
         this.id = id;

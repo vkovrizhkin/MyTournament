@@ -182,7 +182,7 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
         insertFormat(db, "баскетбол", 5, 15, 4, 0, "basketball");
         insertFormat(db, "стритбол", 3, 10, 4, 0, "basketball");
 
-        // создаём два соревнования
+/*        // создаём два соревнования
         insertCompetition(db, "Лига Воронежа", "league", 1, "сегодня", "Все скидываем по косарю",
                 R.drawable.ic_menu_camera);
         insertCompetition(db, "Кубок Липецка", "cup", 1, "завтра", "предварительная регистрация",
@@ -230,7 +230,7 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
         insertMatch(db, 2, "12.12.12 12:00", "энергия", "1 тур", 1, 4, 0);
         insertMatch(db, 3, "12.12.12 12:00", "энергия", "1 тур", 1, 4, 1);
         insertMatch(db, 7, "12.12.12 12:00", "энергия", "1 тур", 1, 4, 0);
-        insertMatch(db, 7, "12.12.12 12:00", "энергия", "1 тур", 1, 4, 1);
+        insertMatch(db, 7, "12.12.12 12:00", "энергия", "1 тур", 1, 4, 1);*/
 
     }
 

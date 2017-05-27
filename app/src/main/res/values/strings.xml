@@ -22,6 +22,10 @@
     <string name="players">СОСТАВ</string>
     <string name="info">ИНФОРМАЦИЯ</string>
     <string name="matches">МАТЧИ</string>
+    <string name="standings">ТУРНИРНАЯ ТАБЛИЦА</string>
+    <string name="top">ЛУЧШИЕ</string>
+    <string name="statistics">СТАТИСТИКА</string>
+    <string name="teams">КОМАНДЫ</string>
     <string name="select_date_born">Выберите дату рождения</string>
     <string name="select_number">Выберите номер</string>
     <string name="selected_teams_count">Выбрано %d команд</string>
@@ -33,7 +37,7 @@
     <string name="won">В</string>
     <string name="drawn">Н</string>
     <string name="lost">П</string>
-
+    <string name="back_to_main">В главное меню</string>
     <string name="enter_match_stage">Введите этап соревнования </string>
     <string name="select_match_date">Выберите дату матча</string>
     <string name="enter_match_place">Введите место матча</string>

@@ -18,9 +18,9 @@ public class Match {
 
     private int team2Id; //команда гостей
 
-    private int scores1 = 0;
+    private int scores1 = 0;//количество голов, забитых первой командой
 
-    private int scores2 = 0;
+    private int scores2 = 0;//второй командой
 
     private String place; //место проведения
 

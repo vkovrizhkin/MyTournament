@@ -23,9 +23,9 @@ public class TeamFragment extends Fragment {
 
     private ViewPager mViewPager;
 
-    private int teamId = 1;
+    private int teamId = 0;
 
-    private int competitionId = 1;
+    private int competitionId = 0;
 
     private View view;
 
@@ -33,8 +33,9 @@ public class TeamFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public TeamFragment(int teamId) {
+    public TeamFragment(int teamId, int competitionId) {
         this.teamId = teamId;
+        this.competitionId = competitionId;
     }
 
     @Override

@@ -24,9 +24,9 @@ public class Standing {
 
     private int lost; //матчей проиграно
 
-    private int drawn;
+    private int drawn;//количество ничьих
 
-    private String group;
+    private String group;//группа (если есть)
 
 
     public Standing(int id, int competitionId, int teamId, int points, int matchesPlayed, int gs, int ga, int won, int lost, int drawn, String group) {
