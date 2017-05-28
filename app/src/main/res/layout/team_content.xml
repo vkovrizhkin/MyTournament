@@ -6,7 +6,7 @@
     android:layout_height="@dimen/logo_middle"
     android:orientation="horizontal">
 
-    <ImageView
+    <com.github.siyamed.shapeimageview.CircularImageView
         android:id="@+id/team_logo"
         android:layout_width="@dimen/logo_middle"
         android:layout_height="@dimen/logo_middle"

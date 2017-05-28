@@ -30,7 +30,7 @@
         tools:text="123Тур!" />
 
 
-    <ImageView
+    <com.github.siyamed.shapeimageview.CircularImageView
         android:id="@+id/team1_logo"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -144,7 +144,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline19"
         tools:text="sdfsdfsdfsdfsdfsdfsdsdfsdf" />
 
-    <ImageView
+    <com.github.siyamed.shapeimageview.CircularImageView
         android:id="@+id/team2_logo"
         android:layout_width="0dp"
         android:layout_height="0dp"
