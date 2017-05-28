@@ -1,5 +1,8 @@
 package com.diplom.mytournament.adapters;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,10 +13,13 @@ import android.widget.TextView;
 
 import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
+import com.diplom.mytournament.activities.CompetitionActivity;
 import com.diplom.mytournament.fragments.details_redact.MatchDetailFragment;
 import com.diplom.mytournament.models.Match;
 import com.diplom.mytournament.models.Team;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import butterknife.BindView;
@@ -29,15 +35,18 @@ public class MatchesRecViewAdapter extends RecyclerView.Adapter<MatchesRecViewAd
 
     private int formatId;
 
+    private CompetitionActivity activity;
+
     private static MyTournamentQueryHelper qh ;
 
 
     private FragmentManager fragmentManager;
 
-    public MatchesRecViewAdapter(List<Match> matchList, FragmentManager fragmentManager, int formatId) {
+    public MatchesRecViewAdapter(List<Match> matchList, FragmentManager fragmentManager, int formatId, CompetitionActivity activity) {
         this.matchList = matchList;
         this.fragmentManager = fragmentManager;
         this.formatId = formatId;
+        this.activity = activity;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -101,11 +110,42 @@ public class MatchesRecViewAdapter extends RecyclerView.Adapter<MatchesRecViewAd
         Team team1 = qh.getTeamById(match.getTeam1Id());
         Team team2 = qh.getTeamById(match.getTeam2Id());
 
+        if (team1.getLogoResourceId()!=null){
+            Bitmap img = null;
+            Uri uri = Uri.parse(team1.getLogoResourceId());
+
+            try {
+                img = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            holder.team1Logo.setImageBitmap(img);
+        } else {
+            holder.team1Logo.setImageResource(R.drawable.ic_menu_camera);
+        }
+        if (team2.getLogoResourceId()!=null){
+            Bitmap img = null;
+            Uri uri = Uri.parse(team2.getLogoResourceId());
+
+            try {
+                img = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            holder.team2Logo.setImageBitmap(img);
+        } else {
+            holder.team2Logo.setImageResource(R.drawable.ic_menu_camera);
+        }
+
         holder.team1Name.setText(team1.getName());
         holder.team2Name.setText(team2.getName());
 
-        holder.team1Logo.setImageResource(R.drawable.ic_menu_camera);
-        holder.team2Logo.setImageResource(R.drawable.ic_menu_gallery);
+       // holder.team1Logo.setImageResource(R.drawable.ic_menu_camera);
+       // holder.team2Logo.setImageResource(R.drawable.ic_menu_gallery);
 
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override

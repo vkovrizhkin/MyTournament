@@ -1,9 +1,12 @@
 package com.diplom.mytournament.fragments.details_redact;
 
 
+import android.graphics.Bitmap;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DividerItemDecoration;
@@ -27,6 +30,8 @@ import com.diplom.mytournament.models.Player;
 import com.diplom.mytournament.models.Standing;
 import com.diplom.mytournament.models.Team;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -186,12 +191,39 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
         Team team1 = qh.getTeamById(match.getTeam1Id());
         Team team2 = qh.getTeamById(match.getTeam2Id());
 
+        if (team1.getLogoResourceId()!=null){
+            Bitmap img = null;
+            Uri uri = Uri.parse(team1.getLogoResourceId());
+
+            try {
+                img = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            team1Logo.setImageBitmap(img);
+        } else {
+            team1Logo.setImageResource(R.drawable.ic_menu_camera);
+        }
+        if (team2.getLogoResourceId()!=null){
+            Bitmap img = null;
+            Uri uri = Uri.parse(team2.getLogoResourceId());
+
+            try {
+                img = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            team2Logo.setImageBitmap(img);
+        } else {
+            team2Logo.setImageResource(R.drawable.ic_menu_camera);
+        }
+
         team1Name.setText(team1.getName());
         team2Name.setText(team2.getName());
-
-        //TODO доделать хранение и извлечение логотипов!
-        team1Logo.setImageResource(R.drawable.ic_menu_camera);
-        team2Logo.setImageResource(R.drawable.ic_menu_gallery);
 
         return rootView;
     }

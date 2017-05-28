@@ -1,8 +1,12 @@
 package com.diplom.mytournament.fragments.details_redact;
 
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.diplom.mytournament.MyTournamentDatabaseHelper;
@@ -20,11 +25,15 @@ import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
 import com.diplom.mytournament.models.Format;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,6 +45,10 @@ public class AddCompetitionFragment extends Fragment {
     private List<Format> formatList = new ArrayList<>();
 
     public static MyTournamentDatabaseHelper dbHelper;
+
+    private static final int REQUEST = 1;
+
+    String logoUri;
 
     @BindView(R.id.competition_title_edit)
     EditText title;
@@ -54,6 +67,12 @@ public class AddCompetitionFragment extends Fragment {
 
     @BindView(R.id.comp_info_edit)
     EditText info;
+
+    @BindView(R.id.comp_logo)
+    ImageView image;
+
+    @BindView(R.id.add_comp_logo_button)
+    Button addLogo;
 
 
     public AddCompetitionFragment() {
@@ -111,15 +130,44 @@ public class AddCompetitionFragment extends Fragment {
                 String dateString = Integer.toString(date.getDayOfMonth())+":"+Integer.toString(date.getMonth());
 
                 dbHelper.insertCompetition(db, title.getText().toString(), "league", f.getId() , dateString,
-                        info.getText().toString(), R.drawable.ic_menu_camera );
+                        info.getText().toString(), logoUri );
 
                 Snackbar.make(rootView, "Соревнование создано!", Snackbar.LENGTH_LONG).show();
+
+            }
+        });
+
+        addLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_PICK);
+                i.setType("image/*");
+                startActivityForResult(i, REQUEST);
             }
         });
 
 
         // Inflate the layout for this fragment
         return rootView;
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        Bitmap img = null;
+
+        if (requestCode == REQUEST && resultCode == RESULT_OK) {
+            Uri selectedImage = data.getData();
+            try {
+                img = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                logoUri = selectedImage.toString();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            image.setImageBitmap(img);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 }

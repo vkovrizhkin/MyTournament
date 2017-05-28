@@ -1,6 +1,10 @@
 package com.diplom.mytournament.adapters;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +14,12 @@ import android.widget.TextView;
 
 import com.diplom.mytournament.R;
 import com.diplom.mytournament.activities.CompetitionActivity;
+import com.diplom.mytournament.activities.MainActivity;
 import com.diplom.mytournament.fragments.drawer.CompetitionsFragment;
 import com.diplom.mytournament.models.Competition;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,6 +34,8 @@ public class CompetitionsReсViewAdapter extends RecyclerView.Adapter<Competitio
     private CompetitionsFragment competitionsFragment;
 
     private List<Competition> competitionList;
+
+    private MainActivity activity;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -47,9 +56,10 @@ public class CompetitionsReсViewAdapter extends RecyclerView.Adapter<Competitio
 
     }
 
-    public CompetitionsReсViewAdapter(CompetitionsFragment competitionsFragment, List<Competition> competitionList) {
+    public CompetitionsReсViewAdapter(CompetitionsFragment competitionsFragment, List<Competition> competitionList, MainActivity activity) {
         this.competitionsFragment = competitionsFragment;
         this.competitionList = competitionList;
+        this.activity = activity;
     }
 
     @Override
@@ -63,10 +73,22 @@ public class CompetitionsReсViewAdapter extends RecyclerView.Adapter<Competitio
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final Competition competition = competitionList.get(position);
+        if (competition.getLogoIdResource()!=null){
+            Bitmap img = null;
+            Uri uri = Uri.parse(competition.getLogoIdResource());
 
+            try {
+                img = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            holder.logo.setImageBitmap(img);
+        } else {
+            holder.logo.setImageResource(R.drawable.ic_menu_camera);
+        }
         holder.title.setText(competition.getName());
-        holder.logo.setImageResource((int) competition.getLogoIdResource());
-
 
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override

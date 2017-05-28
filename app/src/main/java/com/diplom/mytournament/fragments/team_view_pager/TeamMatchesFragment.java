@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
+import com.diplom.mytournament.activities.CompetitionActivity;
 import com.diplom.mytournament.adapters.MatchesRecViewAdapter;
 import com.diplom.mytournament.models.Competition;
 import com.diplom.mytournament.models.Match;
@@ -56,8 +57,8 @@ public class TeamMatchesFragment extends Fragment {
         matchList = qh.getMatchesByTeamId(teamId, competitionId);
         Competition competition = qh.getCompetitionById(competitionId);
         int formatId = competition.getFormat();
-
-        rAdapter = new MatchesRecViewAdapter(matchList, getFragmentManager(), formatId);
+        CompetitionActivity activity = (CompetitionActivity) getActivity();
+        rAdapter = new MatchesRecViewAdapter(matchList, getFragmentManager(), formatId, activity);
 
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());

@@ -36,7 +36,7 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
         //созднаие таблицы "Соревнование". Основные сведения о проводимом соревновании
         db.execSQL("CREATE TABLE COMPETITIONS(" + "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "NAME TEXT," + "TYPE TEXT," + "FORMAT INTEGER," +
-                "DATE TEXT," + "INFO TEXT," + "LOGO_RESOURCE_id INTEGER);");
+                "DATE TEXT," + "INFO TEXT," + "LOGO_RESOURCE_id TEXT);");
 
         //создание сводной турнирной таблицы
         db.execSQL("CREATE TABLE STANDINGS(" + "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -71,7 +71,7 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
 
     //добавление соревнования
     public  void insertCompetition(SQLiteDatabase db, String name, String type, int format,
-                                         String date, String info, int resourceId) {
+                                         String date, String info, String logoUri) {
         ContentValues competitionValues = new ContentValues();
 
         competitionValues.put("NAME", name);
@@ -79,7 +79,7 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
         competitionValues.put("FORMAT", format);
         competitionValues.put("DATE", date);
         competitionValues.put("INFO", info);
-        competitionValues.put("LOGO_RESOURCE_id", resourceId);
+        competitionValues.put("LOGO_RESOURCE_id", logoUri);
 
         db.insert("COMPETITIONS", null, competitionValues);
 
@@ -87,7 +87,7 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
 
     //добавление команды
     public static void insertTeam(SQLiteDatabase db, String name, String kindOfSport,
-                                  int resourceId, String info) {
+                                  String resourceId, String info) {
         ContentValues teamValues = new ContentValues();
 
         teamValues.put("NAME", name);

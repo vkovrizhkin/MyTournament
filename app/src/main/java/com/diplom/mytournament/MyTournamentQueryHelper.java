@@ -45,7 +45,7 @@ public class MyTournamentQueryHelper {
                 int format = cursor.getInt(3);
                 String date = cursor.getString(4);
                 String info = cursor.getString(5);
-                int resourceId = cursor.getInt(6);
+                String resourceId = cursor.getString(6);
 
                 competition = new Competition(name, id, format, info, date, type, resourceId);
 
@@ -78,7 +78,7 @@ public class MyTournamentQueryHelper {
                 int format = cursor.getInt(3);
                 String date = cursor.getString(4);
                 String info = cursor.getString(5);
-                int resourceId = cursor.getInt(6);
+                String resourceId = cursor.getString(6);
 
                 Competition competition = new Competition(name, id, format, info, date, type, resourceId);
                 competitionList.add(competition);
@@ -93,7 +93,7 @@ public class MyTournamentQueryHelper {
                 int format = cursor.getInt(3);
                 String date = cursor.getString(4);
                 String info = cursor.getString(5);
-                int resourceId = cursor.getInt(6);
+                String resourceId = cursor.getString(6);
 
                 Competition competition = new Competition(name, id, format, info, date, type, resourceId);
                 competitionList.add(competition);
@@ -545,7 +545,7 @@ public class MyTournamentQueryHelper {
                 //получение данных соревнования из курсора
                 String name = cursor.getString(1);
                 String sport = cursor.getString(2);
-                long logo = (long) cursor.getInt(3);
+                String logo = cursor.getString(3);
                 String info = cursor.getString(4);
                 team = new Team(teamId, name, logo, sport, info);
 
@@ -596,7 +596,7 @@ public class MyTournamentQueryHelper {
                 //получение данных соревнования из курсора
                 int id = cursor.getInt(0);
                 String name = cursor.getString(1);
-                int resourceId = cursor.getInt(3);
+                String resourceId = cursor.getString(3);
                 String kindOfSport = cursor.getString(2);
                 String info = cursor.getString(4);
 
@@ -609,8 +609,8 @@ public class MyTournamentQueryHelper {
                 //получение данных соревнования из курсора
                 int id = cursor.getInt(0);
                 String name = cursor.getString(1);
-                int resourceId = cursor.getInt(2);
-                String kindOfSport = cursor.getString(3);
+                String resourceId = cursor.getString(3);
+                String kindOfSport = cursor.getString(2);
                 String info = cursor.getString(4);
 
                 Team team = new Team(id, name, resourceId, kindOfSport, info);
@@ -686,7 +686,7 @@ public class MyTournamentQueryHelper {
                 //получение данных соревнования из курсора
                 int id = cursor.getInt(0);
                 String name = cursor.getString(1);
-                int resourceId = cursor.getInt(3);
+                String resourceId = cursor.getString(3);
                 //String kindOfSport = cursor.getString(2);
                 String info = cursor.getString(4);
 
@@ -699,7 +699,7 @@ public class MyTournamentQueryHelper {
                 //получение данных соревнования из курсора
                 int id = cursor.getInt(0);
                 String name = cursor.getString(1);
-                int resourceId = cursor.getInt(2);
+                String resourceId = cursor.getString(2);
                 //String kindOfSport = cursor.getString(3);
                 String info = cursor.getString(4);
 

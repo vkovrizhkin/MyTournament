@@ -10,13 +10,13 @@ public class Team {
 
     private String name; //название команды
 
-    private long logoResourceId; // ссылка на ресурс логотипа команды
+    private String logoResourceId; // ссылка на ресурс логотипа команды
 
     private String kindOfSport; // вид спорта (футбол/ минифутбол)
 
     private String info; // дополнительная информация
 
-    public Team(int id, String name, long logoResourceId, String kindOfSport, String info) {
+    public Team(int id, String name, String logoResourceId, String kindOfSport, String info) {
         this.id = id;
         this.name = name;
         this.logoResourceId = logoResourceId;
@@ -45,11 +45,11 @@ public class Team {
         this.name = name;
     }
 
-    public long getLogoResourceId() {
+    public String getLogoResourceId() {
         return logoResourceId;
     }
 
-    public void setLogoResourceId(long logoResourceId) {
+    public void setLogoResourceId(String logoResourceId) {
         this.logoResourceId = logoResourceId;
     }
 

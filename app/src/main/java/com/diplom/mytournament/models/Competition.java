@@ -18,10 +18,10 @@ public class Competition {
 
     private String type; //тип расписания (кубок, по кругу и тд)
 
-    private long logoIdResource;//ссылка на ресурс логотипа
+    private String logoIdResource;//ссылка на ресурс логотипа
 
     public Competition(String name, int id, int format, String info, String date,
-                       String type, long logoIdResource) {
+                       String type, String logoIdResource) {
         this.name = name;
         this.id = id;
         this.format = format;
@@ -79,11 +79,11 @@ public class Competition {
         this.type = type;
     }
 
-    public long getLogoIdResource() {
+    public String getLogoIdResource() {
         return logoIdResource;
     }
 
-    public void setLogoIdResource(long logoIdResource) {
+    public void setLogoIdResource(String logoIdResource) {
         this.logoIdResource = logoIdResource;
     }
 }
