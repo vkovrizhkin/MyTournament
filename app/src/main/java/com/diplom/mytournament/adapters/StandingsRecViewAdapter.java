@@ -39,6 +39,8 @@ public class StandingsRecViewAdapter extends RecyclerView.Adapter<StandingsRecVi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.standing_content_layout)
+        View container;
 
         @BindView(R.id.st_num)
         TextView num;
@@ -80,6 +82,9 @@ public class StandingsRecViewAdapter extends RecyclerView.Adapter<StandingsRecVi
 
     @Override
     public void onBindViewHolder(StandingsRecViewAdapter.ViewHolder holder, int position) {
+        if(position%2==1){
+            holder.container.setBackgroundResource(R.color.colorDarkWhite);
+        }
         if (position == 0) {
             // Standing standing = standingList.get(position);
             holder.num.setText(" ");

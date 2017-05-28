@@ -45,13 +45,6 @@ public class TeamFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_team, container, false);
         view = rootView;
 
-/*        myTournamentPagerAdapter = new MyTournamentPagerAdapter(getFragmentManager(), 3);
-        myTournamentPagerAdapter.addFragment(new TeamMatchesFragment(teamId, competitionId), "МАТЧИ");
-        myTournamentPagerAdapter.addFragment(new TeamPlayersFragment(teamId), "СОСТАВ");
-        myTournamentPagerAdapter.addFragment(new TeamInfoFragment(teamId), "ИНФОРМАЦИЯ");
-
-        mViewPager = (ViewPager) rootView.findViewById(R.id.team_pager);
-        mViewPager.setAdapter(myTournamentPagerAdapter);*/
         return rootView;
     }
 

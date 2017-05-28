@@ -47,9 +47,9 @@ public class TeamsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_teams, container, false);
-
-        recyclerView = (RecyclerView)rootView.findViewById(R.id.teams_recycler_view);
-        FloatingActionButton fab = (FloatingActionButton)rootView.findViewById(R.id.teams_fab);
+        getActivity().setTitle(R.string.teams);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.teams_recycler_view);
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.teams_fab);
         fab.attachToRecyclerView(recyclerView);
         MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
         Competition competition = qh.getCompetitionById(competitionId);
@@ -74,7 +74,6 @@ public class TeamsFragment extends Fragment {
         });
 
         return rootView;
-
 
 
     }

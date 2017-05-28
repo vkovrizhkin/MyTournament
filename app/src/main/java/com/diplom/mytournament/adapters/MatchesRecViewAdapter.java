@@ -69,8 +69,6 @@ public class MatchesRecViewAdapter extends RecyclerView.Adapter<MatchesRecViewAd
         @BindView(R.id.scores2)
         TextView scores2;
 
-
-
         public ViewHolder(View view) {
             super(view);
             qh = new MyTournamentQueryHelper(view.getContext());
@@ -106,7 +104,6 @@ public class MatchesRecViewAdapter extends RecyclerView.Adapter<MatchesRecViewAd
         holder.team1Name.setText(team1.getName());
         holder.team2Name.setText(team2.getName());
 
-        //TODO доделать хранение и извлечение логотипов!
         holder.team1Logo.setImageResource(R.drawable.ic_menu_camera);
         holder.team2Logo.setImageResource(R.drawable.ic_menu_gallery);
 

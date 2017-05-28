@@ -49,10 +49,12 @@ public class MatchesFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_matches, container, false);
         recyclerView = (RecyclerView)rootView.findViewById(R.id.matches_recycler_view);
         MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
+        getActivity().setTitle("МАТЧ!");
 
         matchList = qh.getMatchesByCompetitionId(competitionId);
         Competition competition = qh.getCompetitionById(competitionId);
         int formatId = competition.getFormat();
+
 
         rAdapter = new MatchesRecViewAdapter(matchList, getFragmentManager(), formatId);
 

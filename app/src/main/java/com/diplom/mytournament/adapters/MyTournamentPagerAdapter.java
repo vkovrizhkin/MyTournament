@@ -37,21 +37,9 @@ public class MyTournamentPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        /*String s = "";
-        switch (position) {
-            case 0:
-                s = "МАТЧИ";
-                break;
-            case 1:
-                s =  "СОСТАВ";
-            break;
-            case 2: s = "ИНФОРМАЦИЯ";
-                break;
-        }
-        return s;*/
+
         return titles.get(position);
     }
-
 
     @Override
     public int getCount() {

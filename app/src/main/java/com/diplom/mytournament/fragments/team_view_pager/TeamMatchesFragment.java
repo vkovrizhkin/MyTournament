@@ -15,6 +15,7 @@ import com.diplom.mytournament.R;
 import com.diplom.mytournament.adapters.MatchesRecViewAdapter;
 import com.diplom.mytournament.models.Competition;
 import com.diplom.mytournament.models.Match;
+import com.diplom.mytournament.models.Team;
 
 import java.util.List;
 
@@ -47,10 +48,11 @@ public class TeamMatchesFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_team_matches, container, false);
-        recyclerView = (RecyclerView)rootView.findViewById(R.id.team_matches_rec_view);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.team_matches_rec_view);
 
         MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
-
+        Team team = qh.getTeamById(teamId);
+        getActivity().setTitle(team.getName());
         matchList = qh.getMatchesByTeamId(teamId, competitionId);
         Competition competition = qh.getCompetitionById(competitionId);
         int formatId = competition.getFormat();

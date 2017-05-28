@@ -59,10 +59,8 @@ public class PlayersRecViewAdapter extends RecyclerView.Adapter<PlayersRecViewAd
     public void onBindViewHolder(PlayersRecViewAdapter.ViewHolder holder, int position) {
 
         Player player = playerList.get(position);
-
         holder.fio.setText(player.getFio());
-
-        holder.matches.setText("лол, кек, чебурек");
+        holder.matches.setText("*иформация*");
 
     }
 
@@ -73,8 +71,6 @@ public class PlayersRecViewAdapter extends RecyclerView.Adapter<PlayersRecViewAd
         } else {
             return playerList.size();
         }
-
     }
-
 
 }

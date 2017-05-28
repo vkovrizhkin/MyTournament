@@ -96,7 +96,6 @@ public class EventsRecViewAdapter extends RecyclerView.Adapter<EventsRecViewAdap
             holder.min.setText(Integer.toString(event.getMinute())+"'");
         }
 
-
     }
 
     @Override

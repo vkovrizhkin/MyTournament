@@ -22,33 +22,30 @@ import butterknife.ButterKnife;
  * Created by Kovrizhkin V.A. on 27.04.2017.
  */
 
-public class CompetitionsReсViewAdapter extends RecyclerView.Adapter<CompetitionsReсViewAdapter.ViewHolder>{
+public class CompetitionsReсViewAdapter extends RecyclerView.Adapter<CompetitionsReсViewAdapter.ViewHolder> {
 
-private CompetitionsFragment competitionsFragment;
+    private CompetitionsFragment competitionsFragment;
 
-private List<Competition> competitionList;
+    private List<Competition> competitionList;
 
-public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
-    @BindView(R.id.competition_title)
-    TextView title ;
+        @BindView(R.id.competition_title)
+        TextView title;
 
-    @BindView(R.id.logo_image)
-    ImageView logo;
+        @BindView(R.id.logo_image)
+        ImageView logo;
 
-    @BindView(R.id.competition_content_layout)
-    View container;
+        @BindView(R.id.competition_content_layout)
+        View container;
 
-    public ViewHolder(View view) {
-        super(view);
-/*        title = (TextView)view.findViewById(R.id.competition_title);
-        logo = (ImageView)view.findViewById(R.id.logo_image);
-        container = (View)view.findViewById(R.id.competition_content_layout);*/
-        ButterKnife.bind(this, view);
+        public ViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+
+        }
 
     }
-
-}
 
     public CompetitionsReсViewAdapter(CompetitionsFragment competitionsFragment, List<Competition> competitionList) {
         this.competitionsFragment = competitionsFragment;
@@ -76,11 +73,10 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View v) {
                 Intent intent = new Intent(holder.container.getContext(), CompetitionActivity.class);
                 int id = competition.getId();
-                intent.putExtra("competitionId",id );
+                intent.putExtra("competitionId", id);
                 competitionsFragment.startActivity(intent);
             }
         });
-
     }
 
     @Override
@@ -88,6 +84,5 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
 
         return competitionList.size();
     }
-
 
 }

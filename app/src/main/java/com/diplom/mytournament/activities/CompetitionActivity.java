@@ -25,6 +25,8 @@ public class CompetitionActivity extends AppCompatActivity
 
     private int competitionId;
 
+    private Toolbar toolbar;
+
     private Player currentPlayer;
 
     public int getCompetitionId() {
@@ -37,17 +39,8 @@ public class CompetitionActivity extends AppCompatActivity
         Intent intent = getIntent();
         competitionId = intent.getIntExtra("competitionId", 0);
         setContentView(R.layout.activity_competition);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-/*        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -77,19 +70,14 @@ public class CompetitionActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.competition, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -100,7 +88,6 @@ public class CompetitionActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         displayView(id);
@@ -137,5 +124,9 @@ public class CompetitionActivity extends AppCompatActivity
 
     public Player getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    public void setTitle(String title){
+        toolbar.setTitle(title);
     }
 }
