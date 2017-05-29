@@ -57,6 +57,18 @@
             android:layout_marginTop="@dimen/margin_small"
             android:calendarViewShown="false"
             android:datePickerMode="spinner" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/select_match_time"
+            android:textSize="@dimen/text_info" />
+
+        <TimePicker
+            android:id="@+id/time_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:timePickerMode="spinner"/>
 
         <EditText
             android:id="@+id/enter_match_place"

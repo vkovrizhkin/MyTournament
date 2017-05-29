@@ -40,6 +40,7 @@
     <string name="back_to_main">В главное меню</string>
     <string name="enter_match_stage">Введите этап соревнования </string>
     <string name="select_match_date">Выберите дату матча</string>
+    <string name="select_match_time">Выберите время матча</string>
     <string name="enter_match_place">Введите место матча</string>
     <string name="select_first_team">Выберите первую команду</string>
     <string name="select_second_team">Выберите вторую команду</string>

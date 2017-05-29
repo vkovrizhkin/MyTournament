@@ -444,7 +444,7 @@ public class MyTournamentQueryHelper {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<Standing> standingList = new ArrayList<>();
 
-        String SqlQuery = "SELECT * FROM STANDINGS WHERE COMPETITION_id = ?";
+        String SqlQuery = "SELECT * FROM STANDINGS WHERE COMPETITION_id = ? ORDER BY POINTS DESC";
         Cursor cursor = db.rawQuery(SqlQuery, new String[]{Integer.toString(competitionId)});
 
         try {
@@ -575,6 +575,19 @@ public class MyTournamentQueryHelper {
                     Integer.toString(standing.getGa()), Integer.toString(standing.getId())});
             return true;
         } catch (SQLiteException e) {
+            return false;
+        }
+    }
+    public boolean upadateMatch(Match match){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        String SqlQuery ="UPDATE MATCHES SET PLAYED=?, SCORES1 = ?, SCORES2 = ? WHERE _id = ?";
+        try{
+            db.execSQL(SqlQuery, new String[]{Integer.toString(match.getPlayed()),
+                    Integer.toString(match.getScores1()), Integer.toString(match.getScores2()),
+                    Integer.toString(match.getId())});
+            return true;
+        }catch (SQLiteException e) {
             return false;
         }
     }

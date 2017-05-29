@@ -14,6 +14,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 
 import com.diplom.mytournament.MyTournamentDatabaseHelper;
 import com.diplom.mytournament.MyTournamentQueryHelper;
@@ -57,6 +58,9 @@ public class AddMatchFragment extends Fragment {
     @BindView(R.id.enter_match_place)
     EditText place;
 
+    @BindView(R.id.time_picker)
+    TimePicker timePicker;
+
     public AddMatchFragment(int competitionId) {
         this.competitionId = competitionId;
     }
@@ -71,6 +75,7 @@ public class AddMatchFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_add_match, container, false);
         ButterKnife.bind(this, rootView);
+        timePicker.setIs24HourView(true);
 
         qh = new MyTournamentQueryHelper(getContext());
         dbHelper = new MyTournamentDatabaseHelper(getContext());
@@ -81,13 +86,16 @@ public class AddMatchFragment extends Fragment {
         team1.setAdapter(adapter);
         team2.setAdapter(adapter);
 
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
                 Team teamH = (Team)team1.getSelectedItem();
                 Team teamA = (Team)team2.getSelectedItem();
-                String dateString = Integer.toString(date.getDayOfMonth())+":"+Integer.toString(date.getMonth());
+                String dateString = date.getDayOfMonth()+"."+date.getMonth()+1+
+                        "."+date.getYear()+"  ";
+                dateString+=timePicker.getCurrentHour()+":"+timePicker.getCurrentMinute();
                 dbHelper.insertMatch(db, competitionId, dateString, place.getText().toString(),
                         stage.getText().toString(),teamH.getId(), teamA.getId(), 0 );
                 Snackbar.make(rootView, "Матч создан!", Snackbar.LENGTH_LONG).show();

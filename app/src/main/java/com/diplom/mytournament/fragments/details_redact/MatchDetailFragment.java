@@ -276,6 +276,8 @@ public class MatchDetailFragment extends Fragment implements PlayersDialogFragme
 
         qh.updateStandings(standing1);
         qh.updateStandings(standing2);
+        match.setPlayed(1);
+        qh.upadateMatch(match);
     }
 
     @OnClick(R.id.add_button)
