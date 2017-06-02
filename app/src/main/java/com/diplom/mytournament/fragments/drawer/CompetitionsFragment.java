@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
+import com.diplom.mytournament.activities.MainActivity;
 import com.diplom.mytournament.adapters.CompetitionsReсViewAdapter;
 import com.diplom.mytournament.fragments.details_redact.AddCompetitionFragment;
 import com.diplom.mytournament.models.Competition;
@@ -46,7 +47,8 @@ public class CompetitionsFragment extends Fragment {
         fab.attachToRecyclerView(recyclerView);
         MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
         competitionList = qh.getAllCompetition();
-        rAdapter = new CompetitionsReсViewAdapter(this, competitionList);
+        MainActivity activity = (MainActivity)getActivity();
+        rAdapter = new CompetitionsReсViewAdapter(this, competitionList, activity);
 
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
@@ -58,6 +60,7 @@ public class CompetitionsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Fragment fragment = new AddCompetitionFragment();
+               // Fragment fragment = new AddPlayerFragment();
                 getFragmentManager().beginTransaction().replace(R.id.profile_frame_layout, fragment).addToBackStack(null).commit();
             }
         });

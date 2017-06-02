@@ -16,7 +16,7 @@ public class Event {
 
     private int minute; //минута матча
 
-    private char side;
+    private char side;//сторона отображения команды на экране
 
 
     public Event(int id, int matchId, int playerId, String type, int minute, char side) {

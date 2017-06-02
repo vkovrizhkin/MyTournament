@@ -1,19 +1,24 @@
 package com.diplom.mytournament.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
 import com.diplom.mytournament.models.Event;
+import com.diplom.mytournament.models.Player;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by Kovrizhkin V.A. on 10.05.2017.
@@ -25,15 +30,23 @@ public class EventsRecViewAdapter extends RecyclerView.Adapter<EventsRecViewAdap
 
     static private Map<String, Integer> eventsImagesMap = new HashMap<String, Integer>();
 
+    private Context context;
+    MyTournamentQueryHelper qh;
 
-    public EventsRecViewAdapter(List<Event> eventList) {
-        mapInit();
+
+    public EventsRecViewAdapter(List<Event> eventList, Context context) {
         this.eventList = eventList;
+        this.context = context;
+        qh = new MyTournamentQueryHelper(context);
+        mapInit();
+
     }
 
-    private static void mapInit(){
+    private static void mapInit() {
         eventsImagesMap.put("yellow_card", R.drawable.yellow_card);
         eventsImagesMap.put("red_card", R.drawable.red_card);
+        eventsImagesMap.put("goal", R.drawable.ic_goal);
+
     }
 
 
@@ -59,22 +72,35 @@ public class EventsRecViewAdapter extends RecyclerView.Adapter<EventsRecViewAdap
 
         public ViewHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 
     @Override
-    public EventsRecViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_content, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(EventsRecViewAdapter.ViewHolder holder, int position) {
+        Event event = eventList.get(position);
+        Player player = qh.getPlayersById(event.getPlayerId());
+        if(event.getSide()=='l'){
+            holder.leftFio.setText(player.getFio());
+            holder.leftLogo.setImageResource(eventsImagesMap.get(event.getType()));
+            holder.min.setText(Integer.toString(event.getMinute())+"'");
+        } else {
+            holder.rightFio.setText(player.getFio());
+            holder.rightLogo.setImageResource(eventsImagesMap.get(event.getType()));
+            holder.min.setText(Integer.toString(event.getMinute())+"'");
+        }
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return eventList.size();
     }
 
 

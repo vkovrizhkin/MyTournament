@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.diplom.mytournament.fragments.TeamFragment">
+    tools:context="com.diplom.mytournament.fragments.details_redact.TeamFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <android.support.v4.view.ViewPager

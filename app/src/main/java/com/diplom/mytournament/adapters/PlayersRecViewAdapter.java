@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.diplom.mytournament.R;
 import com.diplom.mytournament.models.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -20,7 +21,7 @@ import butterknife.ButterKnife;
 
 public class PlayersRecViewAdapter extends RecyclerView.Adapter<PlayersRecViewAdapter.ViewHolder> {
 
-    private List<Player> playerList;
+    private List<Player> playerList = new ArrayList<>();
 
     private int teamId;
 
@@ -28,7 +29,7 @@ public class PlayersRecViewAdapter extends RecyclerView.Adapter<PlayersRecViewAd
         this.playerList = playerList;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.player_content_layout)
         View container;
@@ -45,6 +46,7 @@ public class PlayersRecViewAdapter extends RecyclerView.Adapter<PlayersRecViewAd
             ButterKnife.bind(this, view);
         }
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -57,17 +59,18 @@ public class PlayersRecViewAdapter extends RecyclerView.Adapter<PlayersRecViewAd
     public void onBindViewHolder(PlayersRecViewAdapter.ViewHolder holder, int position) {
 
         Player player = playerList.get(position);
-
         holder.fio.setText(player.getFio());
-
-        holder.matches.setText("лол, кек, чебурек");
+        holder.matches.setText("*иформация*");
 
     }
 
     @Override
     public int getItemCount() {
-        return playerList.size();
+        if (playerList == null) {
+            return 0;
+        } else {
+            return playerList.size();
+        }
     }
-
 
 }

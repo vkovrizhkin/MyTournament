@@ -12,9 +12,12 @@ import android.view.ViewGroup;
 
 import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
+import com.diplom.mytournament.activities.CompetitionActivity;
 import com.diplom.mytournament.adapters.MatchesRecViewAdapter;
+import com.diplom.mytournament.fragments.details_redact.AddMatchFragment;
 import com.diplom.mytournament.models.Competition;
 import com.diplom.mytournament.models.Match;
+import com.melnykov.fab.FloatingActionButton;
 
 import java.util.List;
 
@@ -45,14 +48,16 @@ public class MatchesFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_matches, container, false);
-        recyclerView = (RecyclerView)rootView.findViewById(R.id.matches_recycler_view);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.matches_recycler_view);
         MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
+        getActivity().setTitle(R.string.matches);
 
         matchList = qh.getMatchesByCompetitionId(competitionId);
         Competition competition = qh.getCompetitionById(competitionId);
         int formatId = competition.getFormat();
 
-        rAdapter = new MatchesRecViewAdapter(matchList, getFragmentManager(), formatId);
+        CompetitionActivity activity = (CompetitionActivity) getActivity();
+        rAdapter = new MatchesRecViewAdapter(matchList, getFragmentManager(), formatId, activity);
 
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
@@ -61,6 +66,18 @@ public class MatchesFragment extends Fragment {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
                 mLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
+
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.matches_fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new AddMatchFragment(competitionId);
+                getFragmentManager().beginTransaction().replace(R.id.competition_frame_layout, fragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
 
         // Inflate the layout for this fragment
         return rootView;

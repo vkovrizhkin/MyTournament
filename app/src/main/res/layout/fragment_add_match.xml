@@ -1,43 +1,45 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_small"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/activity_horizontal_margin"
         android:orientation="vertical"
-        tools:context="com.diplom.mytournament.fragments.details_redact.AddCompetitionFragment">
+        tools:context="com.diplom.mytournament.fragments.details_redact.AddMatchFragment">
 
+        <!-- TODO: Update blank fragment layout -->
         <EditText
-            android:id="@+id/competition_title_edit"
+            android:id="@+id/enter_stage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:hint="@string/enter_competition_name" />
+            android:hint="@string/enter_match_stage"
+            android:textSize="@dimen/text_info" />
 
         <TextView
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:text="@string/select_sport"
+            android:text="@string/select_first_team"
             android:textSize="@dimen/text_info" />
 
         <Spinner
-            android:id="@+id/kind_of_sport_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
+            android:id="@+id/select_team1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:text="@string/select_format"
+            android:textSize="@dimen/text_info" />
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/select_second_team"
             android:textSize="@dimen/text_info" />
 
         <Spinner
-            android:id="@+id/format_spinner"
+            android:id="@+id/select_team2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_info" />
@@ -45,46 +47,37 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/select_date"
+            android:text="@string/select_match_date"
             android:textSize="@dimen/text_info" />
 
         <DatePicker
-            android:id="@+id/competition_date"
+            android:id="@+id/match_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
             android:calendarViewShown="false"
             android:datePickerMode="spinner" />
-
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:text="@string/select_match_time"
+            android:textSize="@dimen/text_info" />
 
-            <ImageView
-                android:id="@+id/comp_logo"
-                android:src="@drawable/ic_menu_camera"
-                android:layout_width="@dimen/logo_big"
-                android:layout_height="@dimen/logo_big"
-                android:scaleType="fitCenter" />
-            <Button
-                android:id="@+id/add_comp_logo_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/load_logo"/>
-
-        </LinearLayout>
+        <TimePicker
+            android:id="@+id/time_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:timePickerMode="spinner"/>
 
         <EditText
-            android:id="@+id/comp_info_edit"
+            android:id="@+id/enter_match_place"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_small"
-            android:layout_marginTop="@dimen/margin_small"
-            android:hint="@string/enter_info" />
-
+            android:hint="@string/enter_match_place"
+            android:textSize="@dimen/text_info" />
         <Button
-            android:id="@+id/submit_button"
+            android:id="@+id/match_submit_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_small"
@@ -93,7 +86,7 @@
             android:text="@string/submit"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/text_title" />
+
     </LinearLayout>
 </ScrollView>
-
 

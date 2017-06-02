@@ -14,11 +14,11 @@ public class Player {
 
     private String info; //дополнительная информация
 
-    private int number;
+    private int number; //номер
 
-    private long dateBorn;
+    private String dateBorn; //дата рождения
 
-    public Player(int id, String fio, int teamId, String info, int number, long dateBorn) {
+    public Player(int id, String fio, int teamId, String info, int number, String dateBorn) {
         this.id = id;
         this.fio = fio;
         this.teamId = teamId;
@@ -59,11 +59,11 @@ public class Player {
         this.info = info;
     }
 
-    public long getDateBorn() {
+    public String getDateBorn() {
         return dateBorn;
     }
 
-    public void setDateBorn(long dateBorn) {
+    public void setDateBorn(String dateBorn) {
         this.dateBorn = dateBorn;
     }
 

@@ -24,9 +24,9 @@ public class Standing {
 
     private int lost; //матчей проиграно
 
-    private int drawn;
+    private int drawn;//количество ничьих
 
-    private String group;
+    private String group;//группа (если есть)
 
 
     public Standing(int id, int competitionId, int teamId, int points, int matchesPlayed, int gs, int ga, int won, int lost, int drawn, String group) {
@@ -40,6 +40,22 @@ public class Standing {
         this.won = won;
         this.lost = lost;
         this.drawn = drawn;
+        this.group = group;
+    }
+
+    public int getDrawn() {
+        return drawn;
+    }
+
+    public void setDrawn(int drawn) {
+        this.drawn = drawn;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
         this.group = group;
     }
 

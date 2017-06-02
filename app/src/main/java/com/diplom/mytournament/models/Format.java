@@ -8,17 +8,17 @@ public class Format {
 
     private int id;
 
-    private String name;
+    private String name; //название формата
 
-    private int teamPlayers;
+    private int teamPlayers; //количество игроков на поле от одной команды
 
-    private int periodMinutes;
+    private int periodMinutes;//минут в одном тайме
 
-    private int periodsNum;
+    private int periodsNum; //количество таймов
 
-    private int scoresInPeriod;
+    private int scoresInPeriod;//максимальное количество очков в партии
 
-    private String kindOfSport;
+    private String kindOfSport;//вид спорта
 
     public Format(int id, String name, int teamPlayers, int periodMinutes, int periodsNum, int scoresInPeriod, String kindOfSport) {
         this.id = id;
@@ -28,6 +28,11 @@ public class Format {
         this.periodsNum = periodsNum;
         this.scoresInPeriod = scoresInPeriod;
         this.kindOfSport = kindOfSport;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 
     public int getId() {

@@ -19,4 +19,6 @@
     <dimen name="logo_middle">60dp</dimen>
     <dimen name="logo_small">30dp</dimen>
 
+    <dimen name="finish_button">45dp</dimen>
+
 </resources>

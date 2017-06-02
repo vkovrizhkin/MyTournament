@@ -5,9 +5,21 @@
     tools:context="com.diplom.mytournament.fragments.details_redact.AddTeamFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v4.view.ViewPager
+        android:id="@+id/team_add_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="добавление команды" />
+        android:layout_height="match_parent">
+
+        <android.support.v4.view.PagerTitleStrip
+            android:id="@+id/pager_title_strip_team"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="@color/colorDarkGray"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:textColor="@color/colorWhite" />
+
+    </android.support.v4.view.ViewPager>
 
 </FrameLayout>

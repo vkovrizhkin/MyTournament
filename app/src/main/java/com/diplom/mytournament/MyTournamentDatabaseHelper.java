@@ -36,7 +36,7 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
         //созднаие таблицы "Соревнование". Основные сведения о проводимом соревновании
         db.execSQL("CREATE TABLE COMPETITIONS(" + "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "NAME TEXT," + "TYPE TEXT," + "FORMAT INTEGER," +
-                "DATE TEXT," + "INFO TEXT," + "LOGO_RESOURCE_id INTEGER);");
+                "DATE TEXT," + "INFO TEXT," + "LOGO_RESOURCE_id TEXT);");
 
         //создание сводной турнирной таблицы
         db.execSQL("CREATE TABLE STANDINGS(" + "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -70,8 +70,8 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
     }
 
     //добавление соревнования
-    public static void insertCompetition(SQLiteDatabase db, String name, String type, int format,
-                                         String date, String info, int resourceId) {
+    public  void insertCompetition(SQLiteDatabase db, String name, String type, int format,
+                                         String date, String info, String logoUri) {
         ContentValues competitionValues = new ContentValues();
 
         competitionValues.put("NAME", name);
@@ -79,7 +79,7 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
         competitionValues.put("FORMAT", format);
         competitionValues.put("DATE", date);
         competitionValues.put("INFO", info);
-        competitionValues.put("LOGO_RESOURCE_id", resourceId);
+        competitionValues.put("LOGO_RESOURCE_id", logoUri);
 
         db.insert("COMPETITIONS", null, competitionValues);
 
@@ -87,7 +87,7 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
 
     //добавление команды
     public static void insertTeam(SQLiteDatabase db, String name, String kindOfSport,
-                                  int resourceId, String info) {
+                                  String resourceId, String info) {
         ContentValues teamValues = new ContentValues();
 
         teamValues.put("NAME", name);
@@ -119,12 +119,13 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
     }
 
     //добавление игрок
-    public static void insertPlayer(SQLiteDatabase db, String fio, int teamId, String info) {
+    public static void insertPlayer(SQLiteDatabase db, String fio, int teamId, String info, int number) {
         ContentValues playerValues = new ContentValues();
 
         playerValues.put("FIO", fio);
         playerValues.put("TEAM_id", teamId);
         playerValues.put("INFO", info);
+        playerValues.put("NUMBER", number);
 
         db.insert("PLAYERS", null, playerValues);
 
@@ -171,14 +172,17 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    private static void testInit(SQLiteDatabase db) {
+    private void testInit(SQLiteDatabase db) {
 
         insertFormat(db, "минифутбол", 5, 25, 2, 0, "football");
+        insertFormat(db, "мидифутбол", 8, 30, 2, 0, "football");
         insertFormat(db, "футбол", 11, 45, 2, 0, "football");
         insertFormat(db, "воллейбол", 6, 0, 3, 25, "volleyball");
+        insertFormat(db, "пляж. воллейбол", 2, 0, 3, 15, "volleyball");
         insertFormat(db, "баскетбол", 5, 15, 4, 0, "basketball");
+        insertFormat(db, "стритбол", 3, 10, 4, 0, "basketball");
 
-        // создаём два соревнования
+/*        // создаём два соревнования
         insertCompetition(db, "Лига Воронежа", "league", 1, "сегодня", "Все скидываем по косарю",
                 R.drawable.ic_menu_camera);
         insertCompetition(db, "Кубок Липецка", "cup", 1, "завтра", "предварительная регистрация",
@@ -192,23 +196,28 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
                 R.drawable.ic_menu_camera);
         insertCompetition(db, "Кубок Питера", "cup", 2, "завтра", "предварительная регистрация",
                 R.drawable.ic_menu_camera);
-        insertCompetition(db, "Лига Китая", "league", 3, "сегодня", "Все скидываем по косарю",
+        insertCompetition(db, "Лига Китая", "league", 6, "сегодня", "Все скидываем по косарю",
                 R.drawable.ic_menu_camera);
-        insertCompetition(db, "Кубок Африки", "cup", 3, "завтра", "предварительная регистрация",
+        insertCompetition(db, "Кубок Африки", "cup", 4, "завтра", "предварительная регистрация",
                 R.drawable.ic_menu_camera);
         for (int i = 1; i < 6; ++i) {
 
 
-            insertPlayer(db, "Бубенцов", i, "умничка, по кайфу, молодец");
-            insertPlayer(db, "Петров", i, "умничка, по кайфу, молодец");
-            insertPlayer(db, "Иванов", i, "умничка, по кайфу, молодец");
-            insertPlayer(db, "Кузнецов", i, "умничка, по кайфу, молодец");
-            insertPlayer(db, "Джибриль Сиссе", i, "умничка, по кайфу, молодец");
+            insertPlayer(db, "Бубенцов", i, "умничка, по кайфу, молодец", 2);
+            insertPlayer(db, "Петров", i, "умничка, по кайфу, молодец", 1);
+            insertPlayer(db, "Иванов", i, "умничка, по кайфу, молодец", 3);
+            insertPlayer(db, "Кузнецов", i, "умничка, по кайфу, молодец", 4);
+            insertPlayer(db, "Джибриль Сиссе", i, "умничка, по кайфу, молодец",5);
         }
 
         for (int i = 0; i < 15; i++) {
-            insertTeam(db, "Team" + Integer.toString(i), "football", 0, "тестовая команда");
-            insertStanding(db, i, 1);
+            insertTeam(db, "Футбольная команда " + Integer.toString(i), "football", 0, "тестовая команда");
+            insertTeam(db, "баскетбольная команда " + Integer.toString(i), "basketball", 0, "тестовая команда");
+            insertTeam(db, "волейбольная команда " + Integer.toString(i), "volleyball", 0, "тестовая команда");
+            if(i>0 && i<14){
+                insertStanding(db, i, 1);
+            }
+
 
         }
 
@@ -221,7 +230,7 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
         insertMatch(db, 2, "12.12.12 12:00", "энергия", "1 тур", 1, 4, 0);
         insertMatch(db, 3, "12.12.12 12:00", "энергия", "1 тур", 1, 4, 1);
         insertMatch(db, 7, "12.12.12 12:00", "энергия", "1 тур", 1, 4, 0);
-        insertMatch(db, 7, "12.12.12 12:00", "энергия", "1 тур", 1, 4, 1);
+        insertMatch(db, 7, "12.12.12 12:00", "энергия", "1 тур", 1, 4, 1);*/
 
     }
 

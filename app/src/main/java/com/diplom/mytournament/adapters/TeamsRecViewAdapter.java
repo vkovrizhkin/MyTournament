@@ -1,5 +1,8 @@
 package com.diplom.mytournament.adapters;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,9 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.diplom.mytournament.R;
-import com.diplom.mytournament.fragments.TeamFragment;
+import com.diplom.mytournament.activities.CompetitionActivity;
+import com.diplom.mytournament.fragments.details_redact.TeamFragment;
 import com.diplom.mytournament.models.Team;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,10 +33,16 @@ public class TeamsRecViewAdapter extends RecyclerView.Adapter<TeamsRecViewAdapte
 
     private List<Team> teamList;
 
+    private int competitionId;
+
+    private CompetitionActivity activity;
+
     FragmentManager fragmentManager;
 
-    public TeamsRecViewAdapter(List<Team> teamList, FragmentManager fragmentManager) {
+    public TeamsRecViewAdapter(List<Team> teamList, int competitionId, CompetitionActivity activity, FragmentManager fragmentManager) {
         this.teamList = teamList;
+        this.competitionId = competitionId;
+        this.activity = activity;
         this.fragmentManager = fragmentManager;
     }
 
@@ -65,13 +77,28 @@ public class TeamsRecViewAdapter extends RecyclerView.Adapter<TeamsRecViewAdapte
 
         final Team team = teamList.get(position);
 
+        if (team.getLogoResourceId()!=null){
+            Bitmap img = null;
+            Uri uri = Uri.parse(team.getLogoResourceId());
+
+            try {
+                img = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            holder.teamLogo.setImageBitmap(img);
+        } else {
+            holder.teamLogo.setImageResource(R.drawable.ic_menu_camera);
+        }
+
         holder.teamName.setText(team.getName());
-        holder.teamLogo.setImageResource(R.drawable.ic_menu_camera);
 
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new TeamFragment();
+                Fragment fragment = new TeamFragment(team.getId(), competitionId);
                 fragmentManager.beginTransaction().replace(R.id.competition_frame_layout, fragment).addToBackStack(null).commit();
             }
         });
