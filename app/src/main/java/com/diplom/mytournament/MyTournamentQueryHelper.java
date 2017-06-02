@@ -518,7 +518,7 @@ public class MyTournamentQueryHelper {
                 return new Standing(id, competitionId, teamId, points, played, goalsS, goalsA,
                         won, lost, drawn, group);
 
-            } else{
+            } else {
                 return null;
             }
         } catch (SQLiteException e) {
@@ -578,16 +578,17 @@ public class MyTournamentQueryHelper {
             return false;
         }
     }
-    public boolean upadateMatch(Match match){
+
+    public boolean upadateMatch(Match match) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        String SqlQuery ="UPDATE MATCHES SET PLAYED=?, SCORES1 = ?, SCORES2 = ? WHERE _id = ?";
-        try{
+        String SqlQuery = "UPDATE MATCHES SET PLAYED=?, SCORES1 = ?, SCORES2 = ? WHERE _id = ?";
+        try {
             db.execSQL(SqlQuery, new String[]{Integer.toString(match.getPlayed()),
                     Integer.toString(match.getScores1()), Integer.toString(match.getScores2()),
                     Integer.toString(match.getId())});
             return true;
-        }catch (SQLiteException e) {
+        } catch (SQLiteException e) {
             return false;
         }
     }
@@ -686,6 +687,7 @@ public class MyTournamentQueryHelper {
         }
         return formatList;
     }
+
 
     public List<Team> getTeamsBySport(String kindOfSport) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();

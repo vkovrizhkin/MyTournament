@@ -12,11 +12,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
 import com.diplom.mytournament.activities.CompetitionActivity;
 import com.diplom.mytournament.activities.MainActivity;
 import com.diplom.mytournament.fragments.drawer.CompetitionsFragment;
 import com.diplom.mytournament.models.Competition;
+import com.diplom.mytournament.models.Format;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -48,6 +50,9 @@ public class CompetitionsReсViewAdapter extends RecyclerView.Adapter<Competitio
         @BindView(R.id.competition_content_layout)
         View container;
 
+        @BindView(R.id.format_title)
+        TextView formatTitle;
+
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
@@ -73,6 +78,9 @@ public class CompetitionsReсViewAdapter extends RecyclerView.Adapter<Competitio
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final Competition competition = competitionList.get(position);
+        MyTournamentQueryHelper qh = new MyTournamentQueryHelper(holder.container.getContext());
+
+        Format format = qh.getFormatById(competition.getFormat());
         if (competition.getLogoIdResource()!=null){
             Bitmap img = null;
             Uri uri = Uri.parse(competition.getLogoIdResource());
@@ -89,6 +97,7 @@ public class CompetitionsReсViewAdapter extends RecyclerView.Adapter<Competitio
             holder.logo.setImageResource(R.drawable.ic_menu_camera);
         }
         holder.title.setText(competition.getName());
+        holder.formatTitle.setText(format.getName());
 
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override

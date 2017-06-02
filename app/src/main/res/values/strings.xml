@@ -45,6 +45,12 @@
     <string name="select_first_team">Выберите первую команду</string>
     <string name="select_second_team">Выберите вторую команду</string>
     <string name="load_logo">Загрузить логотип</string>
-
+    <string name="next_time">NEXT TIME</string>
+    <string name="time">%d \n time</string>
+    <string name="match_over">Матч закончен!</string>
+    <string name="share">SHARE</string>
+    <string name="yellow_card">ЖК! </string>
+    <string name="red_card">КК! </string>
+    <string name="goal">ГОЛ! </string>
 
 </resources>

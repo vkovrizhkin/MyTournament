@@ -121,7 +121,12 @@ public class StandingsRecViewAdapter extends RecyclerView.Adapter<StandingsRecVi
 
     @Override
     public int getItemCount() {
-        return standingList.size() + 1;
+        if(standingList!=null){
+            return standingList.size() + 1;
+        } else{
+            return 1;
+        }
+
     }
 
 

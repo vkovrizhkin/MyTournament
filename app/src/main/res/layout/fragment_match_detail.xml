@@ -6,15 +6,65 @@
     android:orientation="vertical"
     tools:context="com.diplom.mytournament.fragments.details_redact.MatchDetailFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/timer"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorDarkGray"
-        android:gravity="center"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/text_timer" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/current_time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/colorDarkGray"
+            android:gravity="center"
+            android:padding="@dimen/margin_small"
+            android:textColor="@color/colorWhite" />
+
+        <TextView
+            android:id="@+id/timer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorDarkGray"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_timer"
+            tools:text="0:12:12:12" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/finish_button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/finish_button"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_finish" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="@dimen/finish_button"
+            android:background="@color/colorDarkGray" />
+
+        <Button
+            android:id="@+id/next_time_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+            android:drawableRight="@drawable/ic_skip_next_blue_grey_800_48dp"
+            android:text="@string/next_time" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDarkGray" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,15 +102,6 @@
             android:layout_weight="1"
             android:background="@color/colorWhite"
             android:src="@drawable/ic_exposure_plus_1_blue_grey_800_36dp" />
-        <ImageButton
-            android:id="@+id/finish_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:scaleType="fitCenter"
-            android:background="@color/colorWhite"
-            android:src="@drawable/ic_finish" />
-
 
     </LinearLayout>
 
@@ -106,17 +147,19 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:gravity="right"
+            android:gravity="center"
             android:textSize="@dimen/text_goals"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="@+id/guideline21"
             app:layout_constraintRight_toLeftOf="@+id/guideline22"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="0" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:text=":"
             android:textSize="@dimen/text_goals"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -130,12 +173,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:gravity="left"
+            android:gravity="center"
             android:textSize="@dimen/text_goals"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="@+id/guideline23"
             app:layout_constraintRight_toLeftOf="@+id/guideline24"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="0" />
 
         <TextView
             android:id="@+id/md_team2_name"
@@ -152,10 +196,10 @@
             android:singleLine="true"
             android:textSize="@dimen/text_title"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintLeft_toLeftOf="@+id/guideline24"
             app:layout_constraintRight_toLeftOf="@+id/guideline25"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHorizontal_bias="0.5" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.github.siyamed.shapeimageview.CircularImageView
             android:id="@+id/md_team2_logo"
@@ -214,10 +258,12 @@
 
 
     </android.support.constraint.ConstraintLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorDarkGray"/>
+        android:background="@color/colorDarkGray" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -228,10 +274,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </ScrollView>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorDarkGray"/>
+        android:background="@color/colorDarkGray" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/logo_middle">
@@ -240,63 +288,66 @@
             android:id="@+id/left_yc"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:scaleType="fitCenter"
-            android:layout_weight="1"
             android:layout_margin="@dimen/margin_small"
+            android:layout_weight="1"
             android:background="@color/colorWhite"
-            android:src="@drawable/yellow_card"/>
+            android:scaleType="fitCenter"
+            android:src="@drawable/yellow_card" />
 
         <ImageButton
             android:id="@+id/left_rc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="fitCenter"
             android:layout_margin="@dimen/margin_small"
             android:layout_weight="1"
             android:background="@color/colorWhite"
-            android:src="@drawable/red_card"/>
+            android:scaleType="fitCenter"
+            android:src="@drawable/red_card" />
+
         <ImageButton
             android:id="@+id/left_goal"
-            android:background="@color/colorWhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_small"
-            android:scaleType="fitCenter"
             android:layout_weight="1"
-            android:src="@drawable/ic_goal"/>
+            android:background="@color/colorWhite"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_goal" />
+
         <View
             android:layout_width="2dp"
             android:layout_height="match_parent"
-            android:background="@color/colorDarkGray"/>
+            android:background="@color/colorDarkGray" />
 
         <ImageButton
             android:id="@+id/right_goal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_small"
-            android:scaleType="fitCenter"
             android:layout_weight="1"
             android:background="@color/colorWhite"
-            android:src="@drawable/ic_goal"/>
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_goal" />
+
         <ImageButton
             android:id="@+id/right_rc"
-            android:background="@color/colorWhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="fitCenter"
             android:layout_margin="@dimen/margin_small"
             android:layout_weight="1"
-            android:src="@drawable/red_card"/>
+            android:background="@color/colorWhite"
+            android:scaleType="fitCenter"
+            android:src="@drawable/red_card" />
 
         <ImageButton
             android:id="@+id/right_yc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_small"
-            android:scaleType="fitCenter"
-            android:background="@color/colorWhite"
             android:layout_weight="1"
-            android:src="@drawable/yellow_card"/>
+            android:background="@color/colorWhite"
+            android:scaleType="fitCenter"
+            android:src="@drawable/yellow_card" />
 
     </LinearLayout>
 

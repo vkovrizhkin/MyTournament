@@ -71,21 +71,14 @@ public class PlayersDialogFragment extends DialogFragment {
                             public void onClick(DialogInterface dialog,
                                                 int item) {
                                 currentPlayer = playerList.get(item);
-                                // dialogInterface.dialogOK(currentPlayer);
-/*                                Toast.makeText(
-                                        getActivity(),
-                                        "Любимое имя игрока: "
-                                                + players[item], Toast.LENGTH_SHORT).show();*/
+
                             }
                         })
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        // User clicked OK, so save the mSelectedItems results somewhere
-                        // or return them to the component that opened the dialog
-                        dialogInterface.dialogOK(currentPlayer, matchDetailFragment);
-                        //matchDetailFragment.setCurrentPlayer(currentPlayer);
 
+                        dialogInterface.dialogOK(currentPlayer, matchDetailFragment);
 
 
                     }
