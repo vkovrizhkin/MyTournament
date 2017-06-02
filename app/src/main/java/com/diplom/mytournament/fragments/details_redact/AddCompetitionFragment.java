@@ -24,6 +24,7 @@ import com.diplom.mytournament.MyTournamentDatabaseHelper;
 import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
 import com.diplom.mytournament.models.Format;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -47,6 +48,8 @@ public class AddCompetitionFragment extends Fragment {
     public static MyTournamentDatabaseHelper dbHelper;
 
     private static final int REQUEST = 1;
+
+    private StorageReference mStorageRef;
 
     String logoUri;
 
