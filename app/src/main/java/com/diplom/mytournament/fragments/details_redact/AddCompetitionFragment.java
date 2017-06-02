@@ -23,7 +23,16 @@ import android.widget.Spinner;
 import com.diplom.mytournament.MyTournamentDatabaseHelper;
 import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
+import com.diplom.mytournament.models.Competition;
 import com.diplom.mytournament.models.Format;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -47,6 +56,10 @@ public class AddCompetitionFragment extends Fragment {
     public static MyTournamentDatabaseHelper dbHelper;
 
     private static final int REQUEST = 1;
+
+    private FirebaseAuth firebaseAuth;
+
+    private DatabaseReference databaseReference;
 
     String logoUri;
 
@@ -84,18 +97,36 @@ public class AddCompetitionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        firebaseAuth = FirebaseAuth.getInstance();
+        final FirebaseUser user = firebaseAuth.getCurrentUser();
+/*        databaseReference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<List<Competition>> t = new GenericTypeIndicator<List<Competition>>(){};
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
+
+
         final View rootView = inflater.inflate(R.layout.fragment_add_competition, container, false);
         ButterKnife.bind(this, rootView);
-        dbHelper =  new MyTournamentDatabaseHelper(getContext());
+        dbHelper = new MyTournamentDatabaseHelper(getContext());
         final MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
         ArrayAdapter<String> aAdapter = new ArrayAdapter<>(this.getActivity(), android.R.layout
                 .simple_spinner_item, sports);
         aAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         sport.setAdapter(aAdapter);
+
         sport.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String kindOfSport= "";
+                String kindOfSport = "";
                 switch (position) {
                     case 0:
                         kindOfSport = "football";
@@ -111,7 +142,7 @@ public class AddCompetitionFragment extends Fragment {
 
                 formatList = qh.getFormatsBySport(kindOfSport);
                 ArrayAdapter<Format> fAdapter = new ArrayAdapter<Format>(parent.getContext(), android.R.layout
-                        .simple_spinner_item,formatList);
+                        .simple_spinner_item, formatList);
                 fAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
                 format.setAdapter(fAdapter);
             }
@@ -125,13 +156,14 @@ public class AddCompetitionFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
-                Format f = (Format)format.getSelectedItem();
-                String dateString = Integer.toString(date.getDayOfMonth())+":"+Integer.toString(date.getMonth());
-
-                dbHelper.insertCompetition(db, title.getText().toString(), "league", f.getId() , dateString,
-                        info.getText().toString(), logoUri );
-
+                // SQLiteDatabase db = dbHelper.getWritableDatabase();
+                Format f = (Format) format.getSelectedItem();
+                String dateString = Integer.toString(date.getDayOfMonth()) + ":" + Integer.toString(date.getMonth());
+                Competition competition1 = new Competition(title.getText().toString(), 1, f.getId(),
+                        info.getText().toString(), dateString, "league", logoUri);
+                // dbHelper.insertCompetition(db, title.getText().toString(), "league", f.getId(), dateString,
+                //    info.getText().toString(), logoUri);
+                databaseReference.child(user.getUid()).child("Competitions").push().setValue(competition1);
                 Snackbar.make(rootView, "Соревнование создано!", Snackbar.LENGTH_LONG).show();
 
             }
@@ -150,6 +182,7 @@ public class AddCompetitionFragment extends Fragment {
         // Inflate the layout for this fragment
         return rootView;
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
