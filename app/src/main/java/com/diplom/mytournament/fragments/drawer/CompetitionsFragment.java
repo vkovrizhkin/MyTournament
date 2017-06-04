@@ -75,11 +75,14 @@ public class CompetitionsFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 GenericTypeIndicator<Map<String, Competition>> t = new GenericTypeIndicator<Map<String, Competition>>() {};
                 Map<String, Competition> map = dataSnapshot.child("Competitions").getValue(t);
-                for (String key : map.keySet()) {
-                    Competition c1 = map.get(key);
-                    competitionList.add(map.get(key));
+                if (map!=null){
+                    for (String key : map.keySet()) {
+                        Competition c1 = map.get(key);
+                        competitionList.add(map.get(key));
 
+                    }
                 }
+
 
                 recyclerView.setAdapter(rAdapter);
 

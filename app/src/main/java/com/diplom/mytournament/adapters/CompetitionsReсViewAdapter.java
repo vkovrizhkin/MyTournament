@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
 import com.diplom.mytournament.activities.CompetitionActivity;
@@ -88,7 +89,8 @@ public class CompetitionsReсViewAdapter extends RecyclerView.Adapter<Competitio
             try {
                 img = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+               // e.printStackTrace();
+                Glide.with(holder.container.getContext()).load(uri).into(holder.logo);
             } catch (IOException e) {
                 e.printStackTrace();
             }
