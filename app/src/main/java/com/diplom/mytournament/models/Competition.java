@@ -20,6 +20,9 @@ public class Competition {
 
     private String logoIdResource;//ссылка на ресурс логотипа
 
+    public Competition() {
+    }
+
     public Competition(String name, int id, int format, String info, String date,
                        String type, String logoIdResource) {
         this.name = name;

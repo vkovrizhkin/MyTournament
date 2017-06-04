@@ -7,6 +7,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -25,6 +27,8 @@ import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
 import com.diplom.mytournament.models.Competition;
 import com.diplom.mytournament.models.Format;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,9 +37,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +67,13 @@ public class AddCompetitionFragment extends Fragment {
 
     private FirebaseAuth firebaseAuth;
 
+    private Uri selectedImage;
+
+    private String imageUrl;
+
     private DatabaseReference databaseReference;
+
+    private StorageReference mStorageRef;
 
     String logoUri;
 
@@ -100,19 +114,7 @@ public class AddCompetitionFragment extends Fragment {
         databaseReference = FirebaseDatabase.getInstance().getReference();
         firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = firebaseAuth.getCurrentUser();
-/*        databaseReference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                GenericTypeIndicator<List<Competition>> t = new GenericTypeIndicator<List<Competition>>(){};
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
-
+        mStorageRef = FirebaseStorage.getInstance().getReference();
 
         final View rootView = inflater.inflate(R.layout.fragment_add_competition, container, false);
         ButterKnife.bind(this, rootView);
@@ -157,13 +159,33 @@ public class AddCompetitionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // SQLiteDatabase db = dbHelper.getWritableDatabase();
-                Format f = (Format) format.getSelectedItem();
-                String dateString = Integer.toString(date.getDayOfMonth()) + ":" + Integer.toString(date.getMonth());
-                Competition competition1 = new Competition(title.getText().toString(), 1, f.getId(),
-                        info.getText().toString(), dateString, "league", logoUri);
                 // dbHelper.insertCompetition(db, title.getText().toString(), "league", f.getId(), dateString,
                 //    info.getText().toString(), logoUri);
-                databaseReference.child(user.getUid()).child("Competitions").push().setValue(competition1);
+                String timestamp = new java.sql.Timestamp(System.currentTimeMillis()).toString();
+                StorageReference riversRef = mStorageRef.child("CompetitionsLogos/logo_" + timestamp + ".jpg");
+
+                riversRef.putFile(selectedImage).
+                        addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                @SuppressWarnings("VisibleForTests") Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                                imageUrl = downloadUrl.toString();
+                                Format f = (Format) format.getSelectedItem();
+                                String dateString = Integer.toString(date.getDayOfMonth()) + ":" + Integer.toString(date.getMonth());
+                                Competition competition1 = new Competition(title.getText().toString(), 1, f.getId(),
+                                        info.getText().toString(), dateString, "league", imageUrl);
+                                databaseReference.child(user.getUid()).child("Competitions").push().setValue(competition1);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle unsuccessful uploads
+                        // ...
+                    }
+                });
+
+
+
                 Snackbar.make(rootView, "Соревнование создано!", Snackbar.LENGTH_LONG).show();
 
             }
@@ -189,7 +211,7 @@ public class AddCompetitionFragment extends Fragment {
         Bitmap img = null;
 
         if (requestCode == REQUEST && resultCode == RESULT_OK) {
-            Uri selectedImage = data.getData();
+            selectedImage = data.getData();
             try {
                 img = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
                 logoUri = selectedImage.toString();
