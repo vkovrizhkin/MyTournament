@@ -24,7 +24,7 @@ public class StandingsFragment extends Fragment {
 
     private StandingsRecViewAdapter rAdapter;
 
-    private int competitionId;
+    private long competitionId;
 
     private List<Standing> standingList;
 
@@ -34,7 +34,7 @@ public class StandingsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public StandingsFragment(int competitionId) {
+    public StandingsFragment(long competitionId) {
         this.competitionId = competitionId;
     }
 

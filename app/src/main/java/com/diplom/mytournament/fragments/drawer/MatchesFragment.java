@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class MatchesFragment extends Fragment {
 
-    private int competitionId;
+    private long competitionId;
 
     private List<Match> matchList;
 
@@ -39,7 +39,7 @@ public class MatchesFragment extends Fragment {
     }
 
 
-    public MatchesFragment(int competitionId) {
+    public MatchesFragment(long competitionId) {
         this.competitionId = competitionId;
     }
 

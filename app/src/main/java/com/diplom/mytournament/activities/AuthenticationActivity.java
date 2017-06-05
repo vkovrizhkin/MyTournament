@@ -78,6 +78,12 @@ public class AuthenticationActivity extends AppCompatActivity {
                 // ...
             }
         };
+
+
+        if(mAuth.getCurrentUser()!=null){
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void signing(String email, String password) {

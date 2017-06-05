@@ -161,7 +161,8 @@ public class AddCompetitionFragment extends Fragment {
                 // SQLiteDatabase db = dbHelper.getWritableDatabase();
                 // dbHelper.insertCompetition(db, title.getText().toString(), "league", f.getId(), dateString,
                 //    info.getText().toString(), logoUri);
-                String timestamp = new java.sql.Timestamp(System.currentTimeMillis()).toString();
+               // final String timestamp = new java.sql.Timestamp(System.currentTimeMillis()).toString();
+                final long timestamp = System.currentTimeMillis();
                 StorageReference riversRef = mStorageRef.child("CompetitionsLogos/logo_" + timestamp + ".jpg");
 
                 riversRef.putFile(selectedImage).
@@ -172,9 +173,9 @@ public class AddCompetitionFragment extends Fragment {
                                 imageUrl = downloadUrl.toString();
                                 Format f = (Format) format.getSelectedItem();
                                 String dateString = Integer.toString(date.getDayOfMonth()) + ":" + Integer.toString(date.getMonth());
-                                Competition competition1 = new Competition(title.getText().toString(), 1, f.getId(),
+                                Competition competition1 = new Competition(title.getText().toString(), timestamp, f.getId(),
                                         info.getText().toString(), dateString, "league", imageUrl);
-                                databaseReference.child(user.getUid()).child("Competitions").push().setValue(competition1);
+                                databaseReference.child(user.getUid()).child("Competitions").child("Comp_"+Long.toString(timestamp)).setValue(competition1);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override

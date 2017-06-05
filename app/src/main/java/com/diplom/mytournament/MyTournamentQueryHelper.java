@@ -30,10 +30,10 @@ public class MyTournamentQueryHelper {
     }
 
     //получение соревнования по идентификатору
-    public Competition getCompetitionById(int id) {
+    public Competition getCompetitionById(long id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query("COMPETITIONS", null,
-                "_id = ?", new String[]{Integer.toString(id)}, null, null, null);
+                "_id = ?", new String[]{Long.toString(id)}, null, null, null);
         Competition competition;
 
         try {
@@ -193,7 +193,7 @@ public class MyTournamentQueryHelper {
     }
 
     //получение всех матчей расписания
-    public List<Match> getMatchesByCompetitionId(int competitionId) {
+    public List<Match> getMatchesByCompetitionId(long competitionId) {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<Match> matchList = new ArrayList<Match>();
@@ -202,7 +202,7 @@ public class MyTournamentQueryHelper {
         // Cursor cursor = db.query("MATCHES", null, null, null, null, null, null);
 
         String SqlQuery = "SELECT * FROM MATCHES WHERE COMPETITION_id = ?";
-        Cursor cursor = db.rawQuery(SqlQuery, new String[]{Integer.toString(competitionId)});
+        Cursor cursor = db.rawQuery(SqlQuery, new String[]{Long.toString(competitionId)});
         try {
             if (cursor.moveToFirst()) {
                 //получение данных соревнования из курсора
@@ -251,15 +251,15 @@ public class MyTournamentQueryHelper {
     }
 
     //получение всех матчей команды
-    public List<Match> getMatchesByTeamId(int teamId, int competitionId) {
+    public List<Match> getMatchesByTeamId(int teamId, long competitionId) {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<Match> matchList = new ArrayList<Match>();
 
         String SqlQuery = "SELECT * FROM MATCHES WHERE TEAM_H_id = ? AND COMPETITION_id = ? " +
                 "UNION SELECT * FROM MATCHES WHERE TEAM_A_id = ? AND COMPETITION_id = ?";
-        Cursor cursor = db.rawQuery(SqlQuery, new String[]{Integer.toString(teamId), Integer.toString(competitionId),
-                Integer.toString(teamId), Integer.toString(competitionId)});
+        Cursor cursor = db.rawQuery(SqlQuery, new String[]{Integer.toString(teamId), Long.toString(competitionId),
+                Integer.toString(teamId), Long.toString(competitionId)});
 
         try {
             if (cursor.moveToFirst()) {
@@ -439,13 +439,13 @@ public class MyTournamentQueryHelper {
     }
 
     //получение турнирной таблицы для соревнования
-    public List<Standing> getStandingsByCompetitionId(int competitionId) {
+    public List<Standing> getStandingsByCompetitionId(long competitionId) {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<Standing> standingList = new ArrayList<>();
 
         String SqlQuery = "SELECT * FROM STANDINGS WHERE COMPETITION_id = ? ORDER BY POINTS DESC";
-        Cursor cursor = db.rawQuery(SqlQuery, new String[]{Integer.toString(competitionId)});
+        Cursor cursor = db.rawQuery(SqlQuery, new String[]{Long.toString(competitionId)});
 
         try {
             if (cursor.moveToFirst()) {
@@ -495,11 +495,11 @@ public class MyTournamentQueryHelper {
     }
 
     //получение турнирных данных для команды во всех соревнованиях
-    public Standing getStandingsByTeamId(int teamId, int competitionId) {
+    public Standing getStandingsByTeamId(int teamId, long competitionId) {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String SqlQuery = "SELECT * FROM STANDINGS WHERE TEAM_id = ? AND COMPETITION_id = ?";
-        Cursor cursor = db.rawQuery(SqlQuery, new String[]{Integer.toString(teamId), Integer.toString(competitionId)});
+        Cursor cursor = db.rawQuery(SqlQuery, new String[]{Integer.toString(teamId), Long.toString(competitionId)});
 
 
         try {
@@ -594,7 +594,7 @@ public class MyTournamentQueryHelper {
     }
 
     //получение всех команд соревнования
-    public List<Team> getTeamsByCompetitionId(int competitionId) {
+    public List<Team> getTeamsByCompetitionId(long competitionId) {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<Team> teamList = new ArrayList<>();
@@ -603,7 +603,7 @@ public class MyTournamentQueryHelper {
                 "WHERE STANDINGS.COMPETITION_id = ?";
 
 
-        Cursor cursor = db.rawQuery(SqlQuery, new String[]{Integer.toString(competitionId)});
+        Cursor cursor = db.rawQuery(SqlQuery, new String[]{Long.toString(competitionId)});
 
         try {
             if (cursor.moveToFirst()) {

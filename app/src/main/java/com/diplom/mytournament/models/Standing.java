@@ -8,7 +8,7 @@ public class Standing {
 
     private int id;
 
-    private int competitionId; // идентификатор соревнования
+    private long competitionId; // идентификатор соревнования
 
     private int teamId; //идентификатор команды
 
@@ -29,7 +29,7 @@ public class Standing {
     private String group;//группа (если есть)
 
 
-    public Standing(int id, int competitionId, int teamId, int points, int matchesPlayed, int gs, int ga, int won, int lost, int drawn, String group) {
+    public Standing(int id, long competitionId, int teamId, int points, int matchesPlayed, int gs, int ga, int won, int lost, int drawn, String group) {
         this.id = id;
         this.competitionId = competitionId;
         this.teamId = teamId;
@@ -67,11 +67,11 @@ public class Standing {
         this.id = id;
     }
 
-    public int getCompetitionId() {
+    public long getCompetitionId() {
         return competitionId;
     }
 
-    public void setCompetitionId(int competitionId) {
+    public void setCompetitionId(long competitionId) {
         this.competitionId = competitionId;
     }
 

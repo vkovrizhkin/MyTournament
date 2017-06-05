@@ -32,7 +32,7 @@ import butterknife.ButterKnife;
  */
 public class AddMatchFragment extends Fragment {
 
-    private int competitionId;
+    private long competitionId;
 
     private MyTournamentQueryHelper qh;
 
@@ -61,7 +61,7 @@ public class AddMatchFragment extends Fragment {
     @BindView(R.id.time_picker)
     TimePicker timePicker;
 
-    public AddMatchFragment(int competitionId) {
+    public AddMatchFragment(long competitionId) {
         this.competitionId = competitionId;
     }
 

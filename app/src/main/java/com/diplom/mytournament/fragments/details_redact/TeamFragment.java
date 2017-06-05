@@ -25,7 +25,7 @@ public class TeamFragment extends Fragment {
 
     private int teamId = 0;
 
-    private int competitionId = 0;
+    private long competitionId = 0;
 
     private View view;
 
@@ -33,7 +33,7 @@ public class TeamFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public TeamFragment(int teamId, int competitionId) {
+    public TeamFragment(int teamId, long competitionId) {
         this.teamId = teamId;
         this.competitionId = competitionId;
     }

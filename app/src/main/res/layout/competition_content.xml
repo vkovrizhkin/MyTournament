@@ -8,12 +8,24 @@
     android:clickable="true"
     android:orientation="horizontal">
 
-    <com.github.siyamed.shapeimageview.CircularImageView
-        android:id="@+id/logo_image"
-        android:layout_width="@dimen/logo_big"
-        android:layout_height="@dimen/logo_big"
-        android:elevation="@dimen/elevation_size"
-        android:scaleType="fitCenter" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.github.siyamed.shapeimageview.CircularImageView
+            android:id="@+id/logo_image"
+            android:layout_width="@dimen/logo_big"
+            android:layout_height="@dimen/logo_big"
+            android:elevation="@dimen/elevation_size"
+            android:scaleType="fitCenter" />
+        <ProgressBar
+            android:id="@+id/progress"
+            android:visibility="visible"
+            android:layout_width="@dimen/logo_big"
+            android:layout_height="@dimen/logo_big"/>
+
+    </RelativeLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"

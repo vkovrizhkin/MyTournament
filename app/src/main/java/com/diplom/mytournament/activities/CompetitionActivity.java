@@ -34,13 +34,13 @@ import java.io.IOException;
 public class CompetitionActivity extends AppCompatActivity
         implements PlayersInterface, NavigationView.OnNavigationItemSelectedListener {
 
-    private int competitionId;
+    private long competitionId;
 
     private Toolbar toolbar;
 
     private Player currentPlayer;
 
-    public int getCompetitionId() {
+    public long getCompetitionId() {
         return competitionId;
     }
 
@@ -48,7 +48,7 @@ public class CompetitionActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        competitionId = intent.getIntExtra("competitionId", 0);
+        competitionId = intent.getLongExtra("competitionId", 0);
         setContentView(R.layout.activity_competition);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

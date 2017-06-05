@@ -10,9 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.diplom.mytournament.MyTournamentQueryHelper;
 import com.diplom.mytournament.R;
 import com.diplom.mytournament.activities.CompetitionActivity;
@@ -20,6 +25,8 @@ import com.diplom.mytournament.activities.MainActivity;
 import com.diplom.mytournament.fragments.drawer.CompetitionsFragment;
 import com.diplom.mytournament.models.Competition;
 import com.diplom.mytournament.models.Format;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -54,6 +61,9 @@ public class CompetitionsReсViewAdapter extends RecyclerView.Adapter<Competitio
         @BindView(R.id.format_title)
         TextView formatTitle;
 
+        @BindView(R.id.progress)
+        ProgressBar progressBar;
+
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
@@ -82,15 +92,32 @@ public class CompetitionsReсViewAdapter extends RecyclerView.Adapter<Competitio
         MyTournamentQueryHelper qh = new MyTournamentQueryHelper(holder.container.getContext());
 
         Format format = qh.getFormatById(competition.getFormat());
-        if (competition.getLogoIdResource()!=null){
+        if (competition.getLogoIdResource() != null) {
             Bitmap img = null;
             Uri uri = Uri.parse(competition.getLogoIdResource());
 
             try {
                 img = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
+                holder.progressBar.setVisibility(View.INVISIBLE);
             } catch (FileNotFoundException e) {
-               // e.printStackTrace();
-                Glide.with(holder.container.getContext()).load(uri).into(holder.logo);
+                // e.printStackTrace();
+                Glide.with(holder.container.getContext()).load(uri).diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                        .listener(new RequestListener<Uri, GlideDrawable>() {
+                            @Override
+                            public boolean onException(Exception e, Uri model, Target<GlideDrawable> target, boolean isFirstResource) {
+                                holder.progressBar.setVisibility(View.VISIBLE);
+                                holder.progressBar.setVisibility(View.GONE);
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(GlideDrawable resource, Uri model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                holder.progressBar.setVisibility(View.VISIBLE);
+                                holder.progressBar.setVisibility(View.GONE);
+                                return false;
+                            }
+                        }).into(holder.logo);
+/*                Picasso.with(holder.container.getContext()).load(uri).networkPolicy(NetworkPolicy.OFFLINE).into(holder.logo);*/
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -105,7 +132,7 @@ public class CompetitionsReсViewAdapter extends RecyclerView.Adapter<Competitio
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(holder.container.getContext(), CompetitionActivity.class);
-                int id = competition.getId();
+                long id = competition.getId();
                 intent.putExtra("competitionId", id);
                 competitionsFragment.startActivity(intent);
             }

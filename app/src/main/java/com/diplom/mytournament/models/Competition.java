@@ -6,7 +6,7 @@ package com.diplom.mytournament.models;
 
 public class Competition {
 
-    private int id;
+    private long id;
 
     private String name; //название соревнования
 
@@ -23,7 +23,7 @@ public class Competition {
     public Competition() {
     }
 
-    public Competition(String name, int id, int format, String info, String date,
+    public Competition(String name, long id, int format, String info, String date,
                        String type, String logoIdResource) {
         this.name = name;
         this.id = id;
@@ -42,11 +42,11 @@ public class Competition {
         this.name = name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -18,6 +18,9 @@ import com.diplom.mytournament.fragments.details_redact.AddTeamFragment;
 import com.diplom.mytournament.models.Competition;
 import com.diplom.mytournament.models.Format;
 import com.diplom.mytournament.models.Team;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -28,7 +31,7 @@ import java.util.List;
  */
 public class TeamsFragment extends Fragment {
 
-    private int competitionId;
+    private long competitionId;
 
     private RecyclerView recyclerView;
 
@@ -36,7 +39,11 @@ public class TeamsFragment extends Fragment {
 
     private List<Team> teamList = new ArrayList<>();
 
-    public TeamsFragment(int competitionId) {
+    private DatabaseReference ref;
+
+    private FirebaseAuth mAuth;
+
+    public TeamsFragment(long competitionId) {
         this.competitionId = competitionId;
     }
 
@@ -48,6 +55,11 @@ public class TeamsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
+        ref = FirebaseDatabase.getInstance().getReference();
+
+
         View rootView = inflater.inflate(R.layout.fragment_teams, container, false);
         getActivity().setTitle(R.string.teams);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.teams_recycler_view);

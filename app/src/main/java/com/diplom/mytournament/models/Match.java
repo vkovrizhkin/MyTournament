@@ -8,7 +8,7 @@ public class Match {
 
     private int id;
 
-    private int competitionId; //идентификатор соревнования
+    private long competitionId; //идентификатор соревнования
 
     private String date; // дата матча
 
@@ -26,7 +26,7 @@ public class Match {
 
     private int played; //сыгран / несыгран
 
-    public Match(int id, int competitionId, String date, String stage, int team1Id, int team2Id,
+    public Match(int id, long competitionId, String date, String stage, int team1Id, int team2Id,
                  String place, int played, int scores1, int scores2) {
         this.id = id;
         this.competitionId = competitionId;
@@ -72,11 +72,11 @@ public class Match {
         this.id = id;
     }
 
-    public int getCompetitionId() {
+    public long getCompetitionId() {
         return competitionId;
     }
 
-    public void setCompetitionId(int competitionId) {
+    public void setCompetitionId(long competitionId) {
         this.competitionId = competitionId;
     }
 

@@ -33,13 +33,13 @@ public class TeamsRecViewAdapter extends RecyclerView.Adapter<TeamsRecViewAdapte
 
     private List<Team> teamList;
 
-    private int competitionId;
+    private long competitionId;
 
     private CompetitionActivity activity;
 
     FragmentManager fragmentManager;
 
-    public TeamsRecViewAdapter(List<Team> teamList, int competitionId, CompetitionActivity activity, FragmentManager fragmentManager) {
+    public TeamsRecViewAdapter(List<Team> teamList, long competitionId, CompetitionActivity activity, FragmentManager fragmentManager) {
         this.teamList = teamList;
         this.competitionId = competitionId;
         this.activity = activity;
@@ -108,6 +108,11 @@ public class TeamsRecViewAdapter extends RecyclerView.Adapter<TeamsRecViewAdapte
 
     @Override
     public int getItemCount() {
-        return teamList.size();
+        if(teamList==null) {
+            return 0;
+        } else{
+            return teamList.size();
+        }
+
     }
 }

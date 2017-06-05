@@ -101,7 +101,7 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
     }
 
     //добавление матча
-    public static void insertMatch(SQLiteDatabase db, int competitionId, String dateTime,
+    public static void insertMatch(SQLiteDatabase db, long competitionId, String dateTime,
                                    String place, String stage, int teamHId, int teamAId, int played) {
         ContentValues matchValues = new ContentValues();
 
@@ -144,7 +144,7 @@ public class MyTournamentDatabaseHelper extends SQLiteOpenHelper {
         db.insert("EVENTS", null, eventValues);
     }
 
-    public static void insertStanding(SQLiteDatabase db, int team_id, int compId) {
+    public static void insertStanding(SQLiteDatabase db, int team_id, long compId) {
         ContentValues standingValues = new ContentValues();
 
         standingValues.put("TEAM_id", team_id);

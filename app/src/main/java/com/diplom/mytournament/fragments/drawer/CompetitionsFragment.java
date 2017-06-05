@@ -45,7 +45,7 @@ public class CompetitionsFragment extends Fragment {
 
     private CompetitionsReсViewAdapter rAdapter;
 
-    private FirebaseDatabase firebaseDatabase;
+   // private FirebaseDatabase firebaseDatabase;
 
     private FirebaseAuth mAuth;
 
@@ -64,8 +64,9 @@ public class CompetitionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
+      //  firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.keepSynced(true);
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -78,7 +79,7 @@ public class CompetitionsFragment extends Fragment {
                 if (map!=null){
                     for (String key : map.keySet()) {
                         Competition c1 = map.get(key);
-                        competitionList.add(map.get(key));
+                        competitionList.add(c1);
 
                     }
                 }
