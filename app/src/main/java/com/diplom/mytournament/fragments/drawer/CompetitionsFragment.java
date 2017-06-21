@@ -64,6 +64,14 @@ public class CompetitionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        View rootView = inflater.inflate(R.layout.fragment_competitions, container, false);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.competitions_recycler_view);
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.competitions_fab);
+        fab.attachToRecyclerView(recyclerView);
+        MainActivity activity = (MainActivity) getActivity();
+        rAdapter = new CompetitionsReсViewAdapter(this, competitionList, activity);
+        MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
+
       //  firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.keepSynced(true);
@@ -71,43 +79,40 @@ public class CompetitionsFragment extends Fragment {
         user = mAuth.getCurrentUser();
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
-        databaseReference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                GenericTypeIndicator<Map<String, Competition>> t = new GenericTypeIndicator<Map<String, Competition>>() {};
-                Map<String, Competition> map = dataSnapshot.child("Competitions").getValue(t);
-                if (map!=null){
-                    for (String key : map.keySet()) {
-                        Competition c1 = map.get(key);
-                        competitionList.add(c1);
+        if(mAuth.getCurrentUser()!=null){
+            databaseReference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    GenericTypeIndicator<Map<String, Competition>> t = new GenericTypeIndicator<Map<String, Competition>>() {};
+                    Map<String, Competition> map = dataSnapshot.child("Competitions").getValue(t);
+                    if (map!=null){
+                        for (String key : map.keySet()) {
+                            Competition c1 = map.get(key);
+                            competitionList.add(c1);
 
+                        }
                     }
+                    recyclerView.setHasFixedSize(true);
+                    LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                    recyclerView.setLayoutManager(mLayoutManager);
+                    recyclerView.setAdapter(rAdapter);
                 }
 
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-                recyclerView.setAdapter(rAdapter);
+                }
+            });
+        }
+        else{
+            competitionList = qh.getAllCompetition();
+            rAdapter = new CompetitionsReсViewAdapter(this, competitionList, activity);
+            recyclerView.setHasFixedSize(true);
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+            recyclerView.setLayoutManager(mLayoutManager);
+            recyclerView.setAdapter(rAdapter);
+        }
 
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        View rootView = inflater.inflate(R.layout.fragment_competitions, container, false);
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.competitions_recycler_view);
-        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.competitions_fab);
-        fab.attachToRecyclerView(recyclerView);
-        MyTournamentQueryHelper qh = new MyTournamentQueryHelper(getContext());
-        competitionList = qh.getAllCompetition();
-        MainActivity activity = (MainActivity) getActivity();
-        rAdapter = new CompetitionsReсViewAdapter(this, competitionList, activity);
-
-        recyclerView.setHasFixedSize(true);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-      //  recyclerView.setAdapter(rAdapter);
 
 
         fab.setOnClickListener(new View.OnClickListener() {

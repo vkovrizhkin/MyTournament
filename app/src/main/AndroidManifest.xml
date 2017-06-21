@@ -19,12 +19,13 @@
             android:name=".activities.CompetitionActivity"
             android:label="@string/title_activity_competition"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.AuthenticationActivity">
+        <activity
+            android:name=".activities.AuthenticationActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

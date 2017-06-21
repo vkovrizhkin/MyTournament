@@ -27,7 +27,7 @@
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1"
-        tools:text="123Тур!" />
+        tools:text="1 Тур" />
 
 
     <com.github.siyamed.shapeimageview.CircularImageView
@@ -61,7 +61,6 @@
         android:marqueeRepeatLimit="marquee_forever"
         android:scrollHorizontally="true"
         android:singleLine="true"
-        android:text="sdfsdfsdf"
         android:textSize="@dimen/text_title"
         app:layout_constraintBottom_toTopOf="@+id/guideline12"
         app:layout_constraintHorizontal_bias="0.0"
@@ -69,7 +68,7 @@
         app:layout_constraintRight_toLeftOf="@+id/guideline15"
         app:layout_constraintTop_toTopOf="@+id/guideline19"
         app:layout_constraintVertical_bias="0.503"
-        tools:text="Доздраперма" />
+        tools:text="Факел" />
 
     <TextView
         android:id="@+id/scores1"
@@ -87,7 +86,7 @@
         app:layout_constraintRight_toLeftOf="@+id/guideline13"
         app:layout_constraintTop_toTopOf="@+id/guideline19"
         app:layout_constraintVertical_bias="0.526"
-        tools:text="99" />
+        tools:text="1" />
 
     <TextView
         android:id="@+id/textView2"
@@ -120,7 +119,7 @@
         app:layout_constraintRight_toLeftOf="@+id/guideline16"
         app:layout_constraintTop_toTopOf="@+id/guideline19"
         app:layout_constraintVertical_bias="0.526"
-        tools:text="99" />
+        tools:text="3" />
 
     <TextView
         android:id="@+id/team2_name"
@@ -142,7 +141,7 @@
         app:layout_constraintLeft_toLeftOf="@+id/guideline16"
         app:layout_constraintRight_toLeftOf="@+id/guideline18"
         app:layout_constraintTop_toTopOf="@+id/guideline19"
-        tools:text="sdfsdfsdfsdfsdfsdfsdsdfsdf" />
+        tools:text="Звезда" />
 
     <com.github.siyamed.shapeimageview.CircularImageView
         android:id="@+id/team2_logo"
@@ -181,7 +180,7 @@
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:text="234234323" />
+        tools:text="12.06.17 19:45" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline12"

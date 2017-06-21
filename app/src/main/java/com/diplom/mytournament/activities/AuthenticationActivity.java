@@ -37,6 +37,9 @@ public class AuthenticationActivity extends AppCompatActivity {
     @BindView(R.id.password_edit)
     EditText passwordET;
 
+    @BindView(R.id.offline_button)
+    Button offlineSignin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +87,15 @@ public class AuthenticationActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
+
+        offlineSignin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void signing(String email, String password) {
@@ -103,6 +115,8 @@ public class AuthenticationActivity extends AppCompatActivity {
 
             }
         });
+
+
 
     }
 

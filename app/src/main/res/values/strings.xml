@@ -52,5 +52,6 @@
     <string name="yellow_card">ЖК! </string>
     <string name="red_card">КК! </string>
     <string name="goal">ГОЛ! </string>
+    <string name="offline_signin">Войти оффлайн</string>
 
 </resources>

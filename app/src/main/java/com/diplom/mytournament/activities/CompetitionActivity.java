@@ -60,7 +60,9 @@ public class CompetitionActivity extends AppCompatActivity
         toggle.syncState();
 
         MyTournamentQueryHelper qh = new MyTournamentQueryHelper(this);
-        Competition competition = qh.getCompetitionById(competitionId);
+
+
+       // Competition competition = qh.getCompetitionById(competitionId);
 
 
 
@@ -68,8 +70,8 @@ public class CompetitionActivity extends AppCompatActivity
         View hView =  navigationView.getHeaderView(0);
         ImageView comp_logo = (ImageView) hView.findViewById(R.id.imageView);
         TextView title = (TextView)hView.findViewById(R.id.nav_title);
-        title.setText(competition.getName());
-        if (competition.getLogoIdResource()!=null){
+       // title.setText(competition.getName());
+/*        if (competition.getLogoIdResource()!=null){
             Bitmap img = null;
             Uri uri = Uri.parse(competition.getLogoIdResource());
 
@@ -83,7 +85,7 @@ public class CompetitionActivity extends AppCompatActivity
             comp_logo.setImageBitmap(img);
         } else {
             comp_logo.setImageResource(R.drawable.ic_menu_camera);
-        }
+        }*/
 
         navigationView.setNavigationItemSelectedListener(this);
 
