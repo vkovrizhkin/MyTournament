@@ -33,4 +33,13 @@
     <string name="players">PLAYERS</string>
     <string name="select_date_born">select date born</string>
     <string name="select_number">Enter Number</string>
+    <string name="back_to_main">Back to main</string>
+    <string name="yellow_card">YC!</string>
+    <string name="top">TOP</string>
+    <string name="teams">TEAMS</string>
+    <string name="statistics">STATISTICS</string>
+    <string name="standings">STANDINGS</string>
+    <string name="share">SHARE</string>
+    <string name="select_second_team">Select second team</string>
+    <string name="red_card">RC!</string>
 </resources>
